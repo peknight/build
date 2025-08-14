@@ -1,6 +1,13 @@
+val pekVersion = "0.1.0-SNAPSHOT"
+val scala3Version = "3.7.2"
+val scala212Version = "2.12.20"
+val sbtVersion = "1.11.4"
+val sbtPlatformDepsVersion = "1.0.2"
+val sbtNativePackagerVersion = "1.11.1"
+
 ThisBuild / organization := "com.peknight"
-ThisBuild / version := "0.1.0-SNAPSHOT"
-ThisBuild / scalaVersion := "2.12.20"
+ThisBuild / version := pekVersion
+ThisBuild / scalaVersion := scala212Version
 ThisBuild / versionScheme := Some("early-semver")
 
 val nexus = "https://nexus.peknight.com/repository"
@@ -27,6 +34,7 @@ lazy val build = (project in file("."))
 lazy val buildGav = (crossProject(JVMPlatform, JSPlatform, NativePlatform) in file("build-gav"))
   .settings(
     name := "build-gav",
+    crossScalaVersions := Seq(scala212Version, scala3Version),
   )
 
 lazy val buildSbt = (project in file("build-sbt"))
@@ -34,8 +42,8 @@ lazy val buildSbt = (project in file("build-sbt"))
   .settings(
     name := "build-sbt",
     libraryDependencies ++= Seq(
-      "org.scala-sbt" % "sbt" % "1.11.4" % Optional,
-      "org.portable-scala" % "sbt-platform-deps_2.12_1.0" % "1.0.2" % Optional,
-      "com.github.sbt" % "sbt-native-packager_2.12_1.0" % "1.11.1" % Optional,
+      "org.scala-sbt" % "sbt" % sbtVersion % Optional,
+      "org.portable-scala" % "sbt-platform-deps_2.12_1.0" % sbtPlatformDepsVersion % Optional,
+      "com.github.sbt" % "sbt-native-packager_2.12_1.0" % sbtNativePackagerVersion % Optional,
     ),
   )
