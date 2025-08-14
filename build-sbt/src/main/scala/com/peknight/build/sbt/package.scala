@@ -32,16 +32,26 @@ package object sbt {
     addJvmSbtPlugin(scalaNative.sbt)
   )
 
+  lazy val commonSettings: Seq[Def.Setting[?]] = buildSettings ++ nexusSettings
+
   lazy val buildSettings: Seq[Def.Setting[?]] = Seq(
     ThisBuild / organization := peknight.groupId,
     ThisBuild / version := peknight.version,
     ThisBuild / scalaVersion := com.peknight.build.gav.scala.scala3.version,
-    ThisBuild / versionScheme := Some("early-semver")
+    ThisBuild / versionScheme := Some("early-semver"),
+    ThisBuild / scalacOptions ++= Seq(
+      "-feature",
+      "-deprecation",
+      "-unchecked",
+      "-Xfatal-warnings",
+      "-language:strictEquality",
+      "-Xmax-inlines:64"
+    )
   )
 
   private val nexus = "https://nexus.peknight.com/repository"
 
-  lazy val nexusSettings = Seq(
+  lazy val nexusSettings: Seq[Def.Setting[?]] = Seq(
     ThisBuild / resolvers += "Pek Nexus" at s"$nexus/maven-public/",
     ThisBuild / publishTo := {
       if (isSnapshot.value)
@@ -52,18 +62,7 @@ package object sbt {
     ThisBuild / credentials += Credentials(Path.userHome / ".sbt" / ".credentials"),
   )
 
-  lazy val commonSettings: Seq[Def.Setting[Task[Seq[String]]]] = Seq(
-    scalacOptions ++= Seq(
-      "-feature",
-      "-deprecation",
-      "-unchecked",
-      "-Xfatal-warnings",
-      "-language:strictEquality",
-      "-Xmax-inlines:64"
-    )
-  )
-
-  lazy val dockerSettings = Seq(
+  lazy val dockerSettings: Seq[Def.Setting[?]] = Seq(
     dockerBaseImage := "eclipse-temurin:21",
     Docker / maintainer := "peknight <JKpeknight@gmail.com>",
     dockerRepository := Some("docker.peknight.com"),
