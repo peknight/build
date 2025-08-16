@@ -27,7 +27,7 @@ package object gav {
   }
 
   /** https://www.scala-sbt.org/ */
-  object sbt extends Module {
+  object sbtScala extends Module {
     def groupId: String = "org.scala-sbt"
     def artifactId: String = "sbt"
     def version: String = "1.11.4"
