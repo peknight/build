@@ -23,6 +23,20 @@ package object gav {
         def version: String = peknight.version
       }
     }
+    object instances {
+      object cats {
+        object scalaCheck extends Module {
+          def groupId: String = peknight.groupId
+          def artifactId: String = "cats-instances-scalacheck"
+          def version: String = peknight.version
+        }
+        object tuple extends Module {
+          def groupId: String = peknight.groupId
+          def artifactId: String = "cats-instances-tuple"
+          def version: String = peknight.version
+        }
+      }
+    }
   }
 
   /** https://www.scala-lang.org/ */
@@ -190,5 +204,14 @@ package object gav {
     def groupId: String = "org.scalacheck"
     def artifactId: String = "scalacheck"
     def version: String = "1.18.1"
+  }
+  /** https://mvnrepository.com/artifact/dev.optics/monocle-core */
+  object optics extends GroupID {
+    def groupId: String = "dev.optics"
+    object monocle extends Module {
+      def groupId: String = optics.groupId
+      def artifactId: String = "monocle-core"
+      def version: String = "3.3.0"
+    }
   }
 }

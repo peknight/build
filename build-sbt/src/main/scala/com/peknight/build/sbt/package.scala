@@ -13,7 +13,7 @@ import org.portablescala.sbtplatformdeps.PlatformDepsPlugin.autoImport.toPlatfor
 import scala.collection.Seq
 
 package object sbt {
-  def crossDependency(dependency: Module, configuration: Option[Configuration]): Def.Setting[Seq[ModuleID]] = {
+  def crossDependency(dependency: Module, configuration: Option[Configuration] = None): Def.Setting[Seq[ModuleID]] = {
     configuration match {
       case Some(conf) =>
         libraryDependencies += dependency.groupId %%% dependency.artifactId % dependency.version % conf
