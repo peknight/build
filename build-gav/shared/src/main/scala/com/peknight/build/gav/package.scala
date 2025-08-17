@@ -16,6 +16,13 @@ package object gav {
         def version: String = peknight.version
       }
     }
+    object ext {
+      object scalaCheck extends Module {
+        def groupId: String = peknight.groupId
+        def artifactId: String = "scalacheck-ext"
+        def version: String = peknight.version
+      }
+    }
   }
 
   /** https://www.scala-lang.org/ */
@@ -97,6 +104,11 @@ package object gav {
       def groupId: String = typelevel.groupId
       def artifactId: String = "cats-core"
       def version: String = "2.13.0"
+      object laws extends Module {
+        def groupId: String = typelevel.groupId
+        def artifactId: String = "cats-laws"
+        def version: String = cats.version
+      }
     }
     /** https://mvnrepository.com/artifact/org.typelevel/cats-effect */
     object catsEffect extends Module {
