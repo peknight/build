@@ -22,6 +22,11 @@ package object gav {
         def artifactId: String = "scalacheck-ext"
         def version: String = peknight.version
       }
+      object spire extends Module {
+        def groupId: String = peknight.groupId
+        def artifactId: String = "spire-ext"
+        def version: String = peknight.version
+      }
     }
     object instances {
       object cats {
@@ -54,6 +59,21 @@ package object gav {
       object spire extends Module {
         def groupId: String = peknight.groupId
         def artifactId: String = "error-spire"
+        def version: String = peknight.version
+      }
+    }
+    object random extends Module {
+      def groupId: String = peknight.groupId
+      def artifactId: String = "random-core"
+      def version: String = peknight.version
+    }
+    object validation extends Module {
+      def groupId: String = peknight.groupId
+      def artifactId: String = "validation-core"
+      def version: String = peknight.version
+      object spire extends Module {
+        def groupId: String = peknight.groupId
+        def artifactId: String = "validation-spire"
         def version: String = peknight.version
       }
     }

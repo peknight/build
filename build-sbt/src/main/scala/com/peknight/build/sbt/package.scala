@@ -13,14 +13,9 @@ import org.portablescala.sbtplatformdeps.PlatformDepsPlugin.autoImport.toPlatfor
 import scala.collection.Seq
 
 package object sbt {
-  def crossDependency(dependency: Module, configuration: Option[Configuration] = None): Def.Setting[Seq[ModuleID]] = {
-    configuration match {
-      case Some(conf) =>
-        libraryDependencies += dependency.groupId %%% dependency.artifactId % dependency.version % conf
-      case _ =>
-        libraryDependencies += dependency.groupId %%% dependency.artifactId % dependency.version
-    }
-  }
+
+  def crossTestDependencies(dependencies: Module*): Def.Setting[Seq[ModuleID]] =
+    libraryDependencies ++= dependencies.map(dependency => dependency.groupId %%% dependency.artifactId % dependency.version % Test)
 
   def crossDependencies(dependencies: Module*): Def.Setting[Seq[ModuleID]] =
     libraryDependencies ++= dependencies.map(dependency => dependency.groupId %%% dependency.artifactId % dependency.version)
