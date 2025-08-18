@@ -27,6 +27,11 @@ package object gav {
         def artifactId: String = "spire-ext"
         def version: String = peknight.version
       }
+      object log4Cats extends Module {
+        def groupId: String = peknight.groupId
+        def artifactId: String = "log4cats-ext"
+        def version: String = peknight.version
+      }
     }
     object instances {
       object cats {
@@ -169,6 +174,12 @@ package object gav {
       def groupId: String = typelevel.groupId
       def artifactId: String = "cats-effect"
       def version: String = "3.6.3"
+      /** https://mvnrepository.com/artifact/org.typelevel/cats-effect-testing-scalatest */
+      object testingScalaTest extends Module {
+        def groupId: String = typelevel.groupId
+        def artifactId: String = "cats-effect-testing-scalatest"
+        def version: String = "1.6.0"
+      }
     }
     /** https://mvnrepository.com/artifact/org.typelevel/cats-parse */
     object catsParse extends Module {
@@ -252,6 +263,29 @@ package object gav {
       def groupId: String = optics.groupId
       def artifactId: String = "monocle-core"
       def version: String = "3.3.0"
+    }
+  }
+
+  /** https://mvnrepository.com/artifact/org.scalatest/scalatest */
+  object scalaTest extends Module {
+    def groupId: String = "org.scalatest"
+    def artifactId: String = "scalatest"
+    def version: String = "3.2.19"
+    /** https://mvnrepository.com/artifact/org.scalatest/scalatest-flatspec */
+    object flatSpec extends Module {
+      def groupId: String = scalaTest.groupId
+      def artifactId: String = "scalatest-flatspec"
+      def version: String = scalaTest.version
+    }
+  }
+
+  object tpolecat extends GroupID {
+    def groupId: String = "org.tpolecat"
+    /** https://mvnrepository.com/artifact/org.tpolecat/natchez-core */
+    object natchez extends Module {
+      def groupId: String = tpolecat.groupId
+      def artifactId: String = "natchez-core"
+      def version: String = "0.3.8"
     }
   }
 }
