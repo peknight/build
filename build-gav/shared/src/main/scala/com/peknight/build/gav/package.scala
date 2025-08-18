@@ -35,12 +35,27 @@ package object gav {
           def artifactId: String = "cats-instances-tuple"
           def version: String = peknight.version
         }
+        object clazz extends Module {
+          def groupId: String = peknight.groupId
+          def artifactId: String = "cats-instances-class"
+          def version: String = peknight.version
+        }
       }
     }
     object generic extends Module {
       def groupId: String = peknight.groupId
       def artifactId: String = "generic-core"
       def version: String = peknight.version
+    }
+    object error extends Module {
+      def groupId: String = peknight.groupId
+      def artifactId: String = "error-core"
+      def version: String = peknight.version
+      object spire extends Module {
+        def groupId: String = peknight.groupId
+        def artifactId: String = "error-spire"
+        def version: String = peknight.version
+      }
     }
   }
 
