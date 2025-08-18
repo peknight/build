@@ -37,6 +37,11 @@ package object gav {
         }
       }
     }
+    object generic extends Module {
+      def groupId: String = peknight.groupId
+      def artifactId: String = "generic-core"
+      def version: String = peknight.version
+    }
   }
 
   /** https://www.scala-lang.org/ */
