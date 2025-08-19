@@ -16,15 +16,27 @@ package object gav {
         def version: String = peknight.version
       }
     }
-    object ext {
-      object scalaCheck extends Module {
+    object commons {
+      object text extends Module {
         def groupId: String = peknight.groupId
-        def artifactId: String = "scalacheck-ext"
+        def artifactId: String = "commons-text"
         def version: String = peknight.version
       }
-      object spire extends Module {
+    }
+    object ext {
+      object cats extends Module {
         def groupId: String = peknight.groupId
-        def artifactId: String = "spire-ext"
+        def artifactId: String = "cats-ext"
+        def version: String = peknight.version
+      }
+      object circe extends Module {
+        def groupId: String = peknight.groupId
+        def artifactId: String = "circe-ext"
+        def version: String = peknight.version
+      }
+      object circeParser extends Module {
+        def groupId: String = peknight.groupId
+        def artifactId: String = "circe-parser-ext"
         def version: String = peknight.version
       }
       object log4Cats extends Module {
@@ -32,9 +44,36 @@ package object gav {
         def artifactId: String = "log4cats-ext"
         def version: String = peknight.version
       }
+      object scalaCheck extends Module {
+        def groupId: String = peknight.groupId
+        def artifactId: String = "scalacheck-ext"
+        def version: String = peknight.version
+      }
+      object scodec {
+        object bits extends Module {
+          def groupId: String = peknight.groupId
+          def artifactId: String = "scodec-bits-ext"
+          def version: String = peknight.version
+        }
+      }
+      object spire extends Module {
+        def groupId: String = peknight.groupId
+        def artifactId: String = "spire-ext"
+        def version: String = peknight.version
+      }
     }
     object instances {
       object cats {
+        object circe extends Module {
+          def groupId: String = peknight.groupId
+          def artifactId: String = "cats-instances-circe"
+          def version: String = peknight.version
+        }
+        object clazz extends Module {
+          def groupId: String = peknight.groupId
+          def artifactId: String = "cats-instances-class"
+          def version: String = peknight.version
+        }
         object scalaCheck extends Module {
           def groupId: String = peknight.groupId
           def artifactId: String = "cats-instances-scalacheck"
@@ -45,17 +84,17 @@ package object gav {
           def artifactId: String = "cats-instances-tuple"
           def version: String = peknight.version
         }
-        object clazz extends Module {
-          def groupId: String = peknight.groupId
-          def artifactId: String = "cats-instances-class"
-          def version: String = peknight.version
-        }
       }
     }
     object generic extends Module {
       def groupId: String = peknight.groupId
       def artifactId: String = "generic-core"
       def version: String = peknight.version
+      object migration extends Module {
+        def groupId: String = peknight.groupId
+        def artifactId: String = "generic-migration"
+        def version: String = peknight.version
+      }
     }
     object error extends Module {
       def groupId: String = peknight.groupId
@@ -281,6 +320,12 @@ package object gav {
 
   object tpolecat extends GroupID {
     def groupId: String = "org.tpolecat"
+    /** https://mvnrepository.com/artifact/org.tpolecat/doobie-core */
+    object doobie extends Module {
+      def groupId: String = tpolecat.groupId
+      def artifactId: String = "doobie-core"
+      def version: String = "1.0.0-RC10"
+    }
     /** https://mvnrepository.com/artifact/org.tpolecat/natchez-core */
     object natchez extends Module {
       def groupId: String = tpolecat.groupId
