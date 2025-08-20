@@ -21,14 +21,12 @@ ThisBuild / publishTo := {
 ThisBuild / credentials += Credentials(Path.userHome / ".sbt" / ".credentials")
 
 lazy val build = (project in file("."))
+  .settings(name := "build")
   .aggregate(
     buildGav.jvm,
     buildGav.js,
     buildGav.native,
     buildSbt
-  )
-  .settings(
-    name := "build",
   )
 
 lazy val buildGav = (crossProject(JVMPlatform, JSPlatform, NativePlatform) in file("build-gav"))

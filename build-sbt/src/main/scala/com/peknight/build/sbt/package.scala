@@ -5,26 +5,29 @@ import _root_.sbt._
 import _root_.sbt.io.syntax.fileToRichFile
 import _root_.sbt.librarymanagement.syntax.{stringToOrganization, toRepositoryName}
 import com.peknight.build.gav.sbtGithub.nativePackager
-import com.peknight.build.gav.{Module, peknight, portableScala, scalaJs, scalaNative}
+import com.peknight.build.gav._
 import com.typesafe.sbt.packager.Keys.maintainer
 import com.typesafe.sbt.packager.docker.DockerPlugin.autoImport.{Docker, dockerBaseImage, dockerBuildOptions, dockerRepository}
 import org.portablescala.sbtplatformdeps.PlatformDepsPlugin.autoImport.toPlatformDepsGroupID
 
-import scala.collection.Seq
+import _root_.scala.collection.Seq
 
 package object sbt {
 
+  def crossDependencies(dependencies: Module*): Def.Setting[Seq[ModuleID]] =
+    libraryDependencies ++= dependencies.map(dependency => dependency.groupId %%% dependency.artifactId % dependency.version)
   def crossTestDependencies(dependencies: Module*): Def.Setting[Seq[ModuleID]] =
     libraryDependencies ++= dependencies.map(dependency => dependency.groupId %%% dependency.artifactId % dependency.version % Test)
 
-  def crossDependencies(dependencies: Module*): Def.Setting[Seq[ModuleID]] =
-    libraryDependencies ++= dependencies.map(dependency => dependency.groupId %%% dependency.artifactId % dependency.version)
-
   def dependency(dependency: Module): ModuleID = dependency.groupId %% dependency.artifactId % dependency.version
-  def dependencies(dependencies: Module*): Def.Setting[Seq[ModuleID]] = libraryDependencies ++= dependencies.map(dependency)
+  def dependencies(dependencies: Module*): Seq[ModuleID] = dependencies.map(dependency)
+  def testDependency(dep: Module): ModuleID = dependency(dep) % Test
+  def testDependencies(dependencies: Module*): Seq[ModuleID] = dependencies.map(testDependency)
 
   def jvmDependency(dependency: Module): ModuleID = dependency.groupId % dependency.artifactId % dependency.version
-  def jvmDependencies(dependencies: Module*): Def.Setting[Seq[ModuleID]] = libraryDependencies ++= dependencies.map(jvmDependency)
+  def jvmDependencies(dependencies: Module*): Seq[ModuleID] = dependencies.map(jvmDependency)
+  def jvmTestDependency(dep: Module): ModuleID = jvmDependency(dep) % Test
+  def jvmTestDependencies(dependencies: Module*): Seq[ModuleID] = dependencies.map(jvmTestDependency)
 
   def addJvmSbtPlugin(dependency: Module): Def.Setting[Seq[ModuleID]] = addSbtPlugin(jvmDependency(dependency))
 

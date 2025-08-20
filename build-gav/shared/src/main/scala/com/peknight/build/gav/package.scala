@@ -22,6 +22,11 @@ package object gav {
         def artifactId: String = "commons-text"
         def version: String = peknight.version
       }
+      object time extends Module {
+        def groupId: String = peknight.groupId
+        def artifactId: String = "commons-time"
+        def version: String = peknight.version
+      }
     }
     object ext {
       object cats extends Module {
@@ -29,20 +34,35 @@ package object gav {
         def artifactId: String = "cats-ext"
         def version: String = peknight.version
       }
-      object circe extends Module {
+      object catsParse extends Module {
         def groupId: String = peknight.groupId
-        def artifactId: String = "circe-ext"
-        def version: String = peknight.version
-      }
-      object circeParser extends Module {
-        def groupId: String = peknight.groupId
-        def artifactId: String = "circe-parser-ext"
+        def artifactId: String = "cats-parse-ext"
         def version: String = peknight.version
       }
       object scodec {
         object bits extends Module {
           def groupId: String = peknight.groupId
           def artifactId: String = "scodec-bits-ext"
+          def version: String = peknight.version
+        }
+      }
+      object fs2 extends Module {
+        def groupId: String = peknight.groupId
+        def artifactId: String = "fs2-ext"
+        def version: String = peknight.version
+        object io extends Module {
+          def groupId: String = peknight.groupId
+          def artifactId: String = "fs2-io-ext"
+          def version: String = peknight.version
+        }
+      }
+      object circe extends Module {
+        def groupId: String = peknight.groupId
+        def artifactId: String = "circe-ext"
+        def version: String = peknight.version
+        object parser extends Module {
+          def groupId: String = peknight.groupId
+          def artifactId: String = "circe-parser-ext"
           def version: String = peknight.version
         }
       }
@@ -74,10 +94,22 @@ package object gav {
           def artifactId: String = "cats-instances-tuple"
           def version: String = peknight.version
         }
+        object time extends Module {
+          def groupId: String = peknight.groupId
+          def artifactId: String = "cats-instances-time"
+          def version: String = peknight.version
+        }
         object circe extends Module {
           def groupId: String = peknight.groupId
           def artifactId: String = "cats-instances-circe"
           def version: String = peknight.version
+        }
+        object scodec {
+          object bits extends Module {
+            def groupId: String = peknight.groupId
+            def artifactId: String = "cats-instances-scodec-bits"
+            def version: String = peknight.version
+          }
         }
         object scalaCheck extends Module {
           def groupId: String = peknight.groupId
@@ -119,6 +151,48 @@ package object gav {
         def groupId: String = peknight.groupId
         def artifactId: String = "validation-spire"
         def version: String = peknight.version
+      }
+    }
+    object method extends Module {
+      def groupId: String = peknight.groupId
+      def artifactId: String = "method-core"
+      def version: String = peknight.version
+    }
+    object codec extends Module {
+      def groupId: String = peknight.groupId
+      def artifactId: String = "codec-core"
+      def version: String = peknight.version
+      object base extends Module {
+        def groupId: String = peknight.groupId
+        def artifactId: String = "codec-base"
+        def version: String = peknight.version
+      }
+      object circe extends Module {
+        def groupId: String = peknight.groupId
+        def artifactId: String = "codec-circe"
+        def version: String = peknight.version
+        object parser extends Module {
+          def groupId: String = peknight.groupId
+          def artifactId: String = "codec-circe-parser"
+          def version: String = peknight.version
+        }
+      }
+      object http4s extends Module {
+        def groupId: String = peknight.groupId
+        def artifactId: String = "codec-http4s"
+        def version: String = peknight.version
+      }
+    }
+    object security extends Module {
+      def groupId: String = peknight.groupId
+      def artifactId: String = "security-core"
+      def version: String = peknight.version
+      object bouncyCastle {
+        object provider extends Module {
+          def groupId: String = peknight.groupId
+          def artifactId: String = "security-bcprov"
+          def version: String = peknight.version
+        }
       }
     }
   }
@@ -347,6 +421,34 @@ package object gav {
     }
   }
 
+  object bouncyCastle extends GroupID with Version {
+    def groupId: String = "org.bouncycastle"
+    def version: String = "1.81"
+    /** https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk18on */
+    object provider extends Module {
+      def groupId: String = bouncyCastle.groupId
+      def artifactId: String = "bcprov-jdk18on"
+      def version: String = bouncyCastle.version
+    }
+    /** https://mvnrepository.com/artifact/org.bouncycastle/bcpkix-jdk18on */
+    object pkix extends Module {
+      def groupId: String = bouncyCastle.groupId
+      def artifactId: String = "bcpkix-jdk18on"
+      def version: String = bouncyCastle.version
+    }
+  }
+  /** https://mvnrepository.com/artifact/ch.qos.logback/logback-core */
+  object logback extends Module {
+    def groupId: String = "ch.qos.logback"
+    def artifactId: String = "logback-core"
+    def version: String = "1.5.18"
+    /** https://mvnrepository.com/artifact/ch.qos.logback/logback-classic */
+    object classic extends Module {
+      def groupId: String = logback.groupId
+      def artifactId: String = "logback-classic"
+      def version: String = logback.version
+    }
+  }
   /** https://mvnrepository.com/artifact/org.scalacheck/scalacheck */
   object scalaCheck extends Module {
     def groupId: String = "org.scalacheck"
