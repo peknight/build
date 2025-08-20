@@ -532,6 +532,22 @@ package object gav {
     }
   }
 
+  object gnieh extends GroupID {
+    def groupId: String = "org.gnieh"
+    object fs2 {
+      object data {
+        object json {
+          // https://mvnrepository.com/artifact/org.gnieh/fs2-data-json-circe
+          object circe extends Module {
+            def groupId: String = gnieh.groupId
+            def artifactId: String = "fs2-data-json-circe"
+            def version: String = "1.12.0"
+          }
+        }
+      }
+    }
+  }
+
   /** https://mvnrepository.com/artifact/io.circe/circe-core */
   object circe extends Module {
     def groupId: String = "io.circe"
@@ -697,6 +713,85 @@ package object gav {
       def groupId: String = scalaTest.groupId
       def artifactId: String = "scalatest-flatspec"
       def version: String = scalaTest.version
+    }
+  }
+
+  /** https://mvnrepository.com/artifact/io.vavr/vavr */
+  object vavr extends Module {
+    def groupId: String = "io.vavr"
+    def artifactId: String = "vavr"
+    def version: String = "0.10.7"
+  }
+
+  /** https://mvnrepository.com/artifact/org.projectlombok/lombok */
+  object lombok extends Module {
+    def groupId: String = "org.projectlombok"
+    def artifactId: String = "lombok"
+    def version: String = "1.18.38"
+    def processorOptions: Seq[String] = Seq("-processor", "lombok.launch.AnnotationProcessorHider$AnnotationProcessor")
+  }
+
+  object spring extends GroupID with Version {
+    def groupId: String = "org.springframework"
+    def version: String = "6.2.10"
+    /** https://mvnrepository.com/artifact/org.springframework/spring-context */
+    object context extends Module {
+      def groupId: String = spring.groupId
+      def artifactId: String = "spring-context"
+      def version: String = spring.version
+    }
+  }
+
+  object apache {
+    object commons extends GroupID {
+      def groupId: String = "org.apache.commons"
+      /** https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 */
+      object lang3 extends Module {
+        def groupId: String = commons.groupId
+        def artifactId: String = "commons-lang3"
+        def version: String = "3.18.0"
+      }
+      /** https://mvnrepository.com/artifact/org.apache.commons/commons-text */
+      object text extends Module {
+        def groupId: String = commons.groupId
+        def artifactId: String = "commons-text"
+        def version: String = "1.14.0"
+      }
+    }
+  }
+
+  object google {
+    /** https://mvnrepository.com/artifact/com.google.guava/guava */
+    object guava extends Module {
+      def groupId: String = "com.google.guava"
+      def artifactId: String = "guava"
+      def version: String = "33.4.8-jre"
+    }
+  }
+
+  object alibaba extends GroupID {
+    def groupId: String = "com.alibaba"
+    /** https://mvnrepository.com/artifact/com.alibaba.fastjson2/fastjson2 */
+    object fastjson2 extends Module {
+      def groupId: String = s"${alibaba.groupId}.fastjson2"
+      def artifactId: String = "fastjson2"
+      def version: String = "2.0.58"
+    }
+    /** https://mvnrepository.com/artifact/com.alibaba/QLExpress */
+    object qlExpress extends Module {
+      def groupId: String = alibaba.groupId
+      def artifactId: String = "QLExpress"
+      def version: String = "3.3.4"
+    }
+  }
+
+  object yomahub extends GroupID {
+    def groupId: String = "com.yomahub"
+    /** https://mvnrepository.com/artifact/com.yomahub/liteflow-core */
+    object liteflow extends Module {
+      def groupId: String = yomahub.groupId
+      def artifactId: String = "liteflow-core"
+      def version: String = "2.13.2.1"
     }
   }
 }
