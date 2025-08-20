@@ -18,16 +18,22 @@ package object sbt {
     libraryDependencies ++= dependencies.map(dependency => dependency.groupId %%% dependency.artifactId % dependency.version)
   def crossTestDependencies(dependencies: Module*): Def.Setting[Seq[ModuleID]] =
     libraryDependencies ++= dependencies.map(dependency => dependency.groupId %%% dependency.artifactId % dependency.version % Test)
+  def crossRuntimeDependencies(dependencies: Module*): Def.Setting[Seq[ModuleID]] =
+    libraryDependencies ++= dependencies.map(dependency => dependency.groupId %%% dependency.artifactId % dependency.version % Runtime)
 
   def dependency(dependency: Module): ModuleID = dependency.groupId %% dependency.artifactId % dependency.version
   def dependencies(dependencies: Module*): Seq[ModuleID] = dependencies.map(dependency)
   def testDependency(dep: Module): ModuleID = dependency(dep) % Test
   def testDependencies(dependencies: Module*): Seq[ModuleID] = dependencies.map(testDependency)
+  def runtimeDependency(dep: Module): ModuleID = dependency(dep) % Runtime
+  def runtimeDependencies(dependencies: Module*): Seq[ModuleID] = dependencies.map(runtimeDependency)
 
   def jvmDependency(dependency: Module): ModuleID = dependency.groupId % dependency.artifactId % dependency.version
   def jvmDependencies(dependencies: Module*): Seq[ModuleID] = dependencies.map(jvmDependency)
   def jvmTestDependency(dep: Module): ModuleID = jvmDependency(dep) % Test
   def jvmTestDependencies(dependencies: Module*): Seq[ModuleID] = dependencies.map(jvmTestDependency)
+  def jvmRuntimeDependency(dep: Module): ModuleID = jvmDependency(dep) % Runtime
+  def jvmRuntimeDependencies(dependencies: Module*): Seq[ModuleID] = dependencies.map(jvmRuntimeDependency)
 
   def addJvmSbtPlugin(dependency: Module): Def.Setting[Seq[ModuleID]] = addSbtPlugin(jvmDependency(dependency))
 

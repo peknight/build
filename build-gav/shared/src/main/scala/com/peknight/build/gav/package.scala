@@ -34,6 +34,11 @@ package object gav {
         def artifactId: String = "cats-ext"
         def version: String = peknight.version
       }
+      object catsEffect extends Module {
+        def groupId: String = peknight.groupId
+        def artifactId: String = "cats-effect-ext"
+        def version: String = peknight.version
+      }
       object catsParse extends Module {
         def groupId: String = peknight.groupId
         def artifactId: String = "cats-parse-ext"
@@ -65,6 +70,11 @@ package object gav {
           def artifactId: String = "circe-parser-ext"
           def version: String = peknight.version
         }
+      }
+      object http4s extends Module {
+        def groupId: String = peknight.groupId
+        def artifactId: String = "http4s-ext"
+        def version: String = peknight.version
       }
       object spire extends Module {
         def groupId: String = peknight.groupId
@@ -158,10 +168,34 @@ package object gav {
       def artifactId: String = "method-core"
       def version: String = peknight.version
     }
+    object logging extends Module {
+      def groupId: String = peknight.groupId
+      def artifactId: String = "logging-core"
+      def version: String = peknight.version
+      object logback {
+        object config extends Module {
+          def groupId: String = peknight.groupId
+          def artifactId: String = "logback-config"
+          def version: String = peknight.version
+        }
+      }
+    }
     object codec extends Module {
       def groupId: String = peknight.groupId
       def artifactId: String = "codec-core"
       def version: String = peknight.version
+      object effect extends Module {
+        def groupId: String = peknight.groupId
+        def artifactId: String = "codec-effect"
+        def version: String = peknight.version
+      }
+      object fs2 {
+        object io extends Module {
+          def groupId: String = peknight.groupId
+          def artifactId: String = "codec-fs2-io"
+          def version: String = peknight.version
+        }
+      }
       object base extends Module {
         def groupId: String = peknight.groupId
         def artifactId: String = "codec-base"
@@ -177,9 +211,29 @@ package object gav {
           def version: String = peknight.version
         }
       }
+      object ip4s extends Module {
+        def groupId: String = peknight.groupId
+        def artifactId: String = "codec-ip4s"
+        def version: String = peknight.version
+      }
       object http4s extends Module {
         def groupId: String = peknight.groupId
         def artifactId: String = "codec-http4s"
+        def version: String = peknight.version
+        object circe extends Module {
+          def groupId: String = peknight.groupId
+          def artifactId: String = "codec-http4s-circe"
+          def version: String = peknight.version
+        }
+      }
+    }
+    object query extends Module {
+      def groupId: String = peknight.groupId
+      def artifactId: String = "query-core"
+      def version: String = peknight.version
+      object http4s extends Module {
+        def groupId: String = peknight.groupId
+        def artifactId: String = "query-http4s"
         def version: String = peknight.version
       }
     }
@@ -191,6 +245,135 @@ package object gav {
         object provider extends Module {
           def groupId: String = peknight.groupId
           def artifactId: String = "security-bcprov"
+          def version: String = peknight.version
+        }
+        object pkix extends Module {
+          def groupId: String = peknight.groupId
+          def artifactId: String = "security-bcpkix"
+          def version: String = peknight.version
+        }
+      }
+      object http4s extends Module {
+        def groupId: String = peknight.groupId
+        def artifactId: String = "security-http4s"
+        def version: String = peknight.version
+      }
+      object instances {
+        object codec extends Module {
+          def groupId: String = peknight.groupId
+          def artifactId: String = "security-codec-instances"
+          def version: String = peknight.version
+        }
+      }
+    }
+    object jose extends Module {
+      def groupId: String = peknight.groupId
+      def artifactId: String = "jose-core"
+      def version: String = peknight.version
+    }
+    object api extends Module {
+      def groupId: String = peknight.groupId
+      def artifactId: String = "api-core"
+      def version: String = peknight.version
+      object instances {
+        object codec extends Module {
+          def groupId: String = peknight.groupId
+          def artifactId: String = "api-codec-instances"
+          def version: String = peknight.version
+        }
+      }
+    }
+    object auth extends Module {
+      def groupId: String = peknight.groupId
+      def artifactId: String = "auth-core"
+      def version: String = peknight.version
+      object http4s extends Module {
+        def groupId: String = peknight.groupId
+        def artifactId: String = "auth-http4s"
+        def version: String = peknight.version
+      }
+    }
+    object os extends Module {
+      def groupId: String = peknight.groupId
+      def artifactId: String = "os-core"
+      def version: String = peknight.version
+      object fs2 extends Module {
+        def groupId: String = peknight.groupId
+        def artifactId: String = "os-fs2"
+        def version: String = peknight.version
+      }
+    }
+    object docker extends Module {
+      def groupId: String = peknight.groupId
+      def artifactId: String = "docker-core"
+      def version: String = peknight.version
+      object client extends Module {
+        def groupId: String = peknight.groupId
+        def artifactId: String = "docker-client"
+        def version: String = peknight.version
+      }
+    }
+    object network {
+      object proxy {
+        object reverse {
+          object http4s extends Module {
+            def groupId: String = peknight.groupId
+            def artifactId: String = "reverse-proxy-http4s"
+            def version: String = peknight.version
+          }
+        }
+      }
+    }
+    object http extends Module {
+      def groupId: String = peknight.groupId
+      def artifactId: String = "http-core"
+      def version: String = peknight.version
+    }
+    object cloudflare extends Module {
+      def groupId: String = s"${peknight.groupId}.cloudflare"
+      def artifactId: String = "core"
+      def version: String = peknight.version
+      object zone extends Module {
+        def groupId: String = cloudflare.groupId
+        def artifactId: String = "zone-core"
+        def version: String = peknight.version
+        object instances {
+          object codec extends Module {
+            def groupId: String = cloudflare.groupId
+            def artifactId: String = "zone-codec-instances"
+            def version: String = peknight.version
+          }
+        }
+      }
+      object dns {
+        object record extends Module {
+          def groupId: String = cloudflare.groupId
+          def artifactId: String = "dns-record-core"
+          def version: String = peknight.version
+          object api extends Module {
+            def groupId: String = cloudflare.groupId
+            def artifactId: String = "dns-record-api"
+            def version: String = peknight.version
+          }
+          object http4s extends Module {
+            def groupId: String = cloudflare.groupId
+            def artifactId: String = "dns-record-http4s"
+            def version: String = peknight.version
+          }
+        }
+      }
+    }
+    object acme extends Module {
+      def groupId: String = peknight.groupId
+      def artifactId: String = "acme-core"
+      def version: String = peknight.version
+      object client extends Module {
+        def groupId: String = peknight.groupId
+        def artifactId: String = "acme-client-core"
+        def version: String = peknight.version
+        object app extends Module {
+          def groupId: String = peknight.groupId
+          def artifactId: String = "acme-client-app"
           def version: String = peknight.version
         }
       }
@@ -316,6 +499,12 @@ package object gav {
       def groupId: String = typelevel.groupId
       def artifactId: String = "log4cats-core"
       def version: String = "2.7.1"
+      /** https://mvnrepository.com/artifact/org.typelevel/log4cats-slf4j */
+      object slf4j extends Module {
+        def groupId: String = typelevel.groupId
+        def artifactId: String = "log4cats-slf4j"
+        def version: String = log4Cats.version
+      }
     }
   }
 
@@ -403,11 +592,53 @@ package object gav {
     def groupId: String = "org.http4s"
     def artifactId: String = "http4s-core"
     def version: String = "1.0.0-M34"
+    /** https://mvnrepository.com/artifact/org.http4s/http4s-dsl */
+    object dsl extends Module {
+      def groupId: String = http4s.groupId
+      def artifactId: String = "http4s-dsl"
+      def version: String = http4s.version
+    }
+    /** https://mvnrepository.com/artifact/org.http4s/http4s-server */
+    object server extends Module {
+      def groupId: String = http4s.groupId
+      def artifactId: String = "http4s-server"
+      def version: String = http4s.version
+    }
+    /** https://mvnrepository.com/artifact/org.http4s/http4s-client */
+    object client extends Module {
+      def groupId: String = http4s.groupId
+      def artifactId: String = "http4s-client"
+      def version: String = http4s.version
+    }
     /** https://mvnrepository.com/artifact/org.http4s/http4s-circe */
     object circe extends Module {
       def groupId: String = http4s.groupId
       def artifactId: String = "http4s-circe"
       def version: String = http4s.version
+    }
+    object ember {
+      /** https://mvnrepository.com/artifact/org.http4s/http4s-ember-server */
+      object server extends Module {
+        def groupId: String = http4s.groupId
+        def artifactId: String = "http4s-ember-server"
+        def version: String = http4s.version
+      }
+      /** https://mvnrepository.com/artifact/org.http4s/http4s-ember-client */
+      object client extends Module {
+        def groupId: String = http4s.groupId
+        def artifactId: String = "http4s-ember-client"
+        def version: String = http4s.version
+      }
+    }
+    object jdk {
+      object http {
+        /** https://mvnrepository.com/artifact/org.http4s/http4s-jdk-http-client */
+        object client extends Module {
+          def groupId: String = http4s.groupId
+          def artifactId: String = "http4s-jdk-http-client"
+          def version: String = "1.0.0-M3"
+        }
+      }
     }
   }
 
