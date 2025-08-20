@@ -16,6 +16,13 @@ package object gav {
         def version: String = peknight.version
       }
     }
+    object commons {
+      object text extends Module {
+        def groupId: String = peknight.groupId
+        def artifactId: String = "commons-text"
+        def version: String = peknight.version
+      }
+    }
     object ext {
       object scalaCheck extends Module {
         def groupId: String = peknight.groupId
@@ -125,7 +132,6 @@ package object gav {
         def version: String = crossProject.version
       }
     }
-
     /** https://github.com/portable-scala/sbt-platform-deps */
     object sbtPlatformDeps extends Module {
       def groupId: String = portableScala.groupId
@@ -187,17 +193,28 @@ package object gav {
       def artifactId: String = "cats-parse"
       def version: String = "0.3.10"
     }
+    /** https://mvnrepository.com/artifact/org.typelevel/spire */
+    object spire extends Module {
+      def groupId: String = typelevel.groupId
+      def artifactId: String = "spire"
+      def version: String = "0.18.0"
+    }
     /** https://mvnrepository.com/artifact/org.typelevel/log4cats-core */
     object log4Cats extends Module {
       def groupId: String = typelevel.groupId
       def artifactId: String = "log4cats-core"
       def version: String = "2.7.1"
     }
-    /** https://mvnrepository.com/artifact/org.typelevel/spire */
-    object spire extends Module {
-      def groupId: String = typelevel.groupId
-      def artifactId: String = "spire"
-      def version: String = "0.18.0"
+  }
+
+  object scodec extends GroupID with Version {
+    def groupId: String = "org.scodec"
+    def version: String = "1.2.4"
+    /** https://mvnrepository.com/artifact/org.scodec/scodec-bits */
+    object bits extends Module {
+      def groupId: String = scodec.groupId
+      def artifactId: String = "scodec-bits"
+      def version: String = scodec.version
     }
   }
 
@@ -232,14 +249,34 @@ package object gav {
       def version: String = circe.version
     }
   }
-  object scodec extends GroupID with Version {
-    def groupId: String = "org.scodec"
-    def version: String = "1.2.4"
-    /** https://mvnrepository.com/artifact/org.scodec/scodec-bits */
-    object bits extends Module {
-      def groupId: String = scodec.groupId
-      def artifactId: String = "scodec-bits"
-      def version: String = scodec.version
+
+  object tpolecat extends GroupID {
+    def groupId: String = "org.tpolecat"
+    /** https://mvnrepository.com/artifact/org.tpolecat/natchez-core */
+    object natchez extends Module {
+      def groupId: String = tpolecat.groupId
+      def artifactId: String = "natchez-core"
+      def version: String = "0.3.8"
+    }
+  }
+
+  object cir extends GroupID {
+    def groupId: String = "is.cir"
+    /** https://mvnrepository.com/artifact/is.cir/ciris */
+    object ciris extends Module {
+      def groupId: String = cir.groupId
+      def artifactId: String = "ciris"
+      def version = "3.10.0"
+    }
+  }
+
+  object comcast extends GroupID {
+    def groupId: String = "com.comcast"
+    /** https://mvnrepository.com/artifact/com.comcast/ip4s-core */
+    object ip4s extends Module {
+      def groupId: String = comcast.groupId
+      def artifactId: String = "ip4s-core"
+      def version = "3.7.0"
     }
   }
 
@@ -248,14 +285,14 @@ package object gav {
     def groupId: String = "org.http4s"
     def artifactId: String = "http4s-core"
     def version: String = "1.0.0-M34"
+    /** https://mvnrepository.com/artifact/org.http4s/http4s-circe */
+    object circe extends Module {
+      def groupId: String = http4s.groupId
+      def artifactId: String = "http4s-circe"
+      def version: String = http4s.version
+    }
   }
 
-  /** https://mvnrepository.com/artifact/org.scalacheck/scalacheck */
-  object scalaCheck extends Module {
-    def groupId: String = "org.scalacheck"
-    def artifactId: String = "scalacheck"
-    def version: String = "1.18.1"
-  }
   /** https://mvnrepository.com/artifact/dev.optics/monocle-core */
   object optics extends GroupID {
     def groupId: String = "dev.optics"
@@ -264,6 +301,13 @@ package object gav {
       def artifactId: String = "monocle-core"
       def version: String = "3.3.0"
     }
+  }
+
+  /** https://mvnrepository.com/artifact/org.scalacheck/scalacheck */
+  object scalaCheck extends Module {
+    def groupId: String = "org.scalacheck"
+    def artifactId: String = "scalacheck"
+    def version: String = "1.18.1"
   }
 
   /** https://mvnrepository.com/artifact/org.scalatest/scalatest */
@@ -276,16 +320,6 @@ package object gav {
       def groupId: String = scalaTest.groupId
       def artifactId: String = "scalatest-flatspec"
       def version: String = scalaTest.version
-    }
-  }
-
-  object tpolecat extends GroupID {
-    def groupId: String = "org.tpolecat"
-    /** https://mvnrepository.com/artifact/org.tpolecat/natchez-core */
-    object natchez extends Module {
-      def groupId: String = tpolecat.groupId
-      def artifactId: String = "natchez-core"
-      def version: String = "0.3.8"
     }
   }
 }
