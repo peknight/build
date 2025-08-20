@@ -231,6 +231,12 @@ package object gav {
       def artifactId: String = "spire"
       def version: String = "0.18.0"
     }
+    /** https://mvnrepository.com/artifact/org.typelevel/squants */
+    object squants extends Module {
+      def groupId: String = typelevel.groupId
+      def artifactId: String = "squants"
+      def version: String = "1.8.3"
+    }
     /** https://mvnrepository.com/artifact/org.typelevel/log4cats-core */
     object log4Cats extends Module {
       def groupId: String = typelevel.groupId
