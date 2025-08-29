@@ -392,7 +392,7 @@ package object gav {
   object sbtScala extends Module {
     def groupId: String = "org.scala-sbt"
     def artifactId: String = "sbt"
-    def version: String = "1.11.4"
+    def version: String = "1.11.5"
   }
 
   object sbtGithub extends GroupID {
@@ -401,7 +401,7 @@ package object gav {
     object nativePackager extends Module {
       def groupId: String = sbtGithub.groupId
       def artifactId: String = "sbt-native-packager"
-      def version: String = "1.11.1"
+      def version: String = "1.11.3"
     }
   }
 
@@ -532,22 +532,6 @@ package object gav {
     }
   }
 
-  object gnieh extends GroupID {
-    def groupId: String = "org.gnieh"
-    object fs2 {
-      object data {
-        object json {
-          // https://mvnrepository.com/artifact/org.gnieh/fs2-data-json-circe
-          object circe extends Module {
-            def groupId: String = gnieh.groupId
-            def artifactId: String = "fs2-data-json-circe"
-            def version: String = "1.12.0"
-          }
-        }
-      }
-    }
-  }
-
   /** https://mvnrepository.com/artifact/io.circe/circe-core */
   object circe extends Module {
     def groupId: String = "io.circe"
@@ -564,6 +548,22 @@ package object gav {
       def groupId: String = circe.groupId
       def artifactId: String = "circe-jawn"
       def version: String = circe.version
+    }
+  }
+
+  object gnieh extends GroupID {
+    def groupId: String = "org.gnieh"
+    object fs2 {
+      object data {
+        object json {
+          // https://mvnrepository.com/artifact/org.gnieh/fs2-data-json-circe
+          object circe extends Module {
+            def groupId: String = gnieh.groupId
+            def artifactId: String = "fs2-data-json-circe"
+            def version: String = "1.12.0"
+          }
+        }
+      }
     }
   }
 
@@ -658,9 +658,9 @@ package object gav {
     }
   }
 
-  /** https://mvnrepository.com/artifact/dev.optics/monocle-core */
   object optics extends GroupID {
     def groupId: String = "dev.optics"
+    /** https://mvnrepository.com/artifact/dev.optics/monocle-core */
     object monocle extends Module {
       def groupId: String = optics.groupId
       def artifactId: String = "monocle-core"
