@@ -384,7 +384,7 @@ package object gav {
   object scala extends GroupID {
     def groupId: String = "org.scala-lang"
     object scala3 extends Version {
-      def version: String = "3.7.2"
+      def version: String = "3.7.3"
     }
   }
 
@@ -392,7 +392,7 @@ package object gav {
   object sbtScala extends Module {
     def groupId: String = "org.scala-sbt"
     def artifactId: String = "sbt"
-    def version: String = "1.11.5"
+    def version: String = "1.11.6"
   }
 
   object sbtGithub extends GroupID {
@@ -432,7 +432,7 @@ package object gav {
   /** https://www.scala-js.org/ */
   object scalaJs extends GroupID with Version {
     def groupId: String = "org.scala-js"
-    def version: String = "1.19.0"
+    def version: String = "1.20.1"
     object sbt extends Module {
       def groupId: String = scalaJs.groupId
       def artifactId: String = "sbt-scalajs"
@@ -473,7 +473,7 @@ package object gav {
       object testingScalaTest extends Module {
         def groupId: String = typelevel.groupId
         def artifactId: String = "cats-effect-testing-scalatest"
-        def version: String = "1.6.0"
+        def version: String = "1.7.0"
       }
     }
     /** https://mvnrepository.com/artifact/org.typelevel/cats-parse */
@@ -523,7 +523,7 @@ package object gav {
   object fs2 extends Module {
     def groupId: String = "co.fs2"
     def artifactId: String = "fs2-core"
-    def version: String = "3.12.0"
+    def version: String = "3.12.2"
     /** https://mvnrepository.com/artifact/co.fs2/fs2-io */
     object io extends Module {
       def groupId: String = fs2.groupId
@@ -670,7 +670,7 @@ package object gav {
 
   object bouncyCastle extends GroupID with Version {
     def groupId: String = "org.bouncycastle"
-    def version: String = "1.81"
+    def version: String = "1.82"
     /** https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk18on */
     object provider extends Module {
       def groupId: String = bouncyCastle.groupId
@@ -700,7 +700,7 @@ package object gav {
   object scalaCheck extends Module {
     def groupId: String = "org.scalacheck"
     def artifactId: String = "scalacheck"
-    def version: String = "1.18.1"
+    def version: String = "1.19.0"
   }
 
   /** https://mvnrepository.com/artifact/org.scalatest/scalatest */
@@ -727,13 +727,13 @@ package object gav {
   object lombok extends Module {
     def groupId: String = "org.projectlombok"
     def artifactId: String = "lombok"
-    def version: String = "1.18.38"
+    def version: String = "1.18.42"
     def processorOptions: Seq[String] = Seq("-processor", "lombok.launch.AnnotationProcessorHider$AnnotationProcessor")
   }
 
   object spring extends GroupID with Version {
     def groupId: String = "org.springframework"
-    def version: String = "6.2.10"
+    def version: String = "6.2.11"
     /** https://mvnrepository.com/artifact/org.springframework/spring-context */
     object context extends Module {
       def groupId: String = spring.groupId
@@ -749,7 +749,7 @@ package object gav {
       object lang3 extends Module {
         def groupId: String = commons.groupId
         def artifactId: String = "commons-lang3"
-        def version: String = "3.18.0"
+        def version: String = "3.19.0"
       }
       /** https://mvnrepository.com/artifact/org.apache.commons/commons-text */
       object text extends Module {
@@ -765,7 +765,7 @@ package object gav {
     object guava extends Module {
       def groupId: String = "com.google.guava"
       def artifactId: String = "guava"
-      def version: String = "33.4.8-jre"
+      def version: String = "33.5.0-jre"
     }
   }
 
@@ -775,13 +775,19 @@ package object gav {
     object fastjson2 extends Module {
       def groupId: String = s"${alibaba.groupId}.fastjson2"
       def artifactId: String = "fastjson2"
-      def version: String = "2.0.58"
+      def version: String = "2.0.59"
     }
     /** https://mvnrepository.com/artifact/com.alibaba/QLExpress */
     object qlExpress extends Module {
       def groupId: String = alibaba.groupId
       def artifactId: String = "QLExpress"
       def version: String = "3.3.4"
+    }
+    /** https://mvnrepository.com/artifact/com.alibaba/qlexpress4 */
+    object qlExpress4 extends Module {
+      def groupId: String = alibaba.groupId
+      def artifactId: String = "qlexpress4"
+      def version: String = "4.0.3"
     }
   }
 
@@ -791,7 +797,7 @@ package object gav {
     object liteflow extends Module {
       def groupId: String = yomahub.groupId
       def artifactId: String = "liteflow-core"
-      def version: String = "2.13.2.1"
+      def version: String = "2.15.0.2"
     }
   }
 }
