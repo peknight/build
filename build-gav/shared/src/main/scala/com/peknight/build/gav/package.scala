@@ -392,7 +392,7 @@ package object gav {
   object sbtScala extends Module {
     def groupId: String = "org.scala-sbt"
     def artifactId: String = "sbt"
-    def version: String = "1.11.6"
+    def version: String = "1.11.7"
   }
 
   object sbtGithub extends GroupID {
@@ -401,7 +401,7 @@ package object gav {
     object nativePackager extends Module {
       def groupId: String = sbtGithub.groupId
       def artifactId: String = "sbt-native-packager"
-      def version: String = "1.11.3"
+      def version: String = "1.11.4"
     }
   }
 
@@ -536,7 +536,7 @@ package object gav {
   object circe extends Module {
     def groupId: String = "io.circe"
     def artifactId: String = "circe-core"
-    def version: String = "0.14.14"
+    def version: String = "0.14.15"
     /** https://mvnrepository.com/artifact/io.circe/circe-parser */
     object parser extends Module {
       def groupId: String = circe.groupId
@@ -589,7 +589,7 @@ package object gav {
     object ciris extends Module {
       def groupId: String = cir.groupId
       def artifactId: String = "ciris"
-      def version = "3.10.0"
+      def version = "3.11.0"
     }
   }
 
@@ -688,7 +688,7 @@ package object gav {
   object logback extends Module {
     def groupId: String = "ch.qos.logback"
     def artifactId: String = "logback-core"
-    def version: String = "1.5.18"
+    def version: String = "1.5.19"
     /** https://mvnrepository.com/artifact/ch.qos.logback/logback-classic */
     object classic extends Module {
       def groupId: String = logback.groupId
