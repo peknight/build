@@ -297,11 +297,6 @@ package object gav {
       def groupId: String = peknight.groupId
       def artifactId: String = "os-core"
       def version: String = peknight.version
-      object fs2 extends Module {
-        def groupId: String = peknight.groupId
-        def artifactId: String = "os-fs2"
-        def version: String = peknight.version
-      }
     }
     object docker extends Module {
       def groupId: String = peknight.groupId
