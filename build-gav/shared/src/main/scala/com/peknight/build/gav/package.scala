@@ -379,7 +379,7 @@ package object gav {
   object scala extends GroupID {
     def groupId: String = "org.scala-lang"
     object scala3 extends Version {
-      def version: String = "3.7.3"
+      def version: String = "3.7.4"
     }
   }
 
@@ -438,7 +438,7 @@ package object gav {
   /** https://scala-native.org/en/stable/ */
   object scalaNative extends GroupID with Version {
     def groupId: String = "org.scala-native"
-    def version: String = "0.5.8"
+    def version: String = "0.5.9"
     object sbt extends Module {
       def groupId: String = scalaNative.groupId
       def artifactId: String = "sbt-scala-native"
@@ -568,7 +568,7 @@ package object gav {
     object doobie extends Module {
       def groupId: String = tpolecat.groupId
       def artifactId: String = "doobie-core"
-      def version: String = "1.0.0-RC10"
+      def version: String = "1.0.0-RC11"
     }
     /** https://mvnrepository.com/artifact/org.tpolecat/natchez-core */
     object natchez extends Module {
@@ -584,7 +584,7 @@ package object gav {
     object ciris extends Module {
       def groupId: String = cir.groupId
       def artifactId: String = "ciris"
-      def version = "3.11.0"
+      def version = "3.11.1"
     }
   }
 
@@ -683,7 +683,7 @@ package object gav {
   object logback extends Module {
     def groupId: String = "ch.qos.logback"
     def artifactId: String = "logback-core"
-    def version: String = "1.5.19"
+    def version: String = "1.5.21"
     /** https://mvnrepository.com/artifact/ch.qos.logback/logback-classic */
     object classic extends Module {
       def groupId: String = logback.groupId
@@ -728,7 +728,7 @@ package object gav {
 
   object spring extends GroupID with Version {
     def groupId: String = "org.springframework"
-    def version: String = "6.2.11"
+    def version: String = "6.2.13"
     /** https://mvnrepository.com/artifact/org.springframework/spring-context */
     object context extends Module {
       def groupId: String = spring.groupId
@@ -744,7 +744,7 @@ package object gav {
       object lang3 extends Module {
         def groupId: String = commons.groupId
         def artifactId: String = "commons-lang3"
-        def version: String = "3.19.0"
+        def version: String = "3.20.0"
       }
       /** https://mvnrepository.com/artifact/org.apache.commons/commons-text */
       object text extends Module {
@@ -770,7 +770,7 @@ package object gav {
     object fastjson2 extends Module {
       def groupId: String = s"${alibaba.groupId}.fastjson2"
       def artifactId: String = "fastjson2"
-      def version: String = "2.0.59"
+      def version: String = "2.0.60"
     }
     /** https://mvnrepository.com/artifact/com.alibaba/QLExpress */
     object qlExpress extends Module {
@@ -782,7 +782,7 @@ package object gav {
     object qlExpress4 extends Module {
       def groupId: String = alibaba.groupId
       def artifactId: String = "qlexpress4"
-      def version: String = "4.0.3"
+      def version: String = "4.0.4"
     }
   }
 
@@ -792,7 +792,7 @@ package object gav {
     object liteflow extends Module {
       def groupId: String = yomahub.groupId
       def artifactId: String = "liteflow-core"
-      def version: String = "2.15.0.2"
+      def version: String = "2.15.1"
     }
   }
 }
