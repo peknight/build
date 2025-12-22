@@ -584,7 +584,7 @@ package object gav {
     object ciris extends Module {
       def groupId: String = cir.groupId
       def artifactId: String = "ciris"
-      def version = "3.11.1"
+      def version = "3.12.0"
     }
   }
 
@@ -665,7 +665,7 @@ package object gav {
 
   object bouncyCastle extends GroupID with Version {
     def groupId: String = "org.bouncycastle"
-    def version: String = "1.82"
+    def version: String = "1.83"
     /** https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk18on */
     object provider extends Module {
       def groupId: String = bouncyCastle.groupId
@@ -683,7 +683,7 @@ package object gav {
   object logback extends Module {
     def groupId: String = "ch.qos.logback"
     def artifactId: String = "logback-core"
-    def version: String = "1.5.21"
+    def version: String = "1.5.22"
     /** https://mvnrepository.com/artifact/ch.qos.logback/logback-classic */
     object classic extends Module {
       def groupId: String = logback.groupId
@@ -715,7 +715,7 @@ package object gav {
   object vavr extends Module {
     def groupId: String = "io.vavr"
     def artifactId: String = "vavr"
-    def version: String = "0.10.7"
+    def version: String = "0.11.0"
   }
 
   /** https://mvnrepository.com/artifact/org.projectlombok/lombok */
@@ -728,7 +728,7 @@ package object gav {
 
   object spring extends GroupID with Version {
     def groupId: String = "org.springframework"
-    def version: String = "6.2.13"
+    def version: String = "6.2.15"
     /** https://mvnrepository.com/artifact/org.springframework/spring-context */
     object context extends Module {
       def groupId: String = spring.groupId
@@ -750,7 +750,7 @@ package object gav {
       object text extends Module {
         def groupId: String = commons.groupId
         def artifactId: String = "commons-text"
-        def version: String = "1.14.0"
+        def version: String = "1.15.0"
       }
     }
   }
@@ -782,7 +782,7 @@ package object gav {
     object qlExpress4 extends Module {
       def groupId: String = alibaba.groupId
       def artifactId: String = "qlexpress4"
-      def version: String = "4.0.4"
+      def version: String = "4.0.7"
     }
   }
 
@@ -792,7 +792,7 @@ package object gav {
     object liteflow extends Module {
       def groupId: String = yomahub.groupId
       def artifactId: String = "liteflow-core"
-      def version: String = "2.15.1"
+      def version: String = "2.15.2"
     }
   }
 }
