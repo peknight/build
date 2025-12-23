@@ -337,7 +337,7 @@ package object gav {
         def groupId: String = cloudflare.groupId
         def artifactId: String = "zone-core"
         def version: String = peknight.version
-        object config {
+        object config extends Module {
           def groupId: String = cloudflare.groupId
           def artifactId: String = "zone-config"
           def version: String = peknight.version
