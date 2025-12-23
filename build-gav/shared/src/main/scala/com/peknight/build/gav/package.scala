@@ -337,12 +337,10 @@ package object gav {
         def groupId: String = cloudflare.groupId
         def artifactId: String = "zone-core"
         def version: String = peknight.version
-        object instances {
-          object codec extends Module {
-            def groupId: String = cloudflare.groupId
-            def artifactId: String = "zone-codec-instances"
-            def version: String = peknight.version
-          }
+        object config {
+          def groupId: String = cloudflare.groupId
+          def artifactId: String = "zone-config"
+          def version: String = peknight.version
         }
       }
       object dns {
