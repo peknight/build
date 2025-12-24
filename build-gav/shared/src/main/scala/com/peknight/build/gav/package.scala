@@ -28,105 +28,79 @@ package object gav {
         def version: String = peknight.version
       }
     }
-    object ext {
-      object cats extends Module {
-        def groupId: String = peknight.groupId
-        def artifactId: String = "cats-ext"
-        def version: String = peknight.version
-      }
-      object catsEffect extends Module {
-        def groupId: String = peknight.groupId
-        def artifactId: String = "cats-effect-ext"
-        def version: String = peknight.version
-      }
-      object catsParse extends Module {
-        def groupId: String = peknight.groupId
-        def artifactId: String = "cats-parse-ext"
-        def version: String = peknight.version
-      }
+    object cats extends Module {
+      def groupId: String = peknight.groupId
+      def artifactId: String = "cats-core"
+      def version: String = peknight.version
       object scodec {
         object bits extends Module {
           def groupId: String = peknight.groupId
-          def artifactId: String = "scodec-bits-ext"
+          def artifactId: String = "cats-scodec-bits"
           def version: String = peknight.version
         }
-      }
-      object fs2 extends Module {
-        def groupId: String = peknight.groupId
-        def artifactId: String = "fs2-ext"
-        def version: String = peknight.version
-        object io extends Module {
-          def groupId: String = peknight.groupId
-          def artifactId: String = "fs2-io-ext"
-          def version: String = peknight.version
-        }
-      }
-      object circe extends Module {
-        def groupId: String = peknight.groupId
-        def artifactId: String = "circe-ext"
-        def version: String = peknight.version
-        object parser extends Module {
-          def groupId: String = peknight.groupId
-          def artifactId: String = "circe-parser-ext"
-          def version: String = peknight.version
-        }
-      }
-      object http4s extends Module {
-        def groupId: String = peknight.groupId
-        def artifactId: String = "http4s-ext"
-        def version: String = peknight.version
-      }
-      object spire extends Module {
-        def groupId: String = peknight.groupId
-        def artifactId: String = "spire-ext"
-        def version: String = peknight.version
-      }
-      object log4Cats extends Module {
-        def groupId: String = peknight.groupId
-        def artifactId: String = "log4cats-ext"
-        def version: String = peknight.version
       }
       object scalaCheck extends Module {
         def groupId: String = peknight.groupId
-        def artifactId: String = "scalacheck-ext"
+        def artifactId: String = "cats-scalacheck"
         def version: String = peknight.version
       }
     }
-    object instances {
-      object cats {
-        object clazz extends Module {
-          def groupId: String = peknight.groupId
-          def artifactId: String = "cats-instances-class"
-          def version: String = peknight.version
-        }
-        object tuple extends Module {
-          def groupId: String = peknight.groupId
-          def artifactId: String = "cats-instances-tuple"
-          def version: String = peknight.version
-        }
-        object time extends Module {
-          def groupId: String = peknight.groupId
-          def artifactId: String = "cats-instances-time"
-          def version: String = peknight.version
-        }
-        object circe extends Module {
-          def groupId: String = peknight.groupId
-          def artifactId: String = "cats-instances-circe"
-          def version: String = peknight.version
-        }
-        object scodec {
-          object bits extends Module {
-            def groupId: String = peknight.groupId
-            def artifactId: String = "cats-instances-scodec-bits"
-            def version: String = peknight.version
-          }
-        }
-        object scalaCheck extends Module {
-          def groupId: String = peknight.groupId
-          def artifactId: String = "cats-instances-scalacheck"
-          def version: String = peknight.version
-        }
+    object catsEffect extends Module {
+      def groupId: String = peknight.groupId
+      def artifactId: String = "cats-effect-core"
+      def version: String = peknight.version
+    }
+    object catsParse extends Module {
+      def groupId: String = peknight.groupId
+      def artifactId: String = "cats-parse-core"
+      def version: String = peknight.version
+    }
+    object scodec {
+      object bits extends Module {
+        def groupId: String = peknight.groupId
+        def artifactId: String = "scodec-bits-core"
+        def version: String = peknight.version
       }
+    }
+    object fs2 extends Module {
+      def groupId: String = peknight.groupId
+      def artifactId: String = "fs2-core"
+      def version: String = peknight.version
+      object io extends Module {
+        def groupId: String = peknight.groupId
+        def artifactId: String = "fs2-io"
+        def version: String = peknight.version
+      }
+    }
+    object circe extends Module {
+      def groupId: String = peknight.groupId
+      def artifactId: String = "circe-core"
+      def version: String = peknight.version
+      object parser extends Module {
+        def groupId: String = peknight.groupId
+        def artifactId: String = "circe-parser"
+        def version: String = peknight.version
+      }
+    }
+    object http4s extends Module {
+      def groupId: String = peknight.groupId
+      def artifactId: String = "http4s-core"
+      def version: String = peknight.version
+    }
+    object spire extends Module {
+      def groupId: String = peknight.groupId
+      def artifactId: String = "spire-core"
+      def version: String = peknight.version
+    }
+    object log4Cats extends Module {
+      def groupId: String = peknight.groupId
+      def artifactId: String = "log4cats-core"
+      def version: String = peknight.version
+    }
+    object scalaCheck extends Module {
+      def groupId: String = peknight.groupId
+      def artifactId: String = "scalacheck-core"
+      def version: String = peknight.version
     }
     object generic extends Module {
       def groupId: String = peknight.groupId
