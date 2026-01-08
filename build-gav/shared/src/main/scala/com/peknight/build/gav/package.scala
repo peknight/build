@@ -62,6 +62,11 @@ package object gav {
         def version: String = peknight.version
       }
     }
+    object ip4s extends Module {
+      def groupId: String = peknight.groupId
+      def artifactId: String = "ip4s-core"
+      def version: String = peknight.version
+    }
     object fs2 extends Module {
       def groupId: String = peknight.groupId
       def artifactId: String = "fs2-core"
