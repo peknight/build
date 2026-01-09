@@ -301,6 +301,11 @@ package object gav {
         def artifactId: String = "docker-custom"
         def version: String = peknight.version
       }
+      object build extends Module {
+        def groupId: String = peknight.groupId
+        def artifactId: String = "docker-build"
+        def version: String = peknight.version
+      }
     }
     object network {
       object proxy {
