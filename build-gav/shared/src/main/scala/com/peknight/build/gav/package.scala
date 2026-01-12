@@ -307,7 +307,10 @@ package object gav {
         def version: String = peknight.version
       }
     }
-    object network {
+    object network extends Module {
+      def groupId: String = peknight.groupId
+      def artifactId: String = "network-core"
+      def version: String = peknight.version
       object proxy {
         object reverse {
           object http4s extends Module {
