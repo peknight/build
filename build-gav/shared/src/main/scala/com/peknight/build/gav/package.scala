@@ -168,6 +168,11 @@ package object gav {
         def artifactId: String = "codec-effect"
         def version: String = peknight.version
       }
+      object caseInsensitive extends Module {
+        def groupId: String = peknight.groupId
+        def artifactId: String = "codec-case-insensitive"
+        def version: String = peknight.version
+      }
       object fs2 {
         object io extends Module {
           def groupId: String = peknight.groupId
