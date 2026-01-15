@@ -477,6 +477,12 @@ package object gav {
       def artifactId: String = "cats-parse"
       def version: String = "0.3.10"
     }
+    /** https://mvnrepository.com/artifact/org.typelevel/case-insensitive */
+    object caseInsensitive extends Module {
+      def groupId: String = typelevel.groupId
+      def artifactId: String = "case-insensitive"
+      def version: String = "1.5.0"
+    }
     /** https://mvnrepository.com/artifact/org.typelevel/spire */
     object spire extends Module {
       def groupId: String = typelevel.groupId
