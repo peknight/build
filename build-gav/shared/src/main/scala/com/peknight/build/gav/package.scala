@@ -378,6 +378,11 @@ package object gav {
         }
       }
     }
+    object v2ray extends Module {
+      def groupId: String = peknight.groupId
+      def artifactId: String = "v2ray-core"
+      def version: String = peknight.version
+    }
   }
 
   /** https://www.scala-lang.org/ */
