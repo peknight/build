@@ -382,6 +382,11 @@ package object gav {
       def groupId: String = peknight.groupId
       def artifactId: String = "v2ray-core"
       def version: String = peknight.version
+      object custom extends Module {
+        def groupId: String = peknight.groupId
+        def artifactId: String = "v2ray-custom"
+        def version: String = peknight.version
+      }
     }
   }
 
