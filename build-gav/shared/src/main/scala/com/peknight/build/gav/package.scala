@@ -402,7 +402,7 @@ package object gav {
   object sbtScala extends Module {
     def groupId: String = "org.scala-sbt"
     def artifactId: String = "sbt"
-    def version: String = "1.11.7"
+    def version: String = "1.12.0"
   }
 
   object sbtGithub extends GroupID {
@@ -411,7 +411,7 @@ package object gav {
     object nativePackager extends Module {
       def groupId: String = sbtGithub.groupId
       def artifactId: String = "sbt-native-packager"
-      def version: String = "1.11.4"
+      def version: String = "1.11.7"
     }
   }
 
@@ -442,7 +442,7 @@ package object gav {
   /** https://www.scala-js.org/ */
   object scalaJs extends GroupID with Version {
     def groupId: String = "org.scala-js"
-    def version: String = "1.20.1"
+    def version: String = "1.20.2"
     object sbt extends Module {
       def groupId: String = scalaJs.groupId
       def artifactId: String = "sbt-scalajs"
@@ -704,7 +704,7 @@ package object gav {
   object logback extends Module {
     def groupId: String = "ch.qos.logback"
     def artifactId: String = "logback-core"
-    def version: String = "1.5.22"
+    def version: String = "1.5.25"
     /** https://mvnrepository.com/artifact/ch.qos.logback/logback-classic */
     object classic extends Module {
       def groupId: String = logback.groupId
@@ -749,7 +749,7 @@ package object gav {
 
   object spring extends GroupID with Version {
     def groupId: String = "org.springframework"
-    def version: String = "6.2.15"
+    def version: String = "7.0.3"
     /** https://mvnrepository.com/artifact/org.springframework/spring-context */
     object context extends Module {
       def groupId: String = spring.groupId
@@ -803,7 +803,7 @@ package object gav {
     object qlExpress4 extends Module {
       def groupId: String = alibaba.groupId
       def artifactId: String = "qlexpress4"
-      def version: String = "4.0.7"
+      def version: String = "4.0.9"
     }
   }
 

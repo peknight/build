@@ -1,9 +1,9 @@
 val pekVersion = "0.1.0-SNAPSHOT"
 val scala3Version = "3.7.4"
 val scala212Version = "2.12.21"
-val sbtVersion = "1.11.7"
+val sbtVersion = "1.12.0"
 val sbtPlatformDepsVersion = "1.0.2"
-val sbtNativePackagerVersion = "1.11.4"
+val sbtNativePackagerVersion = "1.11.7"
 
 ThisBuild / organization := "com.peknight"
 ThisBuild / version := pekVersion
