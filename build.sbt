@@ -1,5 +1,5 @@
 val pekVersion = "0.1.0-SNAPSHOT"
-val scala3Version = "3.7.4"
+val scala3Version = "3.8.1"
 val scala212Version = "2.12.21"
 val sbtVersion = "1.12.0"
 val sbtPlatformDepsVersion = "1.0.2"
