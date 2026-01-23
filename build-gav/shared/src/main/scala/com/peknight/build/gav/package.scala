@@ -271,6 +271,11 @@ package object gav {
       def groupId: String = peknight.groupId
       def artifactId: String = "app-core"
       def version: String = peknight.version
+      object build extends Module {
+        def groupId: String = peknight.groupId
+        def artifactId: String = "app-build"
+        def version: String = peknight.version
+      }
     }
     object auth extends Module {
       def groupId: String = peknight.groupId
