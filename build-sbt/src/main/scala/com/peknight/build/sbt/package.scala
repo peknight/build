@@ -59,9 +59,6 @@ package object sbt {
       "-Werror",
       "-language:strictEquality",
       "-Xmax-inlines:64"
-    ),
-    ThisBuild / javaOptions ++= Seq(
-      "--sun-misc-unsafe-memory-access=allow"
     )
   )
 
