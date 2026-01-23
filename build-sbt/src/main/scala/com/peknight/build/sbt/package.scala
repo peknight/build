@@ -56,7 +56,7 @@ package object sbt {
       "-feature",
       "-deprecation",
       "-unchecked",
-      "-Xfatal-warnings",
+      "-Werror",
       "-language:strictEquality",
       "-Xmax-inlines:64"
     )
