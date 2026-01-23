@@ -4,8 +4,8 @@ import _root_.sbt.Keys._
 import _root_.sbt._
 import _root_.sbt.io.syntax.fileToRichFile
 import _root_.sbt.librarymanagement.syntax.{stringToOrganization, toRepositoryName}
-import com.peknight.build.gav.sbtGithub.nativePackager
 import com.peknight.build.gav._
+import com.peknight.build.gav.sbtGithub.nativePackager
 import com.typesafe.sbt.packager.Keys.maintainer
 import com.typesafe.sbt.packager.docker.DockerPlugin.autoImport.{Docker, dockerBaseImage, dockerBuildOptions, dockerRepository}
 import org.portablescala.sbtplatformdeps.PlatformDepsPlugin.autoImport.toPlatformDepsGroupID
@@ -59,6 +59,9 @@ package object sbt {
       "-Werror",
       "-language:strictEquality",
       "-Xmax-inlines:64"
+    ),
+    ThisBuild / javaOptions ++= Seq(
+      "--sun-misc-unsafe-memory-access=allow"
     )
   )
 
