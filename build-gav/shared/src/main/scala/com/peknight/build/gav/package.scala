@@ -335,6 +335,11 @@ package object gav {
       def groupId: String = peknight.groupId
       def artifactId: String = "http-core"
       def version: String = peknight.version
+      object client extends Module {
+        def groupId: String = peknight.groupId
+        def artifactId: String = "http-client"
+        def version: String = peknight.version
+      }
     }
     object cloudflare extends Module {
       def groupId: String = s"${peknight.groupId}.cloudflare"
@@ -777,6 +782,12 @@ package object gav {
         def groupId: String = commons.groupId
         def artifactId: String = "commons-text"
         def version: String = "1.15.0"
+      }
+      /** https://mvnrepository.com/artifact/org.apache.commons/commons-compress */
+      object compression extends Module {
+        def groupId: String = commons.groupId
+        def artifactId: String = "commons-compress"
+        def version: String = "1.28.0"
       }
     }
   }
