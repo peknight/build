@@ -784,7 +784,7 @@ package object gav {
         def version: String = "1.15.0"
       }
       /** https://mvnrepository.com/artifact/org.apache.commons/commons-compress */
-      object compression extends Module {
+      object compress extends Module {
         def groupId: String = commons.groupId
         def artifactId: String = "commons-compress"
         def version: String = "1.28.0"
