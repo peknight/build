@@ -75,6 +75,7 @@ package object sbt {
     ThisBuild / credentials += Credentials(Path.userHome / ".sbt" / ".credentials"),
   )
 
+  // https://hub.docker.com/_/eclipse-temurin/tags
   lazy val dockerSettings: Seq[Def.Setting[?]] = Seq(
     dockerBaseImage := "eclipse-temurin:25.0.1_8-jdk",
     Docker / maintainer := "peknight <JKpeknight@gmail.com>",
