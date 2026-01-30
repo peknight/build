@@ -823,6 +823,13 @@ package object gav {
     }
   }
 
+  /** https://mvnrepository.com/artifact/net.lingala.zip4j/zip4j */
+  object zip4j extends Module {
+    def groupId: String = "net.lingala.zip4j"
+    def artifactId: String = "zip4j"
+    def version: String = "2.11.5"
+  }
+
   object yomahub extends GroupID {
     def groupId: String = "com.yomahub"
     /** https://mvnrepository.com/artifact/com.yomahub/liteflow-core */
