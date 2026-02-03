@@ -398,6 +398,16 @@ package object gav {
         }
       }
     }
+    object frp extends Module {
+      def groupId: String = peknight.groupId
+      def artifactId: String = "frp-core"
+      def version: String = peknight.version
+      object custom extends Module {
+        def groupId: String = peknight.groupId
+        def artifactId: String = "frp-custom"
+        def version: String = peknight.version
+      }
+    }
     object v2ray extends Module {
       def groupId: String = peknight.groupId
       def artifactId: String = "v2ray-core"
