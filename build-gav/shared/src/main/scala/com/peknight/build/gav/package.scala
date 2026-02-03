@@ -76,6 +76,16 @@ package object gav {
         def artifactId: String = "fs2-io"
         def version: String = peknight.version
       }
+      object tar extends Module {
+        def groupId: String = peknight.groupId
+        def artifactId: String = "fs2-tar"
+        def version: String = peknight.version
+      }
+      object zip extends Module {
+        def groupId: String = peknight.groupId
+        def artifactId: String = "fs2-zip"
+        def version: String = peknight.version
+      }
     }
     object circe extends Module {
       def groupId: String = peknight.groupId
