@@ -483,7 +483,7 @@ package object gav {
   /** https://scala-native.org/en/stable/ */
   object scalaNative extends GroupID with Version {
     def groupId: String = "org.scala-native"
-    def version: String = "0.5.9"
+    def version: String = "0.5.10"
     object sbt extends Module {
       def groupId: String = scalaNative.groupId
       def artifactId: String = "sbt-scala-native"
@@ -734,7 +734,7 @@ package object gav {
   object logback extends Module {
     def groupId: String = "ch.qos.logback"
     def artifactId: String = "logback-core"
-    def version: String = "1.5.25"
+    def version: String = "1.5.27"
     /** https://mvnrepository.com/artifact/ch.qos.logback/logback-classic */
     object classic extends Module {
       def groupId: String = logback.groupId
@@ -856,7 +856,7 @@ package object gav {
     object liteflow extends Module {
       def groupId: String = yomahub.groupId
       def artifactId: String = "liteflow-core"
-      def version: String = "2.15.2"
+      def version: String = "2.15.3.1"
     }
   }
 }
