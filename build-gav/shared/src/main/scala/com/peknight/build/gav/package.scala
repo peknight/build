@@ -231,6 +231,11 @@ package object gav {
         def version: String = peknight.version
       }
     }
+    object data extends Module {
+      def groupId: String = peknight.groupId
+      def artifactId: String = "data-core"
+      def version: String = peknight.version
+    }
     object security extends Module {
       def groupId: String = peknight.groupId
       def artifactId: String = "security-core"
