@@ -635,6 +635,18 @@ package object gav {
       def groupId: String = tpolecat.groupId
       def artifactId: String = "doobie-core"
       def version: String = "1.0.0-RC11"
+      /** https://mvnrepository.com/artifact/org.tpolecat/doobie-postgres */
+      object postgres extends Module {
+        def groupId: String = tpolecat.groupId
+        def artifactId: String = "doobie-postgres"
+        def version: String = doobie.version
+      }
+      /** https://mvnrepository.com/artifact/org.tpolecat/doobie-hikari */
+      object hikari extends Module {
+        def groupId: String = tpolecat.groupId
+        def artifactId: String = "doobie-hikari"
+        def version: String = doobie.version
+      }
     }
     /** https://mvnrepository.com/artifact/org.tpolecat/natchez-core */
     object natchez extends Module {
