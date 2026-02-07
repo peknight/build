@@ -210,6 +210,11 @@ package object gav {
         def artifactId: String = "codec-ip4s"
         def version: String = peknight.version
       }
+      object doobie extends Module {
+        def groupId: String = peknight.groupId
+        def artifactId: String = "codec-doobie"
+        def version: String = peknight.version
+      }
       object http4s extends Module {
         def groupId: String = peknight.groupId
         def artifactId: String = "codec-http4s"
