@@ -225,6 +225,11 @@ package object gav {
           def version: String = peknight.version
         }
       }
+      object squants extends Module {
+        def groupId: String = peknight.groupId
+        def artifactId: String = "codec-squants"
+        def version: String = peknight.version
+      }
     }
     object query extends Module {
       def groupId: String = peknight.groupId
