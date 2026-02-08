@@ -457,7 +457,7 @@ package object gav {
   object sbtScala extends Module {
     def groupId: String = "org.scala-sbt"
     def artifactId: String = "sbt"
-    def version: String = "1.12.1"
+    def version: String = "1.12.2"
   }
 
   object sbtGithub extends GroupID {
@@ -893,7 +893,7 @@ package object gav {
     object liteflow extends Module {
       def groupId: String = yomahub.groupId
       def artifactId: String = "liteflow-core"
-      def version: String = "2.15.3.1"
+      def version: String = "2.15.3.2"
     }
   }
 }
