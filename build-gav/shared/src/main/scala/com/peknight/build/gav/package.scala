@@ -457,7 +457,7 @@ package object gav {
   object sbtScala extends Module {
     def groupId: String = "org.scala-sbt"
     def artifactId: String = "sbt"
-    def version: String = "1.12.2"
+    def version: String = "1.12.3"
   }
 
   object sbtGithub extends GroupID {
@@ -771,7 +771,7 @@ package object gav {
   object logback extends Module {
     def groupId: String = "ch.qos.logback"
     def artifactId: String = "logback-core"
-    def version: String = "1.5.27"
+    def version: String = "1.5.30"
     /** https://mvnrepository.com/artifact/ch.qos.logback/logback-classic */
     object classic extends Module {
       def groupId: String = logback.groupId
@@ -803,7 +803,7 @@ package object gav {
   object vavr extends Module {
     def groupId: String = "io.vavr"
     def artifactId: String = "vavr"
-    def version: String = "0.11.0"
+    def version: String = "1.0.0"
   }
 
   /** https://mvnrepository.com/artifact/org.projectlombok/lombok */
@@ -816,7 +816,7 @@ package object gav {
 
   object spring extends GroupID with Version {
     def groupId: String = "org.springframework"
-    def version: String = "7.0.3"
+    def version: String = "7.0.4"
     /** https://mvnrepository.com/artifact/org.springframework/spring-context */
     object context extends Module {
       def groupId: String = spring.groupId
@@ -864,7 +864,7 @@ package object gav {
     object fastjson2 extends Module {
       def groupId: String = s"${alibaba.groupId}.fastjson2"
       def artifactId: String = "fastjson2"
-      def version: String = "2.0.60"
+      def version: String = "2.0.61"
     }
     /** https://mvnrepository.com/artifact/com.alibaba/QLExpress */
     object qlExpress extends Module {
@@ -876,7 +876,7 @@ package object gav {
     object qlExpress4 extends Module {
       def groupId: String = alibaba.groupId
       def artifactId: String = "qlexpress4"
-      def version: String = "4.0.9"
+      def version: String = "4.1.0"
     }
   }
 
@@ -884,7 +884,7 @@ package object gav {
   object zip4j extends Module {
     def groupId: String = "net.lingala.zip4j"
     def artifactId: String = "zip4j"
-    def version: String = "2.11.5"
+    def version: String = "2.11.6"
   }
 
   object yomahub extends GroupID {
