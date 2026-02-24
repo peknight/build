@@ -887,6 +887,15 @@ package object gav {
     def version: String = "2.11.6"
   }
 
+  object tukaani {
+    /** https://mvnrepository.com/artifact/org.tukaani/xz */
+    object xz extends Module {
+      def groupId: String = "org.tukaani"
+      def artifactId: String = "xz"
+      def version: String = "1.11"
+    }
+  }
+
   object yomahub extends GroupID {
     def groupId: String = "com.yomahub"
     /** https://mvnrepository.com/artifact/com.yomahub/liteflow-core */
