@@ -644,7 +644,7 @@ package object gav {
     object doobie extends Module {
       def groupId: String = tpolecat.groupId
       def artifactId: String = "doobie-core"
-      def version: String = "1.0.0-RC11"
+      def version: String = "1.0.0-RC12"
       /** https://mvnrepository.com/artifact/org.tpolecat/doobie-postgres */
       object postgres extends Module {
         def groupId: String = tpolecat.groupId
@@ -771,7 +771,7 @@ package object gav {
   object logback extends Module {
     def groupId: String = "ch.qos.logback"
     def artifactId: String = "logback-core"
-    def version: String = "1.5.30"
+    def version: String = "1.5.32"
     /** https://mvnrepository.com/artifact/ch.qos.logback/logback-classic */
     object classic extends Module {
       def groupId: String = logback.groupId
@@ -816,7 +816,7 @@ package object gav {
 
   object spring extends GroupID with Version {
     def groupId: String = "org.springframework"
-    def version: String = "7.0.4"
+    def version: String = "7.0.5"
     /** https://mvnrepository.com/artifact/org.springframework/spring-context */
     object context extends Module {
       def groupId: String = spring.groupId
