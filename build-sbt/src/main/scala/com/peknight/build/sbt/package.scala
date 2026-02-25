@@ -50,7 +50,6 @@ package object sbt {
   lazy val buildSettings: Seq[Def.Setting[?]] = Seq(
     ThisBuild / organization := peknight.groupId,
     ThisBuild / version := peknight.version,
-    ThisBuild / maintainer := "JKpeknight@gmail.com",
     ThisBuild / scalaVersion := com.peknight.build.gav.scala.scala3.version,
     ThisBuild / versionScheme := Some("early-semver"),
     ThisBuild / scalacOptions ++= Seq(
