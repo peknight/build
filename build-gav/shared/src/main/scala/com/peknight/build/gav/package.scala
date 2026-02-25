@@ -454,7 +454,7 @@ package object gav {
   object scala extends GroupID {
     def groupId: String = "org.scala-lang"
     object scala3 extends Version {
-      def version: String = "3.8.1"
+      def version: String = "3.8.2"
     }
   }
 
