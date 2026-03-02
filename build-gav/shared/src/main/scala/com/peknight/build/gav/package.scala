@@ -462,7 +462,7 @@ package object gav {
   object sbtScala extends Module {
     def groupId: String = "org.scala-sbt"
     def artifactId: String = "sbt"
-    def version: String = "1.12.4"
+    def version: String = "1.12.5"
   }
 
   object sbtGithub extends GroupID {
