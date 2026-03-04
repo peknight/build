@@ -667,7 +667,7 @@ package object gav {
     object natchez extends Module {
       def groupId: String = tpolecat.groupId
       def artifactId: String = "natchez-core"
-      def version: String = "0.3.8"
+      def version: String = "0.3.9"
     }
   }
 
@@ -808,7 +808,7 @@ package object gav {
   object vavr extends Module {
     def groupId: String = "io.vavr"
     def artifactId: String = "vavr"
-    def version: String = "1.0.0"
+    def version: String = "1.0.1"
   }
 
   /** https://mvnrepository.com/artifact/org.projectlombok/lombok */
@@ -897,7 +897,7 @@ package object gav {
     object xz extends Module {
       def groupId: String = "org.tukaani"
       def artifactId: String = "xz"
-      def version: String = "1.11"
+      def version: String = "1.12"
     }
   }
 
