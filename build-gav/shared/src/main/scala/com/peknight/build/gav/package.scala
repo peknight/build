@@ -538,7 +538,7 @@ package object gav {
     object catsEffect extends Module {
       def groupId: String = typelevel.groupId
       def artifactId: String = "cats-effect"
-      def version: String = "3.6.3"
+      def version: String = "3.7.0"
       /** https://mvnrepository.com/artifact/org.typelevel/cats-effect-testing-scalatest */
       object testingScalaTest extends Module {
         def groupId: String = typelevel.groupId
