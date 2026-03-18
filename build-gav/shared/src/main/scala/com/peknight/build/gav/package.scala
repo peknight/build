@@ -450,7 +450,7 @@ package object gav {
     }
   }
 
-  /** https://www.scala-lang.org/ */
+  /** https://github.com/scala/scala3/releases */
   object scala extends GroupID {
     def groupId: String = "org.scala-lang"
     object scala3 extends Version {
@@ -458,11 +458,11 @@ package object gav {
     }
   }
 
-  /** https://www.scala-sbt.org/ */
+  /** https://github.com/sbt/sbt/releases */
   object sbtScala extends Module {
     def groupId: String = "org.scala-sbt"
     def artifactId: String = "sbt"
-    def version: String = "1.12.5"
+    def version: String = "1.12.6"
   }
 
   object sbtGithub extends GroupID {
@@ -499,7 +499,7 @@ package object gav {
     }
   }
 
-  /** https://www.scala-js.org/ */
+  /** https://github.com/scala-js/scala-js/releases */
   object scalaJs extends GroupID with Version {
     def groupId: String = "org.scala-js"
     def version: String = "1.20.2"
@@ -510,7 +510,7 @@ package object gav {
     }
   }
 
-  /** https://scala-native.org/en/stable/ */
+  /** https://github.com/scala-native/scala-native/releases */
   object scalaNative extends GroupID with Version {
     def groupId: String = "org.scala-native"
     def version: String = "0.5.10"
@@ -523,7 +523,7 @@ package object gav {
 
   object typelevel extends GroupID {
     def groupId: String = "org.typelevel"
-    /** https://mvnrepository.com/artifact/org.typelevel/cats-core */
+    /** https://repo.maven.apache.org/maven2/org/typelevel/cats-core_3/ */
     object cats extends Module {
       def groupId: String = typelevel.groupId
       def artifactId: String = "cats-core"
@@ -534,48 +534,48 @@ package object gav {
         def version: String = cats.version
       }
     }
-    /** https://mvnrepository.com/artifact/org.typelevel/cats-effect */
+    /** https://repo.maven.apache.org/maven2/org/typelevel/cats-effect_3/ */
     object catsEffect extends Module {
       def groupId: String = typelevel.groupId
       def artifactId: String = "cats-effect"
       def version: String = "3.7.0"
-      /** https://mvnrepository.com/artifact/org.typelevel/cats-effect-testing-scalatest */
+      /** https://repo.maven.apache.org/maven2/org/typelevel/cats-effect-testing-scalatest_3/ */
       object testingScalaTest extends Module {
         def groupId: String = typelevel.groupId
         def artifactId: String = "cats-effect-testing-scalatest"
-        def version: String = "1.7.0"
+        def version: String = "1.8.0"
       }
     }
-    /** https://mvnrepository.com/artifact/org.typelevel/cats-parse */
+    /** https://repo.maven.apache.org/maven2/org/typelevel/cats-parse_3/ */
     object catsParse extends Module {
       def groupId: String = typelevel.groupId
       def artifactId: String = "cats-parse"
       def version: String = "0.3.10"
     }
-    /** https://mvnrepository.com/artifact/org.typelevel/case-insensitive */
+    /** https://repo.maven.apache.org/maven2/org/typelevel/case-insensitive_3/ */
     object caseInsensitive extends Module {
       def groupId: String = typelevel.groupId
       def artifactId: String = "case-insensitive"
       def version: String = "1.5.0"
     }
-    /** https://mvnrepository.com/artifact/org.typelevel/spire */
+    /** https://repo.maven.apache.org/maven2/org/typelevel/spire_3/ */
     object spire extends Module {
       def groupId: String = typelevel.groupId
       def artifactId: String = "spire"
       def version: String = "0.18.0"
     }
-    /** https://mvnrepository.com/artifact/org.typelevel/squants */
+    /** https://repo.maven.apache.org/maven2/org/typelevel/squants_3/ */
     object squants extends Module {
       def groupId: String = typelevel.groupId
       def artifactId: String = "squants"
       def version: String = "1.8.3"
     }
-    /** https://mvnrepository.com/artifact/org.typelevel/log4cats-core */
+    /** https://repo.maven.apache.org/maven2/org/typelevel/log4cats-core_3/ */
     object log4Cats extends Module {
       def groupId: String = typelevel.groupId
       def artifactId: String = "log4cats-core"
-      def version: String = "2.7.1"
-      /** https://mvnrepository.com/artifact/org.typelevel/log4cats-slf4j */
+      def version: String = "2.8.0"
+      /** https://repo.maven.apache.org/maven2/org/typelevel/log4cats-slf4j_3/ */
       object slf4j extends Module {
         def groupId: String = typelevel.groupId
         def artifactId: String = "log4cats-slf4j"
@@ -587,20 +587,19 @@ package object gav {
   object scodec extends GroupID with Version {
     def groupId: String = "org.scodec"
     def version: String = "1.2.4"
-    /** https://mvnrepository.com/artifact/org.scodec/scodec-bits */
+    /** https://repo.maven.apache.org/maven2/org/scodec/scodec-bits_3/ */
     object bits extends Module {
       def groupId: String = scodec.groupId
       def artifactId: String = "scodec-bits"
       def version: String = scodec.version
     }
   }
-
-  /** https://mvnrepository.com/artifact/co.fs2/fs2-core */
+  /** https://repo.maven.apache.org/maven2/co/fs2/fs2-core_3/ */
   object fs2 extends Module {
     def groupId: String = "co.fs2"
     def artifactId: String = "fs2-core"
-    def version: String = "3.12.2"
-    /** https://mvnrepository.com/artifact/co.fs2/fs2-io */
+    def version: String = "3.13.0"
+    /** https://repo.maven.apache.org/maven2/co/fs2/fs2-io_3/ */
     object io extends Module {
       def groupId: String = fs2.groupId
       def artifactId: String = "fs2-io"
@@ -608,18 +607,18 @@ package object gav {
     }
   }
 
-  /** https://mvnrepository.com/artifact/io.circe/circe-core */
+  /** https://repo.maven.apache.org/maven2/io/circe/circe-core_3/ */
   object circe extends Module {
     def groupId: String = "io.circe"
     def artifactId: String = "circe-core"
     def version: String = "0.14.15"
-    /** https://mvnrepository.com/artifact/io.circe/circe-parser */
+    /** https://repo.maven.apache.org/maven2/io/circe/circe-parser_3/ */
     object parser extends Module {
       def groupId: String = circe.groupId
       def artifactId: String = "circe-parser"
       def version: String = circe.version
     }
-    /** https://mvnrepository.com/artifact/io.circe/circe-jawn */
+    /** https://repo.maven.apache.org/maven2/io/circe/circe-jawn_3/ */
     object jawn extends Module {
       def groupId: String = circe.groupId
       def artifactId: String = "circe-jawn"
@@ -632,11 +631,11 @@ package object gav {
     object fs2 {
       object data {
         object json {
-          // https://mvnrepository.com/artifact/org.gnieh/fs2-data-json-circe
+          /** https://repo.maven.apache.org/maven2/org/gnieh/fs2-data-json-circe_3/ */
           object circe extends Module {
             def groupId: String = gnieh.groupId
             def artifactId: String = "fs2-data-json-circe"
-            def version: String = "1.12.0"
+            def version: String = "1.12.1"
           }
         }
       }
@@ -645,25 +644,25 @@ package object gav {
 
   object tpolecat extends GroupID {
     def groupId: String = "org.tpolecat"
-    /** https://mvnrepository.com/artifact/org.tpolecat/doobie-core */
+    /** https://repo.maven.apache.org/maven2/org/tpolecat/doobie-core_3/ */
     object doobie extends Module {
       def groupId: String = tpolecat.groupId
       def artifactId: String = "doobie-core"
       def version: String = "1.0.0-RC12"
-      /** https://mvnrepository.com/artifact/org.tpolecat/doobie-postgres */
+      /** https://repo.maven.apache.org/maven2/org/tpolecat/doobie-postgres_3/ */
       object postgres extends Module {
         def groupId: String = tpolecat.groupId
         def artifactId: String = "doobie-postgres"
         def version: String = doobie.version
       }
-      /** https://mvnrepository.com/artifact/org.tpolecat/doobie-hikari */
+      /** https://repo.maven.apache.org/maven2/org/tpolecat/doobie-hikari_3/ */
       object hikari extends Module {
         def groupId: String = tpolecat.groupId
         def artifactId: String = "doobie-hikari"
         def version: String = doobie.version
       }
     }
-    /** https://mvnrepository.com/artifact/org.tpolecat/natchez-core */
+    /** https://repo.maven.apache.org/maven2/org/tpolecat/natchez-core_3/ */
     object natchez extends Module {
       def groupId: String = tpolecat.groupId
       def artifactId: String = "natchez-core"
@@ -673,7 +672,7 @@ package object gav {
 
   object cir extends GroupID {
     def groupId: String = "is.cir"
-    /** https://mvnrepository.com/artifact/is.cir/ciris */
+    /** https://repo.maven.apache.org/maven2/is/cir/ciris_3/ */
     object ciris extends Module {
       def groupId: String = cir.groupId
       def artifactId: String = "ciris"
@@ -683,51 +682,51 @@ package object gav {
 
   object comcast extends GroupID {
     def groupId: String = "com.comcast"
-    /** https://mvnrepository.com/artifact/com.comcast/ip4s-core */
+    /** https://repo.maven.apache.org/maven2/com/comcast/ip4s-core_3/ */
     object ip4s extends Module {
       def groupId: String = comcast.groupId
       def artifactId: String = "ip4s-core"
-      def version = "3.7.0"
+      def version = "3.8.0"
     }
   }
 
-  /** https://mvnrepository.com/artifact/org.http4s/http4s-core */
+  /** https://repo.maven.apache.org/maven2/org/http4s/http4s-core_3/ */
   object http4s extends Module {
     def groupId: String = "org.http4s"
     def artifactId: String = "http4s-core"
     def version: String = "1.0.0-M34"
-    /** https://mvnrepository.com/artifact/org.http4s/http4s-dsl */
+    /** https://repo.maven.apache.org/maven2/org/http4s/http4s-dsl_3/ */
     object dsl extends Module {
       def groupId: String = http4s.groupId
       def artifactId: String = "http4s-dsl"
       def version: String = http4s.version
     }
-    /** https://mvnrepository.com/artifact/org.http4s/http4s-server */
+    /** https://repo.maven.apache.org/maven2/org/http4s/http4s-server_3/ */
     object server extends Module {
       def groupId: String = http4s.groupId
       def artifactId: String = "http4s-server"
       def version: String = http4s.version
     }
-    /** https://mvnrepository.com/artifact/org.http4s/http4s-client */
+    /** https://repo.maven.apache.org/maven2/org/http4s/http4s-client_3/ */
     object client extends Module {
       def groupId: String = http4s.groupId
       def artifactId: String = "http4s-client"
       def version: String = http4s.version
     }
-    /** https://mvnrepository.com/artifact/org.http4s/http4s-circe */
+    /** https://repo.maven.apache.org/maven2/org/http4s/http4s-circe_3/ */
     object circe extends Module {
       def groupId: String = http4s.groupId
       def artifactId: String = "http4s-circe"
       def version: String = http4s.version
     }
     object ember {
-      /** https://mvnrepository.com/artifact/org.http4s/http4s-ember-server */
+      /** https://repo.maven.apache.org/maven2/org/http4s/http4s-ember-server_3/ */
       object server extends Module {
         def groupId: String = http4s.groupId
         def artifactId: String = "http4s-ember-server"
         def version: String = http4s.version
       }
-      /** https://mvnrepository.com/artifact/org.http4s/http4s-ember-client */
+      /** https://repo.maven.apache.org/maven2/org/http4s/http4s-ember-client_3/ */
       object client extends Module {
         def groupId: String = http4s.groupId
         def artifactId: String = "http4s-ember-client"
@@ -736,7 +735,7 @@ package object gav {
     }
     object jdk {
       object http {
-        /** https://mvnrepository.com/artifact/org.http4s/http4s-jdk-http-client */
+        /** https://repo.maven.apache.org/maven2/org/http4s/http4s-jdk-http-client_3/ */
         object client extends Module {
           def groupId: String = http4s.groupId
           def artifactId: String = "http4s-jdk-http-client"
@@ -748,7 +747,7 @@ package object gav {
 
   object optics extends GroupID {
     def groupId: String = "dev.optics"
-    /** https://mvnrepository.com/artifact/dev.optics/monocle-core */
+    /** https://repo.maven.apache.org/maven2/dev/optics/monocle-core_3/ */
     object monocle extends Module {
       def groupId: String = optics.groupId
       def artifactId: String = "monocle-core"
@@ -759,44 +758,44 @@ package object gav {
   object bouncyCastle extends GroupID with Version {
     def groupId: String = "org.bouncycastle"
     def version: String = "1.83"
-    /** https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk18on */
+    /** https://repo.maven.apache.org/maven2/org/bouncycastle/bcprov-jdk18on/ */
     object provider extends Module {
       def groupId: String = bouncyCastle.groupId
       def artifactId: String = "bcprov-jdk18on"
       def version: String = bouncyCastle.version
     }
-    /** https://mvnrepository.com/artifact/org.bouncycastle/bcpkix-jdk18on */
+    /** https://repo.maven.apache.org/maven2/org/bouncycastle/bcpkix-jdk18on/ */
     object pkix extends Module {
       def groupId: String = bouncyCastle.groupId
       def artifactId: String = "bcpkix-jdk18on"
       def version: String = bouncyCastle.version
     }
   }
-  /** https://mvnrepository.com/artifact/ch.qos.logback/logback-core */
+  /** https://repo.maven.apache.org/maven2/ch/qos/logback/logback-core/ */
   object logback extends Module {
     def groupId: String = "ch.qos.logback"
     def artifactId: String = "logback-core"
     def version: String = "1.5.32"
-    /** https://mvnrepository.com/artifact/ch.qos.logback/logback-classic */
+    /** https://repo.maven.apache.org/maven2/ch/qos/logback/logback-classic/ */
     object classic extends Module {
       def groupId: String = logback.groupId
       def artifactId: String = "logback-classic"
       def version: String = logback.version
     }
   }
-  /** https://mvnrepository.com/artifact/org.scalacheck/scalacheck */
+  /** https://repo.maven.apache.org/maven2/org/scalacheck/scalacheck_3/ */
   object scalaCheck extends Module {
     def groupId: String = "org.scalacheck"
     def artifactId: String = "scalacheck"
     def version: String = "1.19.0"
   }
 
-  /** https://mvnrepository.com/artifact/org.scalatest/scalatest */
+  /** https://repo.maven.apache.org/maven2/org/scalatest/scalatest_3/ */
   object scalaTest extends Module {
     def groupId: String = "org.scalatest"
     def artifactId: String = "scalatest"
     def version: String = "3.2.19"
-    /** https://mvnrepository.com/artifact/org.scalatest/scalatest-flatspec */
+    /** https://repo.maven.apache.org/maven2/org/scalatest/scalatest-flatspec_3/ */
     object flatSpec extends Module {
       def groupId: String = scalaTest.groupId
       def artifactId: String = "scalatest-flatspec"
@@ -804,25 +803,25 @@ package object gav {
     }
   }
 
-  /** https://mvnrepository.com/artifact/io.vavr/vavr */
+  /** https://repo.maven.apache.org/maven2/io/vavr/vavr/ */
   object vavr extends Module {
     def groupId: String = "io.vavr"
     def artifactId: String = "vavr"
     def version: String = "1.0.1"
   }
 
-  /** https://mvnrepository.com/artifact/org.projectlombok/lombok */
+  /** https://repo.maven.apache.org/maven2/org/projectlombok/lombok/ */
   object lombok extends Module {
     def groupId: String = "org.projectlombok"
     def artifactId: String = "lombok"
-    def version: String = "1.18.42"
+    def version: String = "1.18.44"
     def processorOptions: Seq[String] = Seq("-processor", "lombok.launch.AnnotationProcessorHider$AnnotationProcessor")
   }
 
   object spring extends GroupID with Version {
     def groupId: String = "org.springframework"
-    def version: String = "7.0.5"
-    /** https://mvnrepository.com/artifact/org.springframework/spring-context */
+    def version: String = "7.0.6"
+    /** https://repo.maven.apache.org/maven2/org/springframework/spring-context/ */
     object context extends Module {
       def groupId: String = spring.groupId
       def artifactId: String = "spring-context"
@@ -833,19 +832,19 @@ package object gav {
   object apache {
     object commons extends GroupID {
       def groupId: String = "org.apache.commons"
-      /** https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 */
+      /** https://repo.maven.apache.org/maven2/org/apache/commons/commons-lang3/ */
       object lang3 extends Module {
         def groupId: String = commons.groupId
         def artifactId: String = "commons-lang3"
         def version: String = "3.20.0"
       }
-      /** https://mvnrepository.com/artifact/org.apache.commons/commons-text */
+      /** https://repo.maven.apache.org/maven2/org/apache/commons/commons-text/ */
       object text extends Module {
         def groupId: String = commons.groupId
         def artifactId: String = "commons-text"
         def version: String = "1.15.0"
       }
-      /** https://mvnrepository.com/artifact/org.apache.commons/commons-compress */
+      /** https://repo.maven.apache.org/maven2/org/apache/commons/commons-compress/ */
       object compress extends Module {
         def groupId: String = commons.groupId
         def artifactId: String = "commons-compress"
@@ -855,7 +854,7 @@ package object gav {
   }
 
   object google {
-    /** https://mvnrepository.com/artifact/com.google.guava/guava */
+    /** https://repo.maven.apache.org/maven2/com/google/guava/guava/ */
     object guava extends Module {
       def groupId: String = "com.google.guava"
       def artifactId: String = "guava"
@@ -865,19 +864,19 @@ package object gav {
 
   object alibaba extends GroupID {
     def groupId: String = "com.alibaba"
-    /** https://mvnrepository.com/artifact/com.alibaba.fastjson2/fastjson2 */
+    /** https://repo.maven.apache.org/maven2/com/alibaba/fastjson2/fastjson2/ */
     object fastjson2 extends Module {
       def groupId: String = s"${alibaba.groupId}.fastjson2"
       def artifactId: String = "fastjson2"
       def version: String = "2.0.61"
     }
-    /** https://mvnrepository.com/artifact/com.alibaba/QLExpress */
+    /** https://repo.maven.apache.org/maven2/com/alibaba/QLExpress/ */
     object qlExpress extends Module {
       def groupId: String = alibaba.groupId
       def artifactId: String = "QLExpress"
       def version: String = "3.3.4"
     }
-    /** https://mvnrepository.com/artifact/com.alibaba/qlexpress4 */
+    /** https://repo.maven.apache.org/maven2/com/alibaba/qlexpress4/ */
     object qlExpress4 extends Module {
       def groupId: String = alibaba.groupId
       def artifactId: String = "qlexpress4"
@@ -885,7 +884,7 @@ package object gav {
     }
   }
 
-  /** https://mvnrepository.com/artifact/net.lingala.zip4j/zip4j */
+  /** https://repo.maven.apache.org/maven2/net/lingala/zip4j/zip4j/ */
   object zip4j extends Module {
     def groupId: String = "net.lingala.zip4j"
     def artifactId: String = "zip4j"
@@ -893,7 +892,7 @@ package object gav {
   }
 
   object tukaani {
-    /** https://mvnrepository.com/artifact/org.tukaani/xz */
+    /** https://repo.maven.apache.org/maven2/org/tukaani/xz/ */
     object xz extends Module {
       def groupId: String = "org.tukaani"
       def artifactId: String = "xz"
@@ -903,7 +902,7 @@ package object gav {
 
   object yomahub extends GroupID {
     def groupId: String = "com.yomahub"
-    /** https://mvnrepository.com/artifact/com.yomahub/liteflow-core */
+    /** https://repo.maven.apache.org/maven2/com/yomahub/liteflow-core/ */
     object liteflow extends Module {
       def groupId: String = yomahub.groupId
       def artifactId: String = "liteflow-core"
