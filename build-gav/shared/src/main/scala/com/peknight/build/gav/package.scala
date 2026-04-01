@@ -454,7 +454,7 @@ package object gav {
   object scala extends GroupID {
     def groupId: String = "org.scala-lang"
     object scala3 extends Version {
-      def version: String = "3.8.2"
+      def version: String = "3.8.3"
     }
   }
 
@@ -462,7 +462,7 @@ package object gav {
   object sbtScala extends Module {
     def groupId: String = "org.scala-sbt"
     def artifactId: String = "sbt"
-    def version: String = "1.12.6"
+    def version: String = "1.12.8"
   }
 
   object sbtGithub extends GroupID {
@@ -794,7 +794,7 @@ package object gav {
   object scalaTest extends Module {
     def groupId: String = "org.scalatest"
     def artifactId: String = "scalatest"
-    def version: String = "3.2.19"
+    def version: String = "3.2.20"
     /** https://repo.maven.apache.org/maven2/org/scalatest/scalatest-flatspec_3/ */
     object flatSpec extends Module {
       def groupId: String = scalaTest.groupId

@@ -1,8 +1,8 @@
 val pekVersion = "0.1.0-SNAPSHOT"
-val scala3Version = "3.8.2"
+val scala3Version = "3.8.3"
 // https://github.com/scala/scala/releases
 val scala212Version = "2.12.21"
-val sbtVersion = "1.12.6"
+val sbtVersion = "1.12.8"
 val sbtPlatformDepsVersion = "1.0.2"
 val sbtNativePackagerVersion = "1.11.7"
 
