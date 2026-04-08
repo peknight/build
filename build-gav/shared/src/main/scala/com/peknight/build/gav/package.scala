@@ -462,7 +462,7 @@ package object gav {
   object sbtScala extends Module {
     def groupId: String = "org.scala-sbt"
     def artifactId: String = "sbt"
-    def version: String = "1.12.8"
+    def version: String = "1.12.9"
   }
 
   object sbtGithub extends GroupID {
@@ -502,7 +502,7 @@ package object gav {
   /** https://github.com/scala-js/scala-js/releases */
   object scalaJs extends GroupID with Version {
     def groupId: String = "org.scala-js"
-    def version: String = "1.20.2"
+    def version: String = "1.21.0"
     object sbt extends Module {
       def groupId: String = scalaJs.groupId
       def artifactId: String = "sbt-scalajs"
@@ -513,7 +513,7 @@ package object gav {
   /** https://github.com/scala-native/scala-native/releases */
   object scalaNative extends GroupID with Version {
     def groupId: String = "org.scala-native"
-    def version: String = "0.5.10"
+    def version: String = "0.5.11"
     object sbt extends Module {
       def groupId: String = scalaNative.groupId
       def artifactId: String = "sbt-scala-native"
@@ -635,7 +635,7 @@ package object gav {
           object circe extends Module {
             def groupId: String = gnieh.groupId
             def artifactId: String = "fs2-data-json-circe"
-            def version: String = "1.12.1"
+            def version: String = "1.13.0"
           }
         }
       }
