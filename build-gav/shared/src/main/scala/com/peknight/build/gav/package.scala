@@ -676,7 +676,7 @@ package object gav {
     object ciris extends Module {
       def groupId: String = cir.groupId
       def artifactId: String = "ciris"
-      def version = "3.12.0"
+      def version = "3.14.1"
     }
   }
 
@@ -757,7 +757,7 @@ package object gav {
 
   object bouncyCastle extends GroupID with Version {
     def groupId: String = "org.bouncycastle"
-    def version: String = "1.83"
+    def version: String = "1.84"
     /** https://repo.maven.apache.org/maven2/org/bouncycastle/bcprov-jdk18on/ */
     object provider extends Module {
       def groupId: String = bouncyCastle.groupId
@@ -858,7 +858,7 @@ package object gav {
     object guava extends Module {
       def groupId: String = "com.google.guava"
       def artifactId: String = "guava"
-      def version: String = "33.5.0-jre"
+      def version: String = "33.6.0-jre"
     }
   }
 
