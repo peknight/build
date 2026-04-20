@@ -381,6 +381,11 @@ package object gav {
         def version: String = peknight.version
       }
     }
+    object financial extends Module {
+      def groupId: String = peknight.groupId
+      def artifactId: String = "financial-core"
+      def version: String = peknight.version
+    }
     object cloudflare extends Module {
       def groupId: String = s"${peknight.groupId}.cloudflare"
       def artifactId: String = "core"
