@@ -825,7 +825,7 @@ package object gav {
 
   object spring extends GroupID with Version {
     def groupId: String = "org.springframework"
-    def version: String = "7.0.6"
+    def version: String = "7.0.7"
     /** https://repo.maven.apache.org/maven2/org/springframework/spring-context/ */
     object context extends Module {
       def groupId: String = spring.groupId
