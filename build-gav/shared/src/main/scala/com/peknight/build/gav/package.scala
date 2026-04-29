@@ -455,7 +455,7 @@ package object gav {
     }
   }
 
-  /** https://github.com/scala/scala3/releases */
+  /** https://repo.maven.apache.org/maven2/org/scala-lang/scala3-library_3/ */
   object scala extends GroupID {
     def groupId: String = "org.scala-lang"
     object scala3 extends Version {
@@ -463,7 +463,7 @@ package object gav {
     }
   }
 
-  /** https://github.com/sbt/sbt/releases */
+  /** https://repo.maven.apache.org/maven2/org/scala-sbt/sbt/ */
   object sbtScala extends Module {
     def groupId: String = "org.scala-sbt"
     def artifactId: String = "sbt"
@@ -472,7 +472,7 @@ package object gav {
 
   object sbtGithub extends GroupID {
     def groupId: String = "com.github.sbt"
-    /** https://github.com/sbt/sbt-native-packager */
+    /** https://repo.maven.apache.org/maven2/com/github/sbt/sbt-native-packager_2.12_1.0/ */
     object nativePackager extends Module {
       def groupId: String = sbtGithub.groupId
       def artifactId: String = "sbt-native-packager"
@@ -482,7 +482,7 @@ package object gav {
 
   object portableScala extends GroupID {
     def groupId: String = "org.portable-scala"
-    /** https://github.com/portable-scala/sbt-crossproject */
+    /** https://repo.maven.apache.org/maven2/org/portable-scala/sbt-crossproject_2.12_1.0/ */
     object crossProject extends Version {
       def version: String = "1.3.2"
       object scalaJs extends Module {
@@ -496,7 +496,7 @@ package object gav {
         def version: String = crossProject.version
       }
     }
-    /** https://github.com/portable-scala/sbt-platform-deps */
+    /** https://repo.maven.apache.org/maven2/org/portable-scala/sbt-platform-deps_2.12_1.0/ */
     object sbtPlatformDeps extends Module {
       def groupId: String = portableScala.groupId
       def artifactId: String = "sbt-platform-deps_2.12_1.0"
@@ -504,7 +504,7 @@ package object gav {
     }
   }
 
-  /** https://github.com/scala-js/scala-js/releases */
+  /** https://repo.maven.apache.org/maven2/org/scala-js/sbt-scalajs_2.12_1.0/ */
   object scalaJs extends GroupID with Version {
     def groupId: String = "org.scala-js"
     def version: String = "1.21.0"
@@ -515,7 +515,7 @@ package object gav {
     }
   }
 
-  /** https://github.com/scala-native/scala-native/releases */
+  /** https://repo.maven.apache.org/maven2/org/scala-native/sbt-scala-native_2.12_1.0/ */
   object scalaNative extends GroupID with Version {
     def groupId: String = "org.scala-native"
     def version: String = "0.5.11"

@@ -1,9 +1,13 @@
 val pekVersion = "0.1.0-SNAPSHOT"
+/** https://repo.maven.apache.org/maven2/org/scala-lang/scala3-library_3/ */
 val scala3Version = "3.8.3"
-// https://github.com/scala/scala/releases
+/** https://repo.maven.apache.org/maven2/org/scala-lang/scala-library/ */
 val scala212Version = "2.12.21"
+/** https://repo.maven.apache.org/maven2/org/scala-sbt/sbt/ */
 val sbtVersion = "1.12.9"
+/** https://repo.maven.apache.org/maven2/org/portable-scala/sbt-platform-deps_2.12_1.0/ */
 val sbtPlatformDepsVersion = "1.0.2"
+/** https://repo.maven.apache.org/maven2/com/github/sbt/sbt-native-packager_2.12_1.0/ */
 val sbtNativePackagerVersion = "1.11.7"
 
 ThisBuild / organization := "com.peknight"
