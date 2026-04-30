@@ -524,6 +524,11 @@ package object gav {
       def artifactId: String = "sbt-scala-native"
       def version: String = scalaNative.version
     }
+    object testInterface extends Module {
+      def groupId: String = scalaNative.groupId
+      def artifactId: String = "test-interface"
+      def version: String = scalaNative.version
+    }
   }
 
   object typelevel extends GroupID {

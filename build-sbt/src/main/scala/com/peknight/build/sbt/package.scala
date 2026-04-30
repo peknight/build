@@ -21,6 +21,9 @@ package object sbt {
   def crossRuntimeDependencies(dependencies: Module*): Def.Setting[Seq[ModuleID]] =
     libraryDependencies ++= dependencies.map(dependency => dependency.groupId %%% dependency.artifactId % dependency.version % Runtime)
 
+  def crossDependencyOverrides(overrides: Module*): Def.Setting[Seq[ModuleID]] =
+    dependencyOverrides ++= overrides.map(override_ => override_.groupId %%% override_.artifactId % override_.version)
+
   def dependency(dependency: Module): ModuleID = dependency.groupId %% dependency.artifactId % dependency.version
   def dependencies(dependencies: Module*): Seq[ModuleID] = dependencies.map(dependency)
   def testDependency(dep: Module): ModuleID = dependency(dep) % Test
