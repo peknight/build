@@ -339,7 +339,11 @@ def update_build_sbt(repo_root: Path, apply: bool) -> list[dict]:
 
 
 def update_build_properties(repo_root: Path, apply: bool) -> list[dict]:
-    """更新 project/build.properties 中的 sbt.version。"""
+    """更新 project/build.properties 中的 sbt.version。
+
+    当 sbt.version 被实际修改且 apply=True 时，同步到 ~/Projects/peknight/
+    下其他所有有 project/build.properties 的模块目录。
+    """
     results = []
     filepath = repo_root / "project" / "build.properties"
     if not filepath.exists():
@@ -378,7 +382,17 @@ def update_build_properties(repo_root: Path, apply: bool) -> list[dict]:
         break
 
     if modified and apply:
-        filepath.write_text("\n".join(lines) + "\n")
+        new_content = "\n".join(lines) + "\n"
+        filepath.write_text(new_content)
+
+        # 同步到其他模块
+        peknight_root = repo_root.parent
+        for mod_dir in sorted(peknight_root.iterdir()):
+            if not mod_dir.is_dir() or mod_dir.name == "build":
+                continue
+            mod_props = mod_dir / "project" / "build.properties"
+            if mod_props.exists():
+                mod_props.write_text(new_content)
 
     return results
 
