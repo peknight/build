@@ -44,3 +44,4 @@ commit message 中的描述根据实际更新的依赖列表自动生成。
 - 更新范围：`build-gav/package.scala`、`build.sbt`、`project/build.properties`、`project/plugins.sbt`、`build-sbt/package.scala`
 - 不要手动修改版本号，统一通过脚本执行
 - 更新后验证缩进是否正确保留（特别是 `package.scala` 中的 4 空格缩进）
+- `sbt.version` 更新时，脚本会自动将 `build/project/build.properties` 覆盖同步到 peknight 单体仓库下其他所有有该文件的模块目录。这些模块的 `build.properties` 均已在 `.gitignore` 中忽略，**无需在其他模块中执行 git add/commit**
