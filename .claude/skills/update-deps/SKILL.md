@@ -3,7 +3,7 @@ name: update-deps
 description: |
   自动更新 build 模块中所有外部依赖的最新版本号。
   触发词："更新依赖版本"、"update deps"、"update dependencies"。
-  流程：先 dry-run 预览 → 用户确认 → --apply 执行 → 自动 git commit。
+  流程：直接 --apply 执行 → 展示结果 → 自动 git commit。
 ---
 
 # 依赖版本自动更新
@@ -14,25 +14,19 @@ description: |
 
 ## 执行流程
 
-### Step 1: Dry-run 预览
-
-```bash
-python3 scripts/update-deps.py
-```
-
-向用户展示预览结果，列出将会更新的依赖及版本变化。
-
-### Step 2: 等待用户确认
-
-询问用户是否确认执行。用户同意后继续。
-
-### Step 3: 实际更新并提交
+### Step 1: 执行更新
 
 ```bash
 python3 scripts/update-deps.py --apply
 ```
 
-更新完成后检查 `git status`，如果有变更：
+### Step 2: 展示结果
+
+向用户展示更新结果，列出已更新/跳过/错误的依赖。
+
+### Step 3: 提交变更
+
+如果有更新的依赖：
 
 ```bash
 git add build-gav/shared/src/main/scala/com/peknight/build/gav/package.scala build.sbt project/build.properties project/plugins.sbt build-sbt/src/main/scala/com/peknight/build/sbt/package.scala
