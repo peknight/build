@@ -9,44 +9,44 @@
 Scala 文件（`.scala`、`.sbt`）统一使用块注释：
 
 ```
-/** @version-check <URL> */
+/** @versionCheck <URL> */
 ```
 
 Properties 文件（`.properties`）使用 `#` 注释：
 
 ```
-# @version-check <URL>
+# @versionCheck <URL>
 ```
 
 ### 示例
 
 **build-gav/package.scala**：
 ```scala
-/** @version-check https://repo.maven.apache.org/maven2/org/bouncycastle/bcprov-jdk18on/ */
+/** @versionCheck https://repo.maven.apache.org/maven2/org/bouncycastle/bcprov-jdk18on/ */
 def version: String = "1.84"
 ```
 
 **build.sbt**：
 ```scala
-/** @version-check https://repo.maven.apache.org/maven2/org/scala-sbt/sbt/ */
+/** @versionCheck https://repo.maven.apache.org/maven2/org/scala-sbt/sbt/ */
 val sbtVersion = "1.12.9"
 ```
 
 **project/build.properties**：
 ```properties
-# @version-check https://repo.maven.apache.org/maven2/org/scala-sbt/sbt/
+# @versionCheck https://repo.maven.apache.org/maven2/org/scala-sbt/sbt/
 sbt.version=1.12.9
 ```
 
 **project/plugins.sbt**：
 ```scala
-/** @version-check https://repo.maven.apache.org/maven2/com/github/sbt/sbt-native-packager_2.12_1.0/ */
+/** @versionCheck https://repo.maven.apache.org/maven2/com/github/sbt/sbt-native-packager_2.12_1.0/ */
 addSbtPlugin("com.github.sbt" % "sbt-native-packager" % "1.11.7")
 ```
 
 **build-sbt/package.scala（Docker）**：
 ```scala
-/** @version-check https://hub.docker.com/_/eclipse-temurin/tags */
+/** @versionCheck https://hub.docker.com/_/eclipse-temurin/tags */
 dockerBaseImage := "eclipse-temurin:26_35-jdk",
 ```
 
@@ -81,7 +81,7 @@ https://hub.docker.com/v2/repositories/library/eclipse-temurin/tags?page_size=20
 
 ## 解析策略
 
-通过查找 `@version-check` 注释锚点 + 下方紧跟的版本号行进行解析：
+通过查找 `@versionCheck` 注释锚点 + 下方紧跟的版本号行进行解析：
 
 | 文件 | 版本号行格式 |
 |------|----------|
@@ -120,5 +120,5 @@ python update-deps.py --skip http4s  # 临时额外排除
 ## 技术实现
 
 - 纯 Python 标准库（`urllib`、`re`、`json`、`xml.etree.ElementTree`），零外部依赖
-- 通过 `@version-check` 注释锚点直接定位版本号，无需作用域分析
+- 通过 `@versionCheck` 注释锚点直接定位版本号，无需作用域分析
 - 脚本置于 `build/update-deps.py`

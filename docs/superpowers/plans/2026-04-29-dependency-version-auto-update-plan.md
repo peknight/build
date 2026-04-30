@@ -2,9 +2,9 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** 创建一个 Python 脚本，通过 `@version-check` 注释锚点定位版本号定义，自动从 Maven Central 和 Docker Hub 检索最新版本号并更新。
+**Goal:** 创建一个 Python 脚本，通过 `@versionCheck` 注释锚点定位版本号定义，自动从 Maven Central 和 Docker Hub 检索最新版本号并更新。
 
-**Architecture:** 单文件 Python 脚本，纯标准库实现。通过 `@version-check` 注释锚点直接定位版本号行，从锚点 URL 中解析 groupId/artifactId，调用 Maven metadata XML 获取所有版本列表，根据智能策略（稳定/预发布）决定是否更新。
+**Architecture:** 单文件 Python 脚本，纯标准库实现。通过 `@versionCheck` 注释锚点直接定位版本号行，从锚点 URL 中解析 groupId/artifactId，调用 Maven metadata XML 获取所有版本列表，根据智能策略（稳定/预发布）决定是否更新。
 
 **Tech Stack:** Python 3, urllib, re, json, xml.etree.ElementTree, argparse
 
@@ -44,11 +44,11 @@ EXCLUDE_NAMES = {
     "catsParse",       # cats-parse
 }
 
-# @version-check URL 正则：Scala 文件统一使用 /** @version-check ... */ 块注释格式
-ANCHOR_RE = re.compile(r"/\*\*\s*@version-check\s*(https?://[^\s]+)\s*\*/")
+# @versionCheck URL 正则：Scala 文件统一使用 /** @versionCheck ... */ 块注释格式
+ANCHOR_RE = re.compile(r"/\*\*\s*@versionCheck\s*(https?://[^\s]+)\s*\*/")
 
-# properties 文件使用 # @version-check ... 格式
-PROP_RE = re.compile(r"#\s*@version-check\s*(https?://[^\s]+)")
+# properties 文件使用 # @versionCheck ... 格式
+PROP_RE = re.compile(r"#\s*@versionCheck\s*(https?://[^\s]+)")
 
 # Maven Central URL 正则：从注释 URL 中提取 groupId 和 artifactId
 MAVEN_URL_RE = re.compile(r"https://repo\.maven\.apache\.org/maven2/(.+)/")
@@ -202,7 +202,7 @@ def update_package_scala(repo_root: Path, apply: bool) -> list[dict]:
             i += 1
             continue
 
-        # @version-check 注释下方紧跟的版本号行
+        # @versionCheck 注释下方紧跟的版本号行
         if i + 1 >= len(lines):
             i += 1
             continue
@@ -566,5 +566,5 @@ Expected: 输出 dry-run header，列出可更新的依赖
 
 ```bash
 git add update-deps.py
-git commit -m "feat: add dependency version auto-update script with @version-check anchors"
+git commit -m "feat: add dependency version auto-update script with @versionCheck anchors"
 ```

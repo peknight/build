@@ -23,11 +23,11 @@ EXCLUDE_NAMES = {
     "catsParse",       # cats-parse
 }
 
-# @version-check URL 正则：Scala 文件统一使用 /** @version-check ... */ 块注释格式
-ANCHOR_RE = re.compile(r"/\*\*\s*@version-check\s*(https?://[^\s]+)\s*\*/")
+# @versionCheck URL 正则：Scala 文件统一使用 /** @versionCheck ... */ 块注释格式
+ANCHOR_RE = re.compile(r"/\*\*\s*@versionCheck\s*(https?://[^\s]+)\s*\*/")
 
-# properties 文件使用 # @version-check ... 格式
-PROP_RE = re.compile(r"#\s*@version-check\s*(https?://[^\s]+)")
+# properties 文件使用 # @versionCheck ... 格式
+PROP_RE = re.compile(r"#\s*@versionCheck\s*(https?://[^\s]+)")
 
 # Maven Central URL 正则：从注释 URL 中提取 groupId 和 artifactId
 MAVEN_URL_RE = re.compile(r"https://repo\.maven\.apache\.org/maven2/(.+)/")
