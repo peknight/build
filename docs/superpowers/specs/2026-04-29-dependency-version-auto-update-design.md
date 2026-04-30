@@ -4,21 +4,68 @@
 
 创建一个 Python 脚本，自动检索并更新 build 模块中所有非 Peknight 外部依赖的最新版本号，包括 `build-gav/package.scala`、`build.sbt`、`project/build.properties`、`project/plugins.sbt`、`build-sbt/package.scala` 五个文件中的版本定义。
 
+## 注释锚点格式
+
+所有需要更新版本号的位置，在版本号定义的上方添加统一格式的注释：
+
+```
+/** @version-check <Maven Central URL> */
+```
+
+或 properties/SBT 插件文件：
+
+```
+// @version-check <URL>
+# @version-check <URL>
+```
+
+### 示例
+
+**build-gav/package.scala**：
+```scala
+/** @version-check https://repo.maven.apache.org/maven2/org/bouncycastle/bcprov-jdk18on/ */
+def version: String = "1.84"
+```
+
+**build.sbt**：
+```scala
+/** @version-check https://repo.maven.apache.org/maven2/org/scala-sbt/sbt/ */
+val sbtVersion = "1.12.9"
+```
+
+**project/build.properties**：
+```properties
+# @version-check https://repo.maven.apache.org/maven2/org/scala-sbt/sbt/
+sbt.version=1.12.9
+```
+
+**project/plugins.sbt**：
+```scala
+// @version-check https://repo.maven.apache.org/maven2/com/github/sbt/sbt-native-packager_2.12_1.0/
+addSbtPlugin("com.github.sbt" % "sbt-native-packager" % "1.11.7")
+```
+
+**build-sbt/package.scala（Docker）**：
+```scala
+// @version-check https://hub.docker.com/_/eclipse-temurin/tags
+dockerBaseImage := "eclipse-temurin:26_35-jdk"
+```
+
 ## 版本获取源
 
 ### Maven Central 依赖
 
-统一使用 Maven Central Search API：
+使用 Maven metadata XML 端点：
 ```
-https://search.maven.org/solrsearch/select?q=g:{groupId}+AND+a:{artifactId}&rows=1&core=gav&wt=json
+https://repo.maven.apache.org/maven2/{group_path}/{artifact}/maven-metadata.xml
 ```
-从返回 JSON 的 `latestVersion` 字段获取最新版本。
+从 `<versions>` 标签中获取所有版本列表，用 Python 排序取最新。
 
 ### Docker Hub 镜像
 
 使用 Docker Hub API：
 ```
-https://hub.docker.com/v2/repositories/library/eclipse-temurin/tags?page_size=50
+https://hub.docker.com/v2/repositories/library/eclipse-temurin/tags?page_size=200
 ```
 
 ## 版本智能匹配
@@ -35,15 +82,15 @@ https://hub.docker.com/v2/repositories/library/eclipse-temurin/tags?page_size=50
 
 ## 解析策略
 
-通过查找 `/** URL */` 或 `// URL` 注释行，从注释 URL 中解析 groupId 和 artifactId：
+通过查找 `@version-check` 注释锚点 + 下方紧跟的版本号行进行解析：
 
-| 文件 | 匹配模式 |
+| 文件 | 版本号行格式 |
 |------|----------|
-| `build-gav/package.scala` | 注释后紧跟 `object xxx extends` 中的 `def version: String = "x.y.z"` |
-| `build.sbt` | 注释后紧跟 `val xxxVersion = "x.y.z"` |
-| `project/build.properties` | 注释后紧跟 `sbt.version=x.y.z` |
-| `project/plugins.sbt` | 注释后紧跟 `addSbtPlugin(... % "x.y.z")` |
-| `build-sbt/package.scala` | Docker Hub URL 注释 + `dockerBaseImage := "eclipse-temurin:XX_XX-jdk"` |
+| `build-gav/package.scala` | `def version: String = "x.y.z"` |
+| `build.sbt` | `val xxxVersion = "x.y.z"` |
+| `project/build.properties` | `sbt.version=x.y.z` |
+| `project/plugins.sbt` | `addSbtPlugin(... % "version")` |
+| `build-sbt/package.scala` | `dockerBaseImage := "eclipse-temurin:XX_XX-jdk"` |
 
 ## Docker 镜像更新逻辑
 
@@ -73,6 +120,6 @@ python update-deps.py --skip http4s  # 临时额外排除
 
 ## 技术实现
 
-- 纯 Python 标准库（`urllib`、`re`、`json`），零外部依赖
-- 使用正则表达式解析 Scala 源码中的版本定义
+- 纯 Python 标准库（`urllib`、`re`、`json`、`xml.etree.ElementTree`），零外部依赖
+- 通过 `@version-check` 注释锚点直接定位版本号，无需作用域分析
 - 脚本置于 `build/update-deps.py`

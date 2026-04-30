@@ -1,23 +1,3 @@
-# 依赖版本自动更新脚本 Implementation Plan
-
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
-
-**Goal:** 创建一个 Python 脚本，通过 `@version-check` 注释锚点定位版本号定义，自动从 Maven Central 和 Docker Hub 检索最新版本号并更新。
-
-**Architecture:** 单文件 Python 脚本，纯标准库实现。通过 `@version-check` 注释锚点直接定位版本号行，从锚点 URL 中解析 groupId/artifactId，调用 Maven metadata XML 获取所有版本列表，根据智能策略（稳定/预发布）决定是否更新。
-
-**Tech Stack:** Python 3, urllib, re, json, xml.etree.ElementTree, argparse
-
----
-
-### Task 1: 创建脚本骨架与 CLI 接口
-
-**Files:**
-- Create: `update-deps.py`
-
-- [ ] **Step 1: 创建完整脚本**
-
-```python
 #!/usr/bin/env python3
 """自动检索并更新 build 模块外部依赖的最新版本号。
 
@@ -27,7 +7,6 @@
 import argparse
 import json
 import re
-import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
 from pathlib import Path
@@ -50,7 +29,7 @@ BLOCK_RE = re.compile(r"/\*\*\s*@version-check\s*(https?://[^\s]+)\s*\*/")
 # @version-check URL 正则：匹配单行注释格式
 LINE_RE = re.compile(r"//\s*@version-check\s*(https?://[^\s]+)")
 
-# # @version-check 正则：匹配 properties 注释格式
+# @version-check URL 正则：匹配 properties 注释格式
 PROP_RE = re.compile(r"#\s*@version-check\s*(https?://[^\s]+)")
 
 # Maven Central URL 正则：从注释 URL 中提取 groupId 和 artifactId
@@ -61,14 +40,36 @@ DOCKER_TAG_RE = re.compile(r"(\d+)_(\d+)-jdk")
 
 
 def _fetch_maven_metadata(group: str, artifact: str) -> list[str] | None:
-    """从 maven-metadata.xml 获取所有版本号列表。"""
+    """从 maven-metadata.xml 获取所有版本号列表。
+
+    优先使用完整 artifact 名（如 scalacheck_3），若不存在则尝试去除
+    Scala/sbt 平台后缀（_3, _2.12, _2.12_1.0 等）。
+    """
+    group_path = group.replace(".", "/")
+
+    # 先尝试用完整 artifact 名
+    url = MAVEN_META_URL.format(group_path=group_path, artifact=artifact)
+    result = _try_fetch_metadata_url(url)
+    if result is not None:
+        return result
+
+    # 去后缀重试
+    suffixes = ["_3", "_2.12", "_2.13", "_2.11", "_2.12_1.0", "_2.12_1.1", "_2.13_1.0", "_3_1.0"]
     base_artifact = artifact
-    for suffix in ["_3", "_2.12_1.0"]:
+    for suffix in suffixes:
         if base_artifact.endswith(suffix):
             base_artifact = base_artifact[: -len(suffix)]
             break
-    group_path = group.replace(".", "/")
-    url = MAVEN_META_URL.format(group_path=group_path, artifact=base_artifact)
+
+    if base_artifact != artifact:
+        url = MAVEN_META_URL.format(group_path=group_path, artifact=base_artifact)
+        return _try_fetch_metadata_url(url)
+
+    return None
+
+
+def _try_fetch_metadata_url(url: str) -> list[str] | None:
+    """尝试获取 maven-metadata.xml，失败返回 None。"""
     try:
         req = urllib.request.Request(url)
         req.add_header("User-Agent", "peknight-build-update-deps/1.0")
@@ -82,7 +83,7 @@ def _fetch_maven_metadata(group: str, artifact: str) -> list[str] | None:
 
 def is_prerelease(version: str) -> bool:
     """判断版本是否为预发布版本。"""
-    markers = ["rc", "m", "snapshot", "alpha", "beta", "cr", "dev"]
+    markers = ["rc", "m", "snapshot", "snap", "alpha", "beta", "cr", "dev"]
     lower = version.lower()
     for m in markers:
         if f"-{m}" in lower or lower.startswith(m):
@@ -107,11 +108,32 @@ def _parse_version_tuple(version: str) -> tuple:
     return tuple(parts)
 
 
+def _is_literal_version(value: str) -> bool:
+    """判断版本号是否为字面量（如 "1.84"）而非引用（如 bouncyCastle.version）。"""
+    if "." in value and not value[0].isdigit():
+        return False
+    return bool(re.match(r'^\d', value))
+
+
+def _is_version_newer(current: str, candidate: str) -> bool:
+    """判断 candidate 版本是否严格高于 current 版本。
+
+    只比较共同的数字位数，忽略后缀差异（如 2.0.61.android5 vs 2.0.61 视为同等）。
+    """
+    cur = _parse_version_tuple(current)
+    cand = _parse_version_tuple(candidate)
+    min_len = min(len(cur), len(cand))
+    # 只比较共同的数字部分
+    return cand[:min_len] > cur[:min_len]
+
+
 def get_latest_matching_version(group: str, artifact: str, current: str) -> str | None:
     """根据智能策略获取最新版本。
 
     - 当前是稳定版 → 只返回稳定版
     - 当前是预发布 → 返回最新版本（无论稳定或预发布）
+
+    只有当最新版的数字 tuple 严格高于当前版时才返回。
     """
     versions = _fetch_maven_metadata(group, artifact)
     if versions is None:
@@ -120,7 +142,7 @@ def get_latest_matching_version(group: str, artifact: str, current: str) -> str 
     if is_prerelease(current):
         versions.sort(key=_parse_version_tuple, reverse=True)
         latest = versions[0]
-        if latest != current:
+        if _is_version_newer(current, latest):
             return latest
     else:
         stable = [v for v in versions if not is_prerelease(v)]
@@ -128,13 +150,16 @@ def get_latest_matching_version(group: str, artifact: str, current: str) -> str 
             return None
         stable.sort(key=_parse_version_tuple, reverse=True)
         latest = stable[0]
-        if latest != current:
+        if _is_version_newer(current, latest):
             return latest
     return None
 
 
-def filter_version_prefix(group: str, artifact: str, prefix: str) -> str | None:
-    """只保留以 prefix 开头的稳定版本，如 2.12.。"""
+def filter_version_prefix(group: str, artifact: str, prefix: str, current: str) -> str | None:
+    """只保留以 prefix 开头的稳定版本，如 2.12.。
+
+    只有当最新版严格高于当前版时才返回。
+    """
     versions = _fetch_maven_metadata(group, artifact)
     if versions is None:
         return None
@@ -142,7 +167,10 @@ def filter_version_prefix(group: str, artifact: str, prefix: str) -> str | None:
     if not matching:
         return None
     matching.sort(key=_parse_version_tuple, reverse=True)
-    return matching[0]
+    latest = matching[0]
+    if _is_version_newer(current, latest):
+        return latest
+    return None
 
 
 def parse_gav_from_url(url: str) -> tuple[str, str] | None:
@@ -157,6 +185,30 @@ def parse_gav_from_url(url: str) -> tuple[str, str] | None:
     artifact = parts[-1]
     group = ".".join(parts[:-1])
     return group, artifact
+
+
+def _find_object_name_before_comment(lines: list[str], comment_idx: int) -> str | None:
+    """查找注释前最近的 object 名称（向上搜索）。"""
+    for j in range(comment_idx - 1, max(0, comment_idx - 4), -1):
+        m = re.search(r"object\s+(\w+)\s+extends", lines[j])
+        if m:
+            return m.group(1)
+    return None
+
+
+def _find_version_def_after_comment(lines: list[str], start: int) -> tuple[int, str, re.Match] | None:
+    """从 start 行开始查找 def version 的字面量定义。
+
+    只匹配 def version: String = "x.y.z" 形式，跳过 def version = xxx.version 引用。
+    """
+    version_re = re.compile(r'(def\s+version\s*(?::\s*\w+)?\s*=\s*")([^"]+)(")')
+    for j in range(start, min(start + 5, len(lines))):
+        m = version_re.search(lines[j])
+        if m:
+            value = m.group(2)
+            if _is_literal_version(value):
+                return j, value, m
+    return None
 
 
 def _is_excluded(object_name: str) -> bool:
@@ -175,8 +227,6 @@ def update_package_scala(repo_root: Path, apply: bool) -> list[dict]:
     lines = content.splitlines()
     modified = False
 
-    version_re = re.compile(r'(def\s+version\s*(?::\s*String)?\s*=\s*")([^"]+)(")')
-
     i = 0
     while i < len(lines):
         url_match = BLOCK_RE.search(lines[i])
@@ -192,44 +242,35 @@ def update_package_scala(repo_root: Path, apply: bool) -> list[dict]:
 
         group, artifact = gav
 
-        # 查找注释后最近的 object 名称（用于显示和排除判断）
-        object_name = None
-        for j in range(max(0, i - 3), i):
-            m = re.search(r"object\s+(\w+)\s+extends", lines[j])
-            if m:
-                object_name = m.group(1)
-                break
+        # 向上查找注释前的 object 名称
+        object_name = _find_object_name_before_comment(lines, i)
+        if not object_name:
+            i += 1
+            continue
 
-        if object_name and _is_excluded(object_name):
+        if _is_excluded(object_name):
             results.append({"name": object_name, "status": "skipped", "reason": "排除列表"})
             i += 1
             continue
 
-        # @version-check 注释下方紧跟的版本号行
-        if i + 1 >= len(lines):
+        # 在注释下方查找字面量版本定义
+        version_info = _find_version_def_after_comment(lines, i + 1)
+        if not version_info:
             i += 1
             continue
 
-        version_match = version_re.search(lines[i + 1])
-        if not version_match:
-            i += 1
-            continue
-
-        current_version = version_match.group(2)
+        version_line_idx, current_version, version_match = version_info
         latest = get_latest_matching_version(group, artifact, current_version)
         if latest is None:
-            name = object_name or artifact
-            results.append({"name": name, "status": "skipped", "reason": f"已是最新 ({current_version})"})
+            results.append({"name": object_name, "status": "skipped", "reason": f"已是最新 ({current_version})"})
             i += 1
             continue
 
-        old_line = lines[i + 1]
         new_line = version_match.group(0).replace(current_version, latest, 1)
-        lines[i + 1] = new_line
+        lines[version_line_idx] = new_line
         modified = True
-        name = object_name or artifact
-        results.append({"name": name, "status": "updated", "old": current_version, "new": latest})
-        i += 2
+        results.append({"name": object_name, "status": "updated", "old": current_version, "new": latest})
+        i += 1
 
     if modified and apply:
         filepath.write_text("\n".join(lines) + "\n")
@@ -257,7 +298,6 @@ def update_build_sbt(repo_root: Path, apply: bool) -> list[dict]:
             i += 1
             continue
 
-        url = url_match.group(1)
         if i + 1 >= len(lines):
             i += 1
             continue
@@ -270,40 +310,30 @@ def update_build_sbt(repo_root: Path, apply: bool) -> list[dict]:
         var_name = val_match.group(2)
         current_version = val_match.group(3)
 
-        if var_name == "scala212Version":
-            gav = parse_gav_from_url(url)
-            if gav:
-                group, artifact = gav
-                latest = filter_version_prefix(group, artifact, "2.12.")
-                if latest and latest != current_version:
-                    old_line = lines[i + 1]
-                    new_line = val_version_re.search(old_line).group(0).replace(current_version, latest, 1)
-                    lines[i + 1] = new_line
-                    modified = True
-                    results.append({"name": var_name, "status": "updated", "old": current_version, "new": latest})
-                else:
-                    results.append({"name": var_name, "status": "skipped", "reason": f"已是最新 ({current_version})"})
-            i += 2
-            continue
-
+        url = url_match.group(1)
         gav = parse_gav_from_url(url)
         if not gav:
             i += 1
             continue
 
         group, artifact = gav
-        latest = get_latest_matching_version(group, artifact, current_version)
+
+        # scala212Version 特殊处理：只取 2.12.* 前缀
+        if var_name == "scala212Version":
+            latest = filter_version_prefix(group, artifact, "2.12.", current_version)
+        else:
+            latest = get_latest_matching_version(group, artifact, current_version)
+
         if latest is None:
             results.append({"name": var_name, "status": "skipped", "reason": f"已是最新 ({current_version})"})
-            i += 1
+            i += 2
             continue
 
-        old_line = lines[i + 1]
-        new_line = val_version_re.search(old_line).group(0).replace(current_version, latest, 1)
+        new_line = val_match.group(0).replace(current_version, latest, 1)
         lines[i + 1] = new_line
         modified = True
         results.append({"name": var_name, "status": "updated", "old": current_version, "new": latest})
-        i += 1
+        i += 2
 
     if modified and apply:
         filepath.write_text("\n".join(lines) + "\n")
@@ -399,12 +429,11 @@ def update_plugins_sbt(repo_root: Path, apply: bool) -> list[dict]:
             results.append({"name": name, "status": "skipped", "reason": f"已是最新 ({current_version})"})
             continue
 
-        old_line = lines[i + 1]
         new_line = plugin_match.group(0).replace(current_version, latest, 1)
         lines[i + 1] = new_line
         modified = True
 
-        name_match = re.search(r'"([^"]+)"', old_line)
+        name_match = re.search(r'"([^"]+)"', lines[i + 1])
         name = name_match.group(1) if name_match else artifact
         results.append({"name": name, "status": "updated", "old": current_version, "new": latest})
 
@@ -440,14 +469,23 @@ def update_docker_image(repo_root: Path, apply: bool) -> list[dict]:
     docker_re = re.compile(r'(dockerBaseImage\s*:=\s*"eclipse-temurin:)(\d+)_(\d+)(-jdk")')
 
     for i, line in enumerate(lines):
-        url_match = LINE_RE.search(line)
+        # 支持块注释（/** @version-check */）和单行注释（// @version-check）
+        url_match = BLOCK_RE.search(line) or LINE_RE.search(line)
         if not url_match:
             continue
 
-        m = docker_re.search(line)
-        if not m:
+        # 在同一行或之后 5 行内查找 dockerBaseImage
+        docker_idx = None
+        for j in range(i, min(i + 6, len(lines))):
+            m = docker_re.search(lines[j])
+            if m:
+                docker_idx = j
+                break
+
+        if docker_idx is None:
             continue
 
+        m = docker_re.search(lines[docker_idx])
         current_major = int(m.group(2))
         current_patch = m.group(3)
 
@@ -498,6 +536,7 @@ def update_docker_image(repo_root: Path, apply: bool) -> list[dict]:
                 "status": "skipped",
                 "reason": f"已是最新 ({old_version})",
             })
+        break
 
     if modified and apply:
         filepath.write_text("\n".join(lines) + "\n")
@@ -533,7 +572,7 @@ def main():
 
     EXCLUDE_NAMES.update(args.skip)
 
-    repo_root = Path(__file__).parent
+    repo_root = Path(__file__).resolve().parent.parent
 
     print("=" * 60)
     if not args.apply:
@@ -553,16 +592,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-```
-
-- [ ] **Step 2: 验证脚本可执行（dry-run）**
-
-Run: `python3 update-deps.py`
-Expected: 输出 dry-run header，列出可更新的依赖
-
-- [ ] **Step 3: 提交**
-
-```bash
-git add update-deps.py
-git commit -m "feat: add dependency version auto-update script with @version-check anchors"
-```
