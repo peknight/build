@@ -467,7 +467,7 @@ package object gav {
     def groupId: String = "org.scala-sbt"
     def artifactId: String = "sbt"
     /** @version-check https://repo.maven.apache.org/maven2/org/scala-sbt/sbt/ */
-    def version: String = "1.12.9"
+    def version: String = "1.12.10"
   }
 
   object sbtGithub extends GroupID {
@@ -664,7 +664,7 @@ package object gav {
       def groupId: String = tpolecat.groupId
       def artifactId: String = "natchez-core"
       /** @version-check https://repo.maven.apache.org/maven2/org/tpolecat/natchez-core_3/ */
-      def version: String = "0.3.9"
+      def version: String = "0.3.10"
     }
   }
 
@@ -803,7 +803,7 @@ package object gav {
     def groupId: String = "org.projectlombok"
     def artifactId: String = "lombok"
     /** @version-check https://repo.maven.apache.org/maven2/org/projectlombok/lombok/ */
-    def version: String = "1.18.44"
+    def version: String = "1.18.46"
     def processorOptions: Seq[String] = Seq("-processor", "lombok.launch.AnnotationProcessorHider$AnnotationProcessor")
   }
 
