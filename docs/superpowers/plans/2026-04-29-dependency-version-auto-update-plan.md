@@ -44,13 +44,10 @@ EXCLUDE_NAMES = {
     "catsParse",       # cats-parse
 }
 
-# @version-check URL 正则：匹配 Scala 块注释格式
-BLOCK_RE = re.compile(r"/\*\*\s*@version-check\s*(https?://[^\s]+)\s*\*/")
+# @version-check URL 正则：Scala 文件统一使用 /** @version-check ... */ 块注释格式
+ANCHOR_RE = re.compile(r"/\*\*\s*@version-check\s*(https?://[^\s]+)\s*\*/")
 
-# @version-check URL 正则：匹配单行注释格式
-LINE_RE = re.compile(r"//\s*@version-check\s*(https?://[^\s]+)")
-
-# # @version-check 正则：匹配 properties 注释格式
+# properties 文件使用 # @version-check ... 格式
 PROP_RE = re.compile(r"#\s*@version-check\s*(https?://[^\s]+)")
 
 # Maven Central URL 正则：从注释 URL 中提取 groupId 和 artifactId
@@ -179,7 +176,7 @@ def update_package_scala(repo_root: Path, apply: bool) -> list[dict]:
 
     i = 0
     while i < len(lines):
-        url_match = BLOCK_RE.search(lines[i])
+        url_match = ANCHOR_RE.search(lines[i])
         if not url_match:
             i += 1
             continue
@@ -224,8 +221,8 @@ def update_package_scala(repo_root: Path, apply: bool) -> list[dict]:
             continue
 
         old_line = lines[i + 1]
-        new_line = version_match.group(0).replace(current_version, latest, 1)
-        lines[i + 1] = new_line
+        old_line = lines[i + 1]
+        lines[i + 1] = old_line.replace(current_version, latest, 1)
         modified = True
         name = object_name or artifact
         results.append({"name": name, "status": "updated", "old": current_version, "new": latest})
@@ -252,7 +249,7 @@ def update_build_sbt(repo_root: Path, apply: bool) -> list[dict]:
 
     i = 0
     while i < len(lines):
-        url_match = BLOCK_RE.search(lines[i])
+        url_match = ANCHOR_RE.search(lines[i])
         if not url_match:
             i += 1
             continue
@@ -277,8 +274,7 @@ def update_build_sbt(repo_root: Path, apply: bool) -> list[dict]:
                 latest = filter_version_prefix(group, artifact, "2.12.")
                 if latest and latest != current_version:
                     old_line = lines[i + 1]
-                    new_line = val_version_re.search(old_line).group(0).replace(current_version, latest, 1)
-                    lines[i + 1] = new_line
+                    lines[i + 1] = old_line.replace(current_version, latest, 1)
                     modified = True
                     results.append({"name": var_name, "status": "updated", "old": current_version, "new": latest})
                 else:
@@ -299,8 +295,7 @@ def update_build_sbt(repo_root: Path, apply: bool) -> list[dict]:
             continue
 
         old_line = lines[i + 1]
-        new_line = val_version_re.search(old_line).group(0).replace(current_version, latest, 1)
-        lines[i + 1] = new_line
+        lines[i + 1] = old_line.replace(current_version, latest, 1)
         modified = True
         results.append({"name": var_name, "status": "updated", "old": current_version, "new": latest})
         i += 1
@@ -372,7 +367,7 @@ def update_plugins_sbt(repo_root: Path, apply: bool) -> list[dict]:
     )
 
     for i, line in enumerate(lines):
-        url_match = LINE_RE.search(line)
+        url_match = ANCHOR_RE.search(line)
         if not url_match:
             continue
         if i + 1 >= len(lines):
@@ -400,8 +395,7 @@ def update_plugins_sbt(repo_root: Path, apply: bool) -> list[dict]:
             continue
 
         old_line = lines[i + 1]
-        new_line = plugin_match.group(0).replace(current_version, latest, 1)
-        lines[i + 1] = new_line
+        lines[i + 1] = old_line.replace(current_version, latest, 1)
         modified = True
 
         name_match = re.search(r'"([^"]+)"', old_line)
@@ -440,14 +434,22 @@ def update_docker_image(repo_root: Path, apply: bool) -> list[dict]:
     docker_re = re.compile(r'(dockerBaseImage\s*:=\s*"eclipse-temurin:)(\d+)_(\d+)(-jdk")')
 
     for i, line in enumerate(lines):
-        url_match = LINE_RE.search(line)
+        url_match = ANCHOR_RE.search(line)
         if not url_match:
             continue
 
-        m = docker_re.search(line)
-        if not m:
+        # 在同一行或之后 5 行内查找 dockerBaseImage
+        docker_idx = None
+        for j in range(i, min(i + 6, len(lines))):
+            m = docker_re.search(lines[j])
+            if m:
+                docker_idx = j
+                break
+
+        if docker_idx is None:
             continue
 
+        m = docker_re.search(lines[docker_idx])
         current_major = int(m.group(2))
         current_patch = m.group(3)
 
@@ -483,8 +485,8 @@ def update_docker_image(repo_root: Path, apply: bool) -> list[dict]:
         old_version = f"{current_major}_{current_patch}"
 
         if new_version != old_version:
-            new_line = line.replace(old_version, new_version)
-            lines[i] = new_line
+            old_line = lines[docker_idx]
+            lines[docker_idx] = old_line.replace(old_version, new_version)
             modified = True
             results.append({
                 "name": "eclipse-temurin",

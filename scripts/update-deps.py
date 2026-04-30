@@ -23,13 +23,10 @@ EXCLUDE_NAMES = {
     "catsParse",       # cats-parse
 }
 
-# @version-check URL 正则：匹配 Scala 块注释格式
-BLOCK_RE = re.compile(r"/\*\*\s*@version-check\s*(https?://[^\s]+)\s*\*/")
+# @version-check URL 正则：Scala 文件统一使用 /** @version-check ... */ 块注释格式
+ANCHOR_RE = re.compile(r"/\*\*\s*@version-check\s*(https?://[^\s]+)\s*\*/")
 
-# @version-check URL 正则：匹配单行注释格式
-LINE_RE = re.compile(r"//\s*@version-check\s*(https?://[^\s]+)")
-
-# @version-check URL 正则：匹配 properties 注释格式
+# properties 文件使用 # @version-check ... 格式
 PROP_RE = re.compile(r"#\s*@version-check\s*(https?://[^\s]+)")
 
 # Maven Central URL 正则：从注释 URL 中提取 groupId 和 artifactId
@@ -229,7 +226,7 @@ def update_package_scala(repo_root: Path, apply: bool) -> list[dict]:
 
     i = 0
     while i < len(lines):
-        url_match = BLOCK_RE.search(lines[i])
+        url_match = ANCHOR_RE.search(lines[i])
         if not url_match:
             i += 1
             continue
@@ -293,7 +290,7 @@ def update_build_sbt(repo_root: Path, apply: bool) -> list[dict]:
 
     i = 0
     while i < len(lines):
-        url_match = BLOCK_RE.search(lines[i])
+        url_match = ANCHOR_RE.search(lines[i])
         if not url_match:
             i += 1
             continue
@@ -402,7 +399,7 @@ def update_plugins_sbt(repo_root: Path, apply: bool) -> list[dict]:
     )
 
     for i, line in enumerate(lines):
-        url_match = LINE_RE.search(line)
+        url_match = ANCHOR_RE.search(line)
         if not url_match:
             continue
         if i + 1 >= len(lines):
@@ -469,8 +466,7 @@ def update_docker_image(repo_root: Path, apply: bool) -> list[dict]:
     docker_re = re.compile(r'(dockerBaseImage\s*:=\s*"eclipse-temurin:)(\d+)_(\d+)(-jdk")')
 
     for i, line in enumerate(lines):
-        # 支持块注释（/** @version-check */）和单行注释（// @version-check）
-        url_match = BLOCK_RE.search(line) or LINE_RE.search(line)
+        url_match = ANCHOR_RE.search(line)
         if not url_match:
             continue
 

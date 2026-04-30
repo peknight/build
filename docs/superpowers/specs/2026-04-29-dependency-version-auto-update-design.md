@@ -6,16 +6,15 @@
 
 ## 注释锚点格式
 
-所有需要更新版本号的位置，在版本号定义的上方添加统一格式的注释：
+Scala 文件（`.scala`、`.sbt`）统一使用块注释：
 
 ```
-/** @version-check <Maven Central URL> */
+/** @version-check <URL> */
 ```
 
-或 properties/SBT 插件文件：
+Properties 文件（`.properties`）使用 `#` 注释：
 
 ```
-// @version-check <URL>
 # @version-check <URL>
 ```
 
@@ -41,14 +40,14 @@ sbt.version=1.12.9
 
 **project/plugins.sbt**：
 ```scala
-// @version-check https://repo.maven.apache.org/maven2/com/github/sbt/sbt-native-packager_2.12_1.0/
+/** @version-check https://repo.maven.apache.org/maven2/com/github/sbt/sbt-native-packager_2.12_1.0/ */
 addSbtPlugin("com.github.sbt" % "sbt-native-packager" % "1.11.7")
 ```
 
 **build-sbt/package.scala（Docker）**：
 ```scala
-// @version-check https://hub.docker.com/_/eclipse-temurin/tags
-dockerBaseImage := "eclipse-temurin:26_35-jdk"
+/** @version-check https://hub.docker.com/_/eclipse-temurin/tags */
+dockerBaseImage := "eclipse-temurin:26_35-jdk",
 ```
 
 ## 版本获取源
