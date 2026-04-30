@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 项目概览
 
-`build` 模块，属于 peknight 单体仓库的 **层级 0 — 构建与基础** 层级。为整个约 60 个子模块提供统一的依赖管理和 SBT 构建配置。
+`build` 模块，属于 peknight 单体仓库的 **层级 0 — 构建基础**，是其它所有模块的基石。为整个 monorepo 提供统一的依赖管理和 SBT 构建配置。
 
 ## 子项目结构
 
@@ -43,6 +43,8 @@ sbt +publish
 
 ## 模块依赖层级
 
-本模块处于层级 0（构建与基础）。完整 monorepo 的模块依赖层级见 `/Users/pek/Projects/peknight/claude/CLAUDE.md`。
+本模块处于 **层级 0 — 构建基础**，是整个 monorepo 的最底层。**禁止引入任何其它依赖**。
+
+完整 monorepo 的模块依赖层级见 `/Users/pek/Projects/peknight/claude/CLAUDE.md`。
 
 **重要规则**：后面的模块只能依赖前面的模块，前面的绝不依赖后面的。
