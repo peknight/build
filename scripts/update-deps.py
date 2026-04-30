@@ -266,8 +266,8 @@ def update_package_scala(repo_root: Path, apply: bool) -> list[dict]:
             i += 1
             continue
 
-        new_line = version_match.group(0).replace(current_version, latest, 1)
-        lines[version_line_idx] = new_line
+        old_line = lines[version_line_idx]
+        lines[version_line_idx] = old_line.replace(current_version, latest, 1)
         modified = True
         results.append({"name": object_name, "status": "updated", "old": current_version, "new": latest})
         i += 1
@@ -329,8 +329,8 @@ def update_build_sbt(repo_root: Path, apply: bool) -> list[dict]:
             i += 2
             continue
 
-        new_line = val_match.group(0).replace(current_version, latest, 1)
-        lines[i + 1] = new_line
+        old_line = lines[i + 1]
+        lines[i + 1] = old_line.replace(current_version, latest, 1)
         modified = True
         results.append({"name": var_name, "status": "updated", "old": current_version, "new": latest})
         i += 2
@@ -429,8 +429,8 @@ def update_plugins_sbt(repo_root: Path, apply: bool) -> list[dict]:
             results.append({"name": name, "status": "skipped", "reason": f"已是最新 ({current_version})"})
             continue
 
-        new_line = plugin_match.group(0).replace(current_version, latest, 1)
-        lines[i + 1] = new_line
+        old_line = lines[i + 1]
+        lines[i + 1] = old_line.replace(current_version, latest, 1)
         modified = True
 
         name_match = re.search(r'"([^"]+)"', lines[i + 1])
@@ -521,8 +521,8 @@ def update_docker_image(repo_root: Path, apply: bool) -> list[dict]:
         old_version = f"{current_major}_{current_patch}"
 
         if new_version != old_version:
-            new_line = line.replace(old_version, new_version)
-            lines[i] = new_line
+            old_line = lines[docker_idx]
+            lines[docker_idx] = old_line.replace(old_version, new_version)
             modified = True
             results.append({
                 "name": "eclipse-temurin",
