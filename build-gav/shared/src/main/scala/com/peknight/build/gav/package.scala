@@ -467,7 +467,7 @@ package object gav {
     def groupId: String = "org.scala-sbt"
     def artifactId: String = "sbt"
     /** @versionCheck https://repo.maven.apache.org/maven2/org/scala-sbt/sbt/ */
-    def version: String = "1.12.10"
+    def version: String = "1.12.11"
   }
 
   object sbtGithub extends GroupID {
@@ -857,7 +857,7 @@ package object gav {
       def groupId: String = s"${alibaba.groupId}.fastjson2"
       def artifactId: String = "fastjson2"
       /** @versionCheck https://repo.maven.apache.org/maven2/com/alibaba/fastjson2/fastjson2/ */
-      def version: String = "2.0.61"
+      def version: String = "2.0.62"
     }
     object qlExpress extends Module {
       def groupId: String = alibaba.groupId
