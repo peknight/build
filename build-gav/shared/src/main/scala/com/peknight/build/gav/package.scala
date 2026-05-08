@@ -594,7 +594,7 @@ package object gav {
       def groupId: String = scodec.groupId
       def artifactId: String = "scodec-bits"
       /** @versionCheck https://repo.maven.apache.org/maven2/org/scodec/scodec-bits_3/ */
-      def version: String = "1.2.4"
+      def version: String = "1.2.5"
     }
   }
   object fs2 extends Module {
