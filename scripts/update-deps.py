@@ -477,7 +477,7 @@ def update_docker_image(repo_root: Path, apply: bool) -> list[dict]:
     lines = content.splitlines()
     modified = False
 
-    docker_re = re.compile(r'(dockerBaseImage\s*:=\s*"eclipse-temurin:)(\d+)_(\d+)(-jdk")')
+    docker_re = re.compile(r'(dockerBaseImage\s*:=\s*"eclipse-temurin:)(\d+(?:\.\d+)*?)_(\d+)(-jdk")')
 
     for i, line in enumerate(lines):
         url_match = ANCHOR_RE.search(line)

@@ -80,7 +80,7 @@ package object sbt {
 
   lazy val dockerSettings: Seq[Def.Setting[?]] = Seq(
     /** @versionCheck https://hub.docker.com/_/eclipse-temurin/tags */
-    dockerBaseImage := "eclipse-temurin:26_35-jdk",
+    dockerBaseImage := "eclipse-temurin:26.0.1_8-jdk",
     Docker / maintainer := "peknight <JKpeknight@gmail.com>",
     dockerRepository := Some("docker.peknight.com"),
     dockerBuildOptions ++= Seq(
