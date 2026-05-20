@@ -477,7 +477,7 @@ def update_docker_image(repo_root: Path, apply: bool) -> list[dict]:
     lines = content.splitlines()
     modified = False
 
-    docker_re = re.compile(r'(dockerBaseImage\s*:=\s*"eclipse-temurin:)(\d+(?:\.\d+)*?)_(\d+)(-jdk")')
+    docker_re = re.compile(r'(dockerBaseImage\s*:=\s*"eclipse-temurin:)(\d+)((?:\.\d+)*)_(\d+)(-jdk")')
 
     for i, line in enumerate(lines):
         url_match = ANCHOR_RE.search(line)
@@ -497,7 +497,8 @@ def update_docker_image(repo_root: Path, apply: bool) -> list[dict]:
 
         m = docker_re.search(lines[docker_idx])
         current_major = int(m.group(2))
-        current_patch = m.group(3)
+        current_minor = m.group(3)  # e.g. ".0.1"
+        current_patch = m.group(4)
 
         tags = query_docker_version()
         if tags is None:
@@ -527,8 +528,8 @@ def update_docker_image(repo_root: Path, apply: bool) -> list[dict]:
             best_major = current_major
             best_patch = str(current_best)
 
-        new_version = f"{best_major}_{best_patch}"
-        old_version = f"{current_major}_{current_patch}"
+        new_version = f"{best_major}{current_minor}_{best_patch}"
+        old_version = f"{current_major}{current_minor}_{current_patch}"
 
         if new_version != old_version:
             old_line = lines[docker_idx]
