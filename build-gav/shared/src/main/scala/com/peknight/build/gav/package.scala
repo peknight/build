@@ -869,7 +869,7 @@ package object gav {
       def groupId: String = alibaba.groupId
       def artifactId: String = "qlexpress4"
       /** @versionCheck https://repo.maven.apache.org/maven2/com/alibaba/qlexpress4/ */
-      def version: String = "4.1.0"
+      def version: String = "4.1.1"
     }
   }
 
