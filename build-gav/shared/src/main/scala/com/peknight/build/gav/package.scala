@@ -518,7 +518,7 @@ package object gav {
   object scalaNative extends GroupID with Version {
     def groupId: String = "org.scala-native"
     /** @versionCheck https://repo.maven.apache.org/maven2/org/scala-native/sbt-scala-native_2.12_1.0/ */
-    def version: String = "0.5.11"
+    def version: String = "0.5.12"
     object sbt extends Module {
       def groupId: String = scalaNative.groupId
       def artifactId: String = "sbt-scala-native"
@@ -635,7 +635,7 @@ package object gav {
             def groupId: String = gnieh.groupId
             def artifactId: String = "fs2-data-json-circe"
             /** @versionCheck https://repo.maven.apache.org/maven2/org/gnieh/fs2-data-json-circe_3/ */
-            def version: String = "1.13.0"
+            def version: String = "1.14.0"
           }
         }
       }
