@@ -459,7 +459,7 @@ package object gav {
     def groupId: String = "org.scala-lang"
     object scala3 extends Version {
       /** @versionCheck https://repo.maven.apache.org/maven2/org/scala-lang/scala3-library_3/ */
-      def version: String = "3.8.3"
+      def version: String = "3.8.4"
     }
   }
 
@@ -766,7 +766,7 @@ package object gav {
     def groupId: String = "ch.qos.logback"
     def artifactId: String = "logback-core"
     /** @versionCheck https://repo.maven.apache.org/maven2/ch/qos/logback/logback-core/ */
-    def version: String = "1.5.32"
+    def version: String = "1.5.34"
     object classic extends Module {
       def groupId: String = logback.groupId
       def artifactId: String = "logback-classic"
@@ -895,7 +895,7 @@ package object gav {
       def groupId: String = yomahub.groupId
       def artifactId: String = "liteflow-core"
       /** @versionCheck https://repo.maven.apache.org/maven2/com/yomahub/liteflow-core/ */
-      def version: String = "2.15.3.2"
+      def version: String = "2.16.0"
     }
   }
 }
