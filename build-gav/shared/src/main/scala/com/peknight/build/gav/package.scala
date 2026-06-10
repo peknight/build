@@ -674,7 +674,7 @@ package object gav {
       def groupId: String = cir.groupId
       def artifactId: String = "ciris"
       /** @versionCheck https://repo.maven.apache.org/maven2/is/cir/ciris_3/ */
-      def version = "3.14.1"
+      def version = "3.15.0"
     }
   }
 
@@ -810,7 +810,7 @@ package object gav {
   object spring extends GroupID with Version {
     def groupId: String = "org.springframework"
     /** @versionCheck https://repo.maven.apache.org/maven2/org/springframework/spring-context/ */
-    def version: String = "7.0.7"
+    def version: String = "7.0.8"
     object context extends Module {
       def groupId: String = spring.groupId
       def artifactId: String = "spring-context"
