@@ -6,10 +6,21 @@
 
 import argparse
 import json
+import os
 import re
 import urllib.request
 import xml.etree.ElementTree as ET
 from pathlib import Path
+
+# 从 ~/.profile_proxy 加载代理配置
+_proxy_file = Path.home() / ".profile_proxy"
+if _proxy_file.exists():
+    for line in _proxy_file.read_text().splitlines():
+        line = line.strip()
+        if line.startswith("export ") and "=" in line:
+            key, _, value = line[len("export "):].partition("=")
+            os.environ.setdefault(key, value.strip())
+    del _proxy_file
 
 # Git hash pattern: e.g. "3.7-8f2b497", "3.4-7154d08" — nightly builds, not releases
 GIT_HASH_RE = re.compile(r"\d+-[0-9a-f]{6,}$")
