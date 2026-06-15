@@ -22,15 +22,14 @@ DOCKER_API = "https://hub.docker.com/v2/repositories/library/eclipse-temurin/tag
 
 # 排除列表：不更新的依赖名（object 名称）
 EXCLUDE_NAMES = {
-    "http4s",          # http4s 下所有
     "catsParse",       # cats-parse
 }
 
-# @versionCheck 正则：Scala 文件统一使用 /** @versionCheck ... */ 块注释格式
-# 支持两种写法：
-#   /** @versionCheck https://... */          — 正常检查更新
-#   /** @versionCheck @skip https://... */    — 跳过更新
-ANCHOR_RE = re.compile(r"/\*\*\s*@versionCheck\s+(?:(@skip)\s+)?(https?://[^\s]+)\s*\*/")
+# @versionCheck / @skipVersionCheck 正则
+#   /** @versionCheck https://... */       — 正常检查更新
+#   /** @skipVersionCheck https://... */   — 跳过更新
+VERSION_CHECK_RE = re.compile(r"/\*\*\s*@versionCheck\s+(https?://[^\s]+)\s*\*/")
+SKIP_VERSION_CHECK_RE = re.compile(r"/\*\*\s*@skipVersionCheck\s+(https?://[^\s]+)\s*\*/")
 
 # properties 文件使用 # @versionCheck ... 格式
 PROP_RE = re.compile(r"#\s*@versionCheck\s*(https?://[^\s]+)")
@@ -280,19 +279,21 @@ def update_package_scala(repo_root: Path, apply: bool) -> list[dict]:
 
     i = 0
     while i < len(lines):
-        url_match = ANCHOR_RE.search(lines[i])
+        # 先检查 @skipVersionCheck（跳过更新）
+        skip_match = SKIP_VERSION_CHECK_RE.search(lines[i])
+        if skip_match:
+            object_name = _find_object_name_before_comment(lines, i) or "unknown"
+            results.append({"name": object_name, "status": "skipped", "reason": "@skipVersionCheck"})
+            i += 1
+            continue
+
+        # 再检查 @versionCheck（正常更新）
+        url_match = VERSION_CHECK_RE.search(lines[i])
         if not url_match:
             i += 1
             continue
 
-        is_skip = url_match.group(1) is not None
-        url = url_match.group(2)
-
-        if is_skip:
-            object_name = _find_object_name_before_comment(lines, i) or "unknown"
-            results.append({"name": object_name, "status": "skipped", "reason": "@skip"})
-            i += 1
-            continue
+        url = url_match.group(1)
 
         gav = parse_gav_from_url(url)
         if not gav:
@@ -352,7 +353,12 @@ def update_build_sbt(repo_root: Path, apply: bool) -> list[dict]:
 
     i = 0
     while i < len(lines):
-        url_match = ANCHOR_RE.search(lines[i])
+        # 先检查 @skipVersionCheck
+        if SKIP_VERSION_CHECK_RE.search(lines[i]):
+            i += 2
+            continue
+
+        url_match = VERSION_CHECK_RE.search(lines[i])
         if not url_match:
             i += 1
             continue
@@ -369,7 +375,7 @@ def update_build_sbt(repo_root: Path, apply: bool) -> list[dict]:
         var_name = val_match.group(2)
         current_version = val_match.group(3)
 
-        url = url_match.group(2)
+        url = url_match.group(1)
         gav = parse_gav_from_url(url)
         if not gav:
             i += 1
@@ -475,7 +481,10 @@ def update_plugins_sbt(repo_root: Path, apply: bool) -> list[dict]:
     )
 
     for i, line in enumerate(lines):
-        url_match = ANCHOR_RE.search(line)
+        # 先检查 @skipVersionCheck
+        if SKIP_VERSION_CHECK_RE.search(line):
+            continue
+        url_match = VERSION_CHECK_RE.search(line)
         if not url_match:
             continue
         if i + 1 >= len(lines):
@@ -486,7 +495,7 @@ def update_plugins_sbt(repo_root: Path, apply: bool) -> list[dict]:
             continue
 
         current_version = plugin_match.group(4)
-        url = url_match.group(2)
+        url = url_match.group(1)
 
         gav = parse_gav_from_url(url)
         if gav:
@@ -542,7 +551,7 @@ def update_docker_image(repo_root: Path, apply: bool) -> list[dict]:
     docker_re = re.compile(r'(dockerBaseImage\s*:=\s*"eclipse-temurin:)(\d+)((?:\.\d+)*)_(\d+)(-jdk")')
 
     for i, line in enumerate(lines):
-        url_match = ANCHOR_RE.search(line)
+        url_match = VERSION_CHECK_RE.search(line)
         if not url_match:
             continue
 

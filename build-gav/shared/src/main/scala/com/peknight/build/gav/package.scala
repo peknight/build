@@ -691,7 +691,7 @@ package object gav {
   object http4s extends Module {
     def groupId: String = "org.http4s"
     def artifactId: String = "http4s-core"
-    /** @versionCheck https://repo.maven.apache.org/maven2/org/http4s/http4s-core_3/ */
+    /** @skipVersionCheck https://repo.maven.apache.org/maven2/org/http4s/http4s-core_3/ */
     def version: String = "1.0.0-M34"
     object dsl extends Module {
       def groupId: String = http4s.groupId
@@ -730,7 +730,7 @@ package object gav {
         object client extends Module {
           def groupId: String = http4s.groupId
           def artifactId: String = "http4s-jdk-http-client"
-          /** @versionCheck @skip https://repo.maven.apache.org/maven2/org/http4s/http4s-jdk-http-client_3/ */
+          /** @skipVersionCheck https://repo.maven.apache.org/maven2/org/http4s/http4s-jdk-http-client_3/ */
           def version: String = "1.0.0-M3"
         }
       }
