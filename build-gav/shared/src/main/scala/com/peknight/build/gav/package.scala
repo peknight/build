@@ -467,7 +467,7 @@ package object gav {
     def groupId: String = "org.scala-sbt"
     def artifactId: String = "sbt"
     /** @versionCheck https://repo.maven.apache.org/maven2/org/scala-sbt/sbt/ */
-    def version: String = "1.12.11"
+    def version: String = "2.0.0"
   }
 
   object sbtGithub extends GroupID {
@@ -563,6 +563,22 @@ package object gav {
       /** @versionCheck https://repo.maven.apache.org/maven2/org/typelevel/case-insensitive_3/ */
       def version: String = "1.5.0"
     }
+    object doobie extends Module {
+      def groupId: String = tpolecat.groupId
+      def artifactId: String = "doobie-core"
+      /** @versionCheck https://repo.maven.apache.org/maven2/org/typelevel/doobie-core_3/ */
+      def version: String = "1.0.0-RC12"
+      object postgres extends Module {
+        def groupId: String = tpolecat.groupId
+        def artifactId: String = "doobie-postgres"
+        def version: String = doobie.version
+      }
+      object hikari extends Module {
+        def groupId: String = tpolecat.groupId
+        def artifactId: String = "doobie-hikari"
+        def version: String = doobie.version
+      }
+    }
     object spire extends Module {
       def groupId: String = typelevel.groupId
       def artifactId: String = "spire"
@@ -644,22 +660,6 @@ package object gav {
 
   object tpolecat extends GroupID {
     def groupId: String = "org.tpolecat"
-    object doobie extends Module {
-      def groupId: String = tpolecat.groupId
-      def artifactId: String = "doobie-core"
-      /** @versionCheck https://repo.maven.apache.org/maven2/org/tpolecat/doobie-core_3/ */
-      def version: String = "1.0.0-RC12"
-      object postgres extends Module {
-        def groupId: String = tpolecat.groupId
-        def artifactId: String = "doobie-postgres"
-        def version: String = doobie.version
-      }
-      object hikari extends Module {
-        def groupId: String = tpolecat.groupId
-        def artifactId: String = "doobie-hikari"
-        def version: String = doobie.version
-      }
-    }
     object natchez extends Module {
       def groupId: String = tpolecat.groupId
       def artifactId: String = "natchez-core"
@@ -869,7 +869,7 @@ package object gav {
       def groupId: String = alibaba.groupId
       def artifactId: String = "qlexpress4"
       /** @versionCheck https://repo.maven.apache.org/maven2/com/alibaba/qlexpress4/ */
-      def version: String = "4.1.1"
+      def version: String = "4.1.2"
     }
   }
 
