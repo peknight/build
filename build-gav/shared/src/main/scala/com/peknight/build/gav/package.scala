@@ -567,7 +567,7 @@ package object gav {
       def groupId: String = tpolecat.groupId
       def artifactId: String = "doobie-core"
       /** @versionCheck https://repo.maven.apache.org/maven2/org/typelevel/doobie-core_3/ */
-      def version: String = "1.0.0-RC12"
+      def version: String = "1.0.0-RC13"
       object postgres extends Module {
         def groupId: String = tpolecat.groupId
         def artifactId: String = "doobie-postgres"
@@ -730,7 +730,7 @@ package object gav {
         object client extends Module {
           def groupId: String = http4s.groupId
           def artifactId: String = "http4s-jdk-http-client"
-          /** @versionCheck https://repo.maven.apache.org/maven2/org/http4s/http4s-jdk-http-client_3/ */
+          /** @versionCheck @skip https://repo.maven.apache.org/maven2/org/http4s/http4s-jdk-http-client_3/ */
           def version: String = "1.0.0-M3"
         }
       }

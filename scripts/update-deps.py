@@ -11,6 +11,9 @@ import urllib.request
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
+# Git hash pattern: e.g. "3.7-8f2b497", "3.4-7154d08" — nightly builds, not releases
+GIT_HASH_RE = re.compile(r"\d+-[0-9a-f]{6,}$")
+
 # Maven metadata XML 端点：实时获取所有版本
 MAVEN_META_URL = "https://repo.maven.apache.org/maven2/{group_path}/{artifact}/maven-metadata.xml"
 
@@ -23,8 +26,11 @@ EXCLUDE_NAMES = {
     "catsParse",       # cats-parse
 }
 
-# @versionCheck URL 正则：Scala 文件统一使用 /** @versionCheck ... */ 块注释格式
-ANCHOR_RE = re.compile(r"/\*\*\s*@versionCheck\s*(https?://[^\s]+)\s*\*/")
+# @versionCheck 正则：Scala 文件统一使用 /** @versionCheck ... */ 块注释格式
+# 支持两种写法：
+#   /** @versionCheck https://... */          — 正常检查更新
+#   /** @versionCheck @skip https://... */    — 跳过更新
+ANCHOR_RE = re.compile(r"/\*\*\s*@versionCheck\s+(?:(@skip)\s+)?(https?://[^\s]+)\s*\*/")
 
 # properties 文件使用 # @versionCheck ... 格式
 PROP_RE = re.compile(r"#\s*@versionCheck\s*(https?://[^\s]+)")
@@ -79,19 +85,62 @@ def _try_fetch_metadata_url(url: str) -> list[str] | None:
 
 
 def is_prerelease(version: str) -> bool:
-    """判断版本是否为预发布版本。"""
+    """判断版本是否为预发布版本。
+
+    包括：-RC, -M, -SNAPSHOT, -alpha, -beta 等标准预发布标记，
+    以及 git-hash 风格的 nightly build（如 "3.7-8f2b497"）。
+    """
     markers = ["rc", "m", "snapshot", "snap", "alpha", "beta", "cr", "dev"]
     lower = version.lower()
     for m in markers:
         if f"-{m}" in lower or lower.startswith(m):
             return True
+    # Git-hash nightly builds: e.g. "3.7-8f2b497"
+    if GIT_HASH_RE.search(version):
+        return True
     return False
 
 
 def _parse_version_tuple(version: str) -> tuple:
-    """将版本号字符串解析为可比较的 tuple。"""
+    """将版本号字符串解析为可比较的 tuple。
+
+    支持预发布版本号，如 "1.0.0-RC12" -> (1, 0, 0, -1, 12)。
+    稳定版本如 "1.0.0" -> (1, 0, 0, 1, 0)，这样稳定版永远大于预发布版。
+    格式: (major, minor, patch, ..., is_stable, prerelease_num)
+    - is_stable: 1 = 稳定版, -1 = 预发布
+    - prerelease_num: 预发布序号（如 RC12 的 12，M3 的 3），稳定版为 0
+
+    所有 tuple 长度统一为 (主版本位数 + 2)，不足的主版本位补 0，确保比较时
+    is_stable 永远对齐到同一位置。
+    """
+    main_part = version
+    prerelease_num = 0
+    is_stable = 1
+
+    for marker in ["-RC", "-rc", "-M", "-m", "-SNAPSHOT", "-snap", "-alpha", "-beta", "-cr", "-dev"]:
+        idx = version.find(marker)
+        if idx != -1:
+            main_part = version[:idx]
+            suffix = version[idx + len(marker):]
+            for c in suffix:
+                if c.isdigit():
+                    prerelease_num = prerelease_num * 10 + int(c)
+                else:
+                    break
+            is_stable = -1
+            break
+
+    # Git-hash 版本（如 "3.7-8f2b497"）也视为预发布
+    if GIT_HASH_RE.search(version):
+        # main_part 是 "-" 之前的部分，后缀无预发布序号
+        dash_idx = version.find("-")
+        if dash_idx != -1:
+            main_part = version[:dash_idx]
+        is_stable = -1
+        prerelease_num = 0
+
     parts = []
-    for p in version.split("."):
+    for p in main_part.split("."):
         try:
             parts.append(int(p))
         except ValueError:
@@ -102,7 +151,12 @@ def _parse_version_tuple(version: str) -> tuple:
                 else:
                     break
             parts.append(int(num) if num else 0)
-    return tuple(parts)
+
+    # 统一补齐主版本位数到至少 3 位（major.minor.patch），确保 is_stable 对齐
+    while len(parts) < 3:
+        parts.append(0)
+
+    return (*parts, is_stable, prerelease_num)
 
 
 def _is_literal_version(value: str) -> bool:
@@ -231,7 +285,15 @@ def update_package_scala(repo_root: Path, apply: bool) -> list[dict]:
             i += 1
             continue
 
-        url = url_match.group(1)
+        is_skip = url_match.group(1) is not None
+        url = url_match.group(2)
+
+        if is_skip:
+            object_name = _find_object_name_before_comment(lines, i) or "unknown"
+            results.append({"name": object_name, "status": "skipped", "reason": "@skip"})
+            i += 1
+            continue
+
         gav = parse_gav_from_url(url)
         if not gav:
             i += 1
@@ -307,7 +369,7 @@ def update_build_sbt(repo_root: Path, apply: bool) -> list[dict]:
         var_name = val_match.group(2)
         current_version = val_match.group(3)
 
-        url = url_match.group(1)
+        url = url_match.group(2)
         gav = parse_gav_from_url(url)
         if not gav:
             i += 1
@@ -424,7 +486,7 @@ def update_plugins_sbt(repo_root: Path, apply: bool) -> list[dict]:
             continue
 
         current_version = plugin_match.group(4)
-        url = url_match.group(1)
+        url = url_match.group(2)
 
         gav = parse_gav_from_url(url)
         if gav:
