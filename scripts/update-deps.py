@@ -31,11 +31,6 @@ MAVEN_META_URL = "https://repo.maven.apache.org/maven2/{group_path}/{artifact}/m
 # Docker Hub API for eclipse-temurin
 DOCKER_API = "https://hub.docker.com/v2/repositories/library/eclipse-temurin/tags?page_size=200"
 
-# 排除列表：不更新的依赖名（object 名称）
-EXCLUDE_NAMES = {
-    "catsParse",       # cats-parse
-}
-
 # @versionCheck / @skipVersionCheck 正则
 #   /** @versionCheck https://... */       — 正常检查更新
 #   /** @skipVersionCheck https://... */   — 跳过更新
@@ -272,11 +267,6 @@ def _find_version_def_after_comment(lines: list[str], start: int) -> tuple[int, 
     return None
 
 
-def _is_excluded(object_name: str) -> bool:
-    """检查是否在排除列表中。"""
-    return object_name in EXCLUDE_NAMES
-
-
 def update_package_scala(repo_root: Path, apply: bool) -> list[dict]:
     """更新 build-gav/package.scala 中的版本号。"""
     results = []
@@ -316,11 +306,6 @@ def update_package_scala(repo_root: Path, apply: bool) -> list[dict]:
         # 向上查找注释前的 object 名称
         object_name = _find_object_name_before_comment(lines, i)
         if not object_name:
-            i += 1
-            continue
-
-        if _is_excluded(object_name):
-            results.append({"name": object_name, "status": "skipped", "reason": "排除列表"})
             i += 1
             continue
 
@@ -659,11 +644,7 @@ def print_results(results):
 def main():
     parser = argparse.ArgumentParser(description="自动更新 build 模块依赖版本号")
     parser.add_argument("--apply", action="store_true", help="实际写入文件（默认仅 dry-run）")
-    parser.add_argument("--skip", nargs="*", default=[], metavar="NAME",
-                        help="临时跳过指定依赖的更新（object 名称）")
     args = parser.parse_args()
-
-    EXCLUDE_NAMES.update(args.skip)
 
     repo_root = Path(__file__).resolve().parent.parent
 

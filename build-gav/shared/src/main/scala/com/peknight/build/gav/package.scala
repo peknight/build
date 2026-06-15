@@ -554,7 +554,7 @@ package object gav {
     object catsParse extends Module {
       def groupId: String = typelevel.groupId
       def artifactId: String = "cats-parse"
-      /** @versionCheck https://repo.maven.apache.org/maven2/org/typelevel/cats-parse_3/ */
+      /** @skipVersionCheck https://repo.maven.apache.org/maven2/org/typelevel/cats-parse_3/ */
       def version: String = "0.3.10"
     }
     object caseInsensitive extends Module {
