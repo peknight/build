@@ -426,6 +426,11 @@ package object gav {
         def groupId: String = peknight.groupId
         def artifactId: String = "acme-client-core"
         def version: String = peknight.version
+        object stream extends Module {
+          def groupId: String = peknight.groupId
+          def artifactId: String = "acme-client-stream"
+          def version: String = peknight.version
+        }
         object app extends Module {
           def groupId: String = peknight.groupId
           def artifactId: String = "acme-client-app"
