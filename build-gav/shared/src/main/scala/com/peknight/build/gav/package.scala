@@ -472,7 +472,7 @@ package object gav {
     def groupId: String = "org.scala-sbt"
     def artifactId: String = "sbt"
     /** @versionCheck https://repo.maven.apache.org/maven2/org/scala-sbt/sbt/ */
-    def version: String = "2.0.0"
+    def version: String = "1.12.12"
   }
 
   object sbtGithub extends GroupID {
