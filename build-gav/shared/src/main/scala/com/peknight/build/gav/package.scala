@@ -569,7 +569,7 @@ package object gav {
       def version: String = "1.5.0"
     }
     object doobie extends Module {
-      def groupId: String = tpolecat.groupId
+      def groupId: String = typelevel.groupId
       def artifactId: String = "doobie-core"
       /** @versionCheck https://repo.maven.apache.org/maven2/org/typelevel/doobie-core_3/ */
       def version: String = "1.0.0-RC13"
