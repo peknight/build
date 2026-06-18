@@ -418,6 +418,21 @@ package object gav {
         }
       }
     }
+    object infisical extends Module {
+      def groupId: String = peknight.groupId
+      def artifactId: String = "infisical-core"
+      def version: String = peknight.version
+      object api extends Module {
+        def groupId: String = peknight.groupId
+        def artifactId: String = "infisical-api"
+        def version: String = peknight.version
+      }
+      object http4s extends Module {
+        def groupId: String = peknight.groupId
+        def artifactId: String = "infisical-http4s"
+        def version: String = peknight.version
+      }
+    }
     object acme extends Module {
       def groupId: String = peknight.groupId
       def artifactId: String = "acme-core"
