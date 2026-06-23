@@ -532,7 +532,7 @@ package object gav {
   object scalaJs extends GroupID with Version {
     def groupId: String = "org.scala-js"
     /** @versionCheck https://repo.maven.apache.org/maven2/org/scala-js/sbt-scalajs_2.12_1.0/ */
-    def version: String = "1.21.0"
+    def version: String = "1.22.0"
     object sbt extends Module {
       def groupId: String = scalaJs.groupId
       def artifactId: String = "sbt-scalajs"
@@ -676,7 +676,7 @@ package object gav {
             def groupId: String = gnieh.groupId
             def artifactId: String = "fs2-data-json-circe"
             /** @versionCheck https://repo.maven.apache.org/maven2/org/gnieh/fs2-data-json-circe_3/ */
-            def version: String = "1.14.0"
+            def version: String = "1.14.1"
           }
         }
       }
