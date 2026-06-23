@@ -791,7 +791,7 @@ package object gav {
     def groupId: String = "ch.qos.logback"
     def artifactId: String = "logback-core"
     /** @versionCheck https://repo.maven.apache.org/maven2/ch/qos/logback/logback-core/ */
-    def version: String = "1.5.34"
+    def version: String = "1.5.35"
     object classic extends Module {
       def groupId: String = logback.groupId
       def artifactId: String = "logback-classic"
