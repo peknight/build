@@ -112,6 +112,11 @@ package object gav {
       def artifactId: String = "spire-core"
       def version: String = peknight.version
     }
+    object squants extends Module {
+      def groupId: String = peknight.groupId
+      def artifactId: String = "squants-core"
+      def version: String = peknight.version
+    }
     object log4Cats extends Module {
       def groupId: String = peknight.groupId
       def artifactId: String = "log4cats-core"
