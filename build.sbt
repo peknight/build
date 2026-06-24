@@ -1,18 +1,14 @@
 val pekVersion = "0.1.0-SNAPSHOT"
 /** @versionCheck https://repo.maven.apache.org/maven2/org/scala-lang/scala3-library_3/ */
 val scala3Version = "3.8.4"
-/** @versionCheck https://repo.maven.apache.org/maven2/org/scala-lang/scala-library/ */
-val scala212Version = "2.12.21"
 /** @versionCheck https://repo.maven.apache.org/maven2/org/scala-sbt/sbt/ */
-val sbtVersion = "1.12.12"
-/** @versionCheck https://repo.maven.apache.org/maven2/org/portable-scala/sbt-platform-deps_2.12_1.0/ */
-val sbtPlatformDepsVersion = "1.0.2"
-/** @versionCheck https://repo.maven.apache.org/maven2/com/github/sbt/sbt-native-packager_2.12_1.0/ */
+val sbtVersion = "2.0.0"
+/** @versionCheck https://repo.maven.apache.org/maven2/com/github/sbt/sbt-native-packager_sbt2_3/ */
 val sbtNativePackagerVersion = "1.11.7"
 
 ThisBuild / organization := "com.peknight"
 ThisBuild / version := pekVersion
-ThisBuild / scalaVersion := scala212Version
+ThisBuild / scalaVersion := scala3Version
 ThisBuild / versionScheme := Some("early-semver")
 
 val nexus = "https://nexus.peknight.com/repository"
@@ -27,26 +23,23 @@ ThisBuild / credentials += Credentials(Path.userHome / ".sbt" / ".credentials")
 
 lazy val build = (project in file("."))
   .settings(name := "build")
-  .aggregate(
-    buildGav.jvm,
-    buildGav.js,
-    buildGav.native,
-    buildSbt
-  )
+  .aggregate(buildGav.projectRefs *)
+  .aggregate(buildSbt)
 
-lazy val buildGav = (crossProject(JVMPlatform, JSPlatform, NativePlatform) in file("build-gav"))
+lazy val buildGav = (projectMatrix in file("build-gav"))
   .settings(
     name := "build-gav",
-    crossScalaVersions := Seq(scala212Version, scala3Version),
   )
+  .jvmPlatform(scalaVersions = Seq(scala3Version))
+  .jsPlatform(scalaVersions = Seq(scala3Version))
+  .nativePlatform(scalaVersions = Seq(scala3Version))
 
 lazy val buildSbt = (project in file("build-sbt"))
-  .dependsOn(buildGav.jvm)
+  .dependsOn(buildGav.jvm(scala3Version))
   .settings(
     name := "build-sbt",
     libraryDependencies ++= Seq(
       "org.scala-sbt" % "sbt" % sbtVersion % Optional,
-      "org.portable-scala" % "sbt-platform-deps_2.12_1.0" % sbtPlatformDepsVersion % Optional,
-      "com.github.sbt" % "sbt-native-packager_2.12_1.0" % sbtNativePackagerVersion % Optional,
+      "com.github.sbt" % "sbt-native-packager_sbt2_3" % sbtNativePackagerVersion % Optional,
     ),
   )

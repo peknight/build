@@ -8,21 +8,8 @@ import com.peknight.build.gav._
 import com.peknight.build.gav.sbtGithub.nativePackager
 import com.typesafe.sbt.packager.Keys.maintainer
 import com.typesafe.sbt.packager.docker.DockerPlugin.autoImport.{Docker, dockerBaseImage, dockerBuildOptions, dockerRepository}
-import org.portablescala.sbtplatformdeps.PlatformDepsPlugin.autoImport.toPlatformDepsGroupID
-
-import _root_.scala.collection.Seq
 
 package object sbt {
-
-  def crossDependencies(dependencies: Module*): Def.Setting[Seq[ModuleID]] =
-    libraryDependencies ++= dependencies.map(dependency => dependency.groupId %%% dependency.artifactId % dependency.version)
-  def crossTestDependencies(dependencies: Module*): Def.Setting[Seq[ModuleID]] =
-    libraryDependencies ++= dependencies.map(dependency => dependency.groupId %%% dependency.artifactId % dependency.version % Test)
-  def crossRuntimeDependencies(dependencies: Module*): Def.Setting[Seq[ModuleID]] =
-    libraryDependencies ++= dependencies.map(dependency => dependency.groupId %%% dependency.artifactId % dependency.version % Runtime)
-
-  def crossDependencyOverrides(overrides: Module*): Def.Setting[Seq[ModuleID]] =
-    dependencyOverrides ++= overrides.map(override_ => override_.groupId %%% override_.artifactId % override_.version)
 
   def dependency(dependency: Module): ModuleID = dependency.groupId %% dependency.artifactId % dependency.version
   def dependencies(dependencies: Module*): Seq[ModuleID] = dependencies.map(dependency)
@@ -42,8 +29,6 @@ package object sbt {
 
   lazy val commonSbtPlugins = Seq(
     addJvmSbtPlugin(nativePackager),
-    addJvmSbtPlugin(portableScala.crossProject.scalaJs),
-    addJvmSbtPlugin(portableScala.crossProject.scalaNative),
     addJvmSbtPlugin(scalaJs.sbt),
     addJvmSbtPlugin(scalaNative.sbt)
   )
