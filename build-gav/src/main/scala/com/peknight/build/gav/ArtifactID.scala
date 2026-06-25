@@ -1,5 +1,5 @@
 package com.peknight.build.gav
 
-trait ArtifactID {
+trait ArtifactID:
   def artifactId: String
-}
+end ArtifactID

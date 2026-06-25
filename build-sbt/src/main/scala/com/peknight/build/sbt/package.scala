@@ -1,15 +1,15 @@
 package com.peknight.build
 
-import _root_.sbt.Keys._
-import _root_.sbt._
+import _root_.sbt.*
+import _root_.sbt.Keys.*
 import _root_.sbt.io.syntax.fileToRichFile
 import _root_.sbt.librarymanagement.syntax.{stringToOrganization, toRepositoryName}
-import com.peknight.build.gav._
+import com.peknight.build.gav.*
 import com.peknight.build.gav.sbtGithub.nativePackager
 import com.typesafe.sbt.packager.Keys.maintainer
 import com.typesafe.sbt.packager.docker.DockerPlugin.autoImport.{Docker, dockerBaseImage, dockerBuildOptions, dockerRepository}
 
-package object sbt {
+package object sbt:
 
   def dependency(dependency: Module): ModuleID = dependency.groupId %% dependency.artifactId % dependency.version
   def dependencies(dependencies: Module*): Seq[ModuleID] = dependencies.map(dependency)
@@ -27,7 +27,7 @@ package object sbt {
 
   def addJvmSbtPlugin(dependency: Module): Def.Setting[Seq[ModuleID]] = addSbtPlugin(jvmDependency(dependency))
 
-  lazy val commonSbtPlugins = Seq(
+  lazy val commonSbtPlugins: Seq[Def.Setting[Seq[ModuleID]]] = Seq(
     addJvmSbtPlugin(nativePackager),
     addJvmSbtPlugin(scalaJs.sbt),
     addJvmSbtPlugin(scalaNative.sbt)
@@ -72,4 +72,4 @@ package object sbt {
       "--platform", "linux/amd64"
     ),
   )
-}
+end sbt

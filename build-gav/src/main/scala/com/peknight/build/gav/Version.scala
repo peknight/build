@@ -1,5 +1,5 @@
 package com.peknight.build.gav
 
-trait Version {
+trait Version:
   def version: String
-}
+end Version
