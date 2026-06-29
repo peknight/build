@@ -3,22 +3,22 @@ pipeline {
     stages {
         stage('Compile') {
             steps {
-                sh '''sbt 'clean; compile' '''
+                sh '''sbt --server 'clean; compile' '''
             }
         }
         stage('Test') {
             steps {
-                sh 'sbt test'
+                sh 'sbt --server test'
             }
         }
         stage('Publish Local') {
             steps {
-                sh 'sbt +publishLocal'
+                sh 'sbt --server +publishLocal'
             }
         }
         stage('Publish') {
             steps {
-                sh 'sbt +publish'
+                sh 'sbt --server +publish'
             }
         }
     }
