@@ -36,11 +36,11 @@ package object sbt:
   lazy val commonSettings: Seq[Def.Setting[?]] = buildSettings ++ nexusSettings
 
   lazy val buildSettings: Seq[Def.Setting[?]] = Seq(
-    ThisBuild / organization := peknight.groupId,
-    ThisBuild / version := peknight.version,
-    ThisBuild / scalaVersion := com.peknight.build.gav.scala.scala3.version,
-    ThisBuild / versionScheme := Some("early-semver"),
-    ThisBuild / scalacOptions ++= Seq(
+    organization := peknight.groupId,
+    version := peknight.version,
+    scalaVersion := com.peknight.build.gav.scala.scala3.version,
+    versionScheme := Some("early-semver"),
+    scalacOptions ++= Seq(
       "-feature",
       "-deprecation",
       "-unchecked",
@@ -53,14 +53,14 @@ package object sbt:
   private val nexus = "https://nexus.peknight.com/repository"
 
   lazy val nexusSettings: Seq[Def.Setting[?]] = Seq(
-    ThisBuild / resolvers += "Pek Nexus" at s"$nexus/maven-public/",
-    ThisBuild / publishTo := {
+    resolvers += "Pek Nexus" at s"$nexus/maven-public/",
+    publishTo := {
       if (isSnapshot.value)
         Some("snapshot" at s"$nexus/maven-snapshots/")
       else
         Some("releases" at s"$nexus/maven-releases/")
     },
-    ThisBuild / credentials += Credentials(Path.userHome / ".sbt" / ".credentials"),
+    credentials += Credentials(Path.userHome / ".sbt" / ".credentials"),
   )
 
   lazy val dockerSettings: Seq[Def.Setting[?]] = Seq(

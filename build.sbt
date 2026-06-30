@@ -6,23 +6,24 @@ val sbtVersion = "2.0.1"
 /** @versionCheck https://repo.maven.apache.org/maven2/com/github/sbt/sbt-native-packager_sbt2_3/ */
 val sbtNativePackagerVersion = "1.11.7"
 
-ThisBuild / organization := "com.peknight"
-ThisBuild / version := pekVersion
-ThisBuild / scalaVersion := scala3Version
-ThisBuild / versionScheme := Some("early-semver")
+organization := "com.peknight"
+version := pekVersion
+scalaVersion := scala3Version
+versionScheme := Some("early-semver")
 
 val nexus = "https://nexus.peknight.com/repository"
-ThisBuild / resolvers += "Pek Nexus" at s"$nexus/maven-public/"
-ThisBuild / publishTo := {
+resolvers += "Pek Nexus" at s"$nexus/maven-public/"
+publishTo := {
   if (isSnapshot.value)
     Some("snapshot" at s"$nexus/maven-snapshots/")
   else
     Some("releases" at s"$nexus/maven-releases/")
 }
-ThisBuild / credentials += Credentials(Path.userHome / ".sbt" / ".credentials")
+credentials += Credentials(Path.userHome / ".sbt" / ".credentials")
 
-lazy val build = (project in file("."))
+lazy val build = rootProject
   .settings(name := "build")
+  .settings(publish / skip := true)
   .aggregate(buildGav.projectRefs *)
   .aggregate(buildSbt)
 
