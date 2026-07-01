@@ -270,7 +270,7 @@ def _find_version_def_after_comment(lines: list[str], start: int) -> tuple[int, 
 def update_package_scala(repo_root: Path, apply: bool) -> list[dict]:
     """更新 build-gav/package.scala 中的版本号。"""
     results = []
-    filepath = repo_root / "build-gav" / "shared" / "src" / "main" / "scala" / "com" / "peknight" / "build" / "gav" / "package.scala"
+    filepath = repo_root / "build-gav" / "src" / "main" / "scala" / "com" / "peknight" / "build" / "gav" / "package.scala"
     if not filepath.exists():
         return results
 

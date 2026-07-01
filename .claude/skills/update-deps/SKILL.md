@@ -29,7 +29,7 @@ python3 scripts/update-deps.py --apply
 如果有更新的依赖：
 
 ```bash
-git add build-gav/shared/src/main/scala/com/peknight/build/gav/package.scala build.sbt project/build.properties project/plugins.sbt build-sbt/src/main/scala/com/peknight/build/sbt/package.scala
+git add build-gav/src/main/scala/com/peknight/build/gav/package.scala build.sbt project/build.properties project/plugins.sbt build-sbt/src/main/scala/com/peknight/build/sbt/package.scala
 git commit -m "$(cat <<'EOF'
 chore: bump dependency versions
 EOF

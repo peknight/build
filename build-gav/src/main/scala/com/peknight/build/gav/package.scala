@@ -492,7 +492,7 @@ package object gav:
     def groupId: String = "org.scala-sbt"
     def artifactId: String = "sbt"
     /** @versionCheck https://repo.maven.apache.org/maven2/org/scala-sbt/sbt/ */
-    def version: String = "2.0.0"
+    def version: String = "2.0.1"
   end sbtScala
 
   object sbtGithub extends GroupID:
@@ -630,7 +630,7 @@ package object gav:
     def groupId: String = "io.circe"
     def artifactId: String = "circe-core"
     /** @versionCheck https://repo.maven.apache.org/maven2/io/circe/circe-core_3/ */
-    def version: String = "0.14.15"
+    def version: String = "0.14.16"
     object parser extends Module:
       def groupId: String = circe.groupId
       def artifactId: String = "circe-parser"
@@ -767,7 +767,7 @@ package object gav:
     def groupId: String = "ch.qos.logback"
     def artifactId: String = "logback-core"
     /** @versionCheck https://repo.maven.apache.org/maven2/ch/qos/logback/logback-core/ */
-    def version: String = "1.5.35"
+    def version: String = "1.5.37"
     object classic extends Module:
       def groupId: String = logback.groupId
       def artifactId: String = "logback-classic"
