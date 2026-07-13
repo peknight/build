@@ -492,7 +492,7 @@ package object gav:
     def groupId: String = "org.scala-sbt"
     def artifactId: String = "sbt"
     /** @versionCheck https://repo.maven.apache.org/maven2/org/scala-sbt/sbt/ */
-    def version: String = "2.0.1"
+    def version: String = "2.0.2"
   end sbtScala
 
   object sbtGithub extends GroupID:
@@ -751,7 +751,7 @@ package object gav:
   object bouncyCastle extends GroupID with Version:
     def groupId: String = "org.bouncycastle"
     /** @versionCheck https://repo.maven.apache.org/maven2/org/bouncycastle/bcprov-jdk18on/ */
-    def version: String = "1.84"
+    def version: String = "1.85"
     object provider extends Module:
       def groupId: String = bouncyCastle.groupId
       def artifactId: String = "bcprov-jdk18on"
@@ -767,7 +767,7 @@ package object gav:
     def groupId: String = "ch.qos.logback"
     def artifactId: String = "logback-core"
     /** @versionCheck https://repo.maven.apache.org/maven2/ch/qos/logback/logback-core/ */
-    def version: String = "1.5.37"
+    def version: String = "1.5.38"
     object classic extends Module:
       def groupId: String = logback.groupId
       def artifactId: String = "logback-classic"

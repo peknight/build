@@ -2,7 +2,7 @@ val pekVersion = "0.1.0-SNAPSHOT"
 /** @versionCheck https://repo.maven.apache.org/maven2/org/scala-lang/scala3-library_3/ */
 val scala3Version = "3.8.4"
 /** @versionCheck https://repo.maven.apache.org/maven2/org/scala-sbt/sbt/ */
-val sbtVersion = "2.0.1"
+val sbtVersion = "2.0.2"
 /** @versionCheck https://repo.maven.apache.org/maven2/com/github/sbt/sbt-native-packager_sbt2_3/ */
 val sbtNativePackagerVersion = "1.11.7"
 
