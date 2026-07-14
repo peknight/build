@@ -385,6 +385,13 @@ package object gav:
         def artifactId: String = "database-config"
         def version: String = peknight.version
       end config
+      object jdbc:
+        object aliyunDms extends Module:
+          def groupId: String = peknight.groupId
+          def artifactId: String = "jdbc-aliyun-dms"
+          def version: String = peknight.version
+        end aliyunDms
+      end jdbc
     end database
     object financial extends Module:
       def groupId: String = peknight.groupId
