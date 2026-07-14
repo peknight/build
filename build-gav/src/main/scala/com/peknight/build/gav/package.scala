@@ -793,6 +793,16 @@ package object gav:
     end flatSpec
   end scalaTest
 
+  object aliyun extends GroupID:
+    def groupId: String = "com.aliyun"
+    object dmsEnterprise extends Module:
+      def groupId: String = aliyun.groupId
+      def artifactId: String = "dms_enterprise20181101"
+      /** @versionCheck https://repo.maven.apache.org/maven2/com/aliyun/dms_enterprise20181101/ */
+      def version: String = "3.0.0"
+    end dmsEnterprise
+  end aliyun
+
   object vavr extends Module:
     def groupId: String = "io.vavr"
     def artifactId: String = "vavr"
