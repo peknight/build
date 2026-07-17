@@ -499,7 +499,7 @@ package object gav:
     def groupId: String = "org.scala-sbt"
     def artifactId: String = "sbt"
     /** @versionCheck https://repo.maven.apache.org/maven2/org/scala-sbt/sbt/ */
-    def version: String = "2.0.2"
+    def version: String = "2.0.3"
   end sbtScala
 
   object sbtGithub extends GroupID:
