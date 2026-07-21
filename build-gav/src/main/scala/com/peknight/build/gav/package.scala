@@ -918,7 +918,7 @@ package object gav:
       def groupId: String = yomahub.groupId
       def artifactId: String = "liteflow-core"
       /** @versionCheck https://repo.maven.apache.org/maven2/com/yomahub/liteflow-core/ */
-      def version: String = "2.16.0"
+      def version: String = "2.16.0.1"
     end liteflow
   end yomahub
 end gav
