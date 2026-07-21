@@ -444,6 +444,11 @@ package object gav:
         def artifactId: String = "infisical-http4s"
         def version: String = peknight.version
       end http4s
+      object custom extends Module:
+        def groupId: String = peknight.groupId
+        def artifactId: String = "infisical-custom"
+        def version: String = peknight.version
+      end custom
     end infisical
     object acme extends Module:
       def groupId: String = peknight.groupId
