@@ -504,7 +504,7 @@ package object gav:
     def groupId: String = "org.scala-sbt"
     def artifactId: String = "sbt"
     /** @versionCheck https://repo.maven.apache.org/maven2/org/scala-sbt/sbt/ */
-    def version: String = "2.0.3"
+    def version: String = "2.0.4"
   end sbtScala
 
   object sbtGithub extends GroupID:
@@ -779,7 +779,7 @@ package object gav:
     def groupId: String = "ch.qos.logback"
     def artifactId: String = "logback-core"
     /** @versionCheck https://repo.maven.apache.org/maven2/ch/qos/logback/logback-core/ */
-    def version: String = "1.5.38"
+    def version: String = "1.6.0"
     object classic extends Module:
       def groupId: String = logback.groupId
       def artifactId: String = "logback-classic"
@@ -918,7 +918,7 @@ package object gav:
       def groupId: String = yomahub.groupId
       def artifactId: String = "liteflow-core"
       /** @versionCheck https://repo.maven.apache.org/maven2/com/yomahub/liteflow-core/ */
-      def version: String = "2.16.0.1"
+      def version: String = "2.16.1"
     end liteflow
   end yomahub
 end gav
