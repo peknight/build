@@ -779,7 +779,7 @@ package object gav:
     def groupId: String = "ch.qos.logback"
     def artifactId: String = "logback-core"
     /** @versionCheck https://repo.maven.apache.org/maven2/ch/qos/logback/logback-core/ */
-    def version: String = "1.6.0"
+    def version: String = "1.6.1"
     object classic extends Module:
       def groupId: String = logback.groupId
       def artifactId: String = "logback-classic"
@@ -880,7 +880,7 @@ package object gav:
       def groupId: String = s"${alibaba.groupId}.fastjson2"
       def artifactId: String = "fastjson2"
       /** @versionCheck https://repo.maven.apache.org/maven2/com/alibaba/fastjson2/fastjson2/ */
-      def version: String = "2.0.62"
+      def version: String = "2.0.63"
     end fastjson2
     object qlExpress extends Module:
       def groupId: String = alibaba.groupId
