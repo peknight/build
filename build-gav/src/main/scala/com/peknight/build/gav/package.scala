@@ -626,6 +626,7 @@ package object gav:
       def version: String = "1.2.5"
     end bits
   end scodec
+
   object fs2 extends Module:
     def groupId: String = "co.fs2"
     def artifactId: String = "fs2-core"
@@ -760,32 +761,6 @@ package object gav:
     end monocle
   end optics
 
-  object bouncyCastle extends GroupID with Version:
-    def groupId: String = "org.bouncycastle"
-    /** @versionCheck https://repo.maven.apache.org/maven2/org/bouncycastle/bcprov-jdk18on/ */
-    def version: String = "1.85"
-    object provider extends Module:
-      def groupId: String = bouncyCastle.groupId
-      def artifactId: String = "bcprov-jdk18on"
-      def version: String = bouncyCastle.version
-    end provider
-    object pkix extends Module:
-      def groupId: String = bouncyCastle.groupId
-      def artifactId: String = "bcpkix-jdk18on"
-      def version: String = bouncyCastle.version
-    end pkix
-  end bouncyCastle
-  object logback extends Module:
-    def groupId: String = "ch.qos.logback"
-    def artifactId: String = "logback-core"
-    /** @versionCheck https://repo.maven.apache.org/maven2/ch/qos/logback/logback-core/ */
-    def version: String = "1.6.1"
-    object classic extends Module:
-      def groupId: String = logback.groupId
-      def artifactId: String = "logback-classic"
-      def version: String = logback.version
-    end classic
-  end logback
   object scalaCheck extends Module:
     def groupId: String = "org.scalacheck"
     def artifactId: String = "scalacheck"
@@ -804,42 +779,6 @@ package object gav:
       def version: String = scalaTest.version
     end flatSpec
   end scalaTest
-
-  object aliyun extends GroupID:
-    def groupId: String = "com.aliyun"
-    object dmsEnterprise extends Module:
-      def groupId: String = aliyun.groupId
-      def artifactId: String = "dms_enterprise20181101"
-      /** @versionCheck https://repo.maven.apache.org/maven2/com/aliyun/dms_enterprise20181101/ */
-      def version: String = "3.0.0"
-    end dmsEnterprise
-  end aliyun
-
-  object vavr extends Module:
-    def groupId: String = "io.vavr"
-    def artifactId: String = "vavr"
-    /** @versionCheck https://repo.maven.apache.org/maven2/io/vavr/vavr/ */
-    def version: String = "1.0.1"
-  end vavr
-
-  object lombok extends Module:
-    def groupId: String = "org.projectlombok"
-    def artifactId: String = "lombok"
-    /** @versionCheck https://repo.maven.apache.org/maven2/org/projectlombok/lombok/ */
-    def version: String = "1.18.46"
-    def processorOptions: Seq[String] = Seq("-processor", "lombok.launch.AnnotationProcessorHider$AnnotationProcessor")
-  end lombok
-
-  object spring extends GroupID with Version:
-    def groupId: String = "org.springframework"
-    /** @versionCheck https://repo.maven.apache.org/maven2/org/springframework/spring-context/ */
-    def version: String = "7.0.8"
-    object context extends Module:
-      def groupId: String = spring.groupId
-      def artifactId: String = "spring-context"
-      def version: String = spring.version
-    end context
-  end spring
 
   object apache:
     object commons extends GroupID:
@@ -865,6 +804,85 @@ package object gav:
     end commons
   end apache
 
+  object zip4j extends Module:
+    def groupId: String = "net.lingala.zip4j"
+    def artifactId: String = "zip4j"
+    /** @versionCheck https://repo.maven.apache.org/maven2/net/lingala/zip4j/zip4j/ */
+    def version: String = "2.11.6"
+  end zip4j
+
+  object tukaani:
+    object xz extends Module:
+      def groupId: String = "org.tukaani"
+      def artifactId: String = "xz"
+      /** @versionCheck https://repo.maven.apache.org/maven2/org/tukaani/xz/ */
+      def version: String = "1.12"
+    end xz
+  end tukaani
+
+  object bouncyCastle extends GroupID with Version:
+    def groupId: String = "org.bouncycastle"
+    /** @versionCheck https://repo.maven.apache.org/maven2/org/bouncycastle/bcprov-jdk18on/ */
+    def version: String = "1.85"
+    object provider extends Module:
+      def groupId: String = bouncyCastle.groupId
+      def artifactId: String = "bcprov-jdk18on"
+      def version: String = bouncyCastle.version
+    end provider
+    object pkix extends Module:
+      def groupId: String = bouncyCastle.groupId
+      def artifactId: String = "bcpkix-jdk18on"
+      def version: String = bouncyCastle.version
+    end pkix
+  end bouncyCastle
+
+  object logback extends Module:
+    def groupId: String = "ch.qos.logback"
+    def artifactId: String = "logback-core"
+    /** @versionCheck https://repo.maven.apache.org/maven2/ch/qos/logback/logback-core/ */
+    def version: String = "1.6.1"
+    object classic extends Module:
+      def groupId: String = logback.groupId
+      def artifactId: String = "logback-classic"
+      def version: String = logback.version
+    end classic
+  end logback
+
+  object aliyun extends GroupID:
+    def groupId: String = "com.aliyun"
+    object dmsEnterprise extends Module:
+      def groupId: String = aliyun.groupId
+      def artifactId: String = "dms_enterprise20181101"
+      /** @versionCheck https://repo.maven.apache.org/maven2/com/aliyun/dms_enterprise20181101/ */
+      def version: String = "3.0.0"
+    end dmsEnterprise
+  end aliyun
+
+  object vesoft extends GroupID:
+    def groupId: String = "com.vesoft"
+    object client extends Module:
+      def groupId: String = vesoft.groupId
+      def artifactId: String = "client"
+      /** @versionCheck https://repo.maven.apache.org/maven2/com/vesoft/client/ */
+      def version: String = "3.8.4"
+    end client
+  end vesoft
+
+  object vavr extends Module:
+    def groupId: String = "io.vavr"
+    def artifactId: String = "vavr"
+    /** @versionCheck https://repo.maven.apache.org/maven2/io/vavr/vavr/ */
+    def version: String = "1.0.1"
+  end vavr
+
+  object lombok extends Module:
+    def groupId: String = "org.projectlombok"
+    def artifactId: String = "lombok"
+    /** @versionCheck https://repo.maven.apache.org/maven2/org/projectlombok/lombok/ */
+    def version: String = "1.18.46"
+    def processorOptions: Seq[String] = Seq("-processor", "lombok.launch.AnnotationProcessorHider$AnnotationProcessor")
+  end lombok
+
   object google:
     object guava extends Module:
       def groupId: String = "com.google.guava"
@@ -873,6 +891,17 @@ package object gav:
       def version: String = "33.6.0-jre"
     end guava
   end google
+
+  object spring extends GroupID with Version:
+    def groupId: String = "org.springframework"
+    /** @versionCheck https://repo.maven.apache.org/maven2/org/springframework/spring-context/ */
+    def version: String = "7.0.8"
+    object context extends Module:
+      def groupId: String = spring.groupId
+      def artifactId: String = "spring-context"
+      def version: String = spring.version
+    end context
+  end spring
 
   object alibaba extends GroupID:
     def groupId: String = "com.alibaba"
@@ -895,22 +924,6 @@ package object gav:
       def version: String = "4.1.2"
     end qlExpress4
   end alibaba
-
-  object zip4j extends Module:
-    def groupId: String = "net.lingala.zip4j"
-    def artifactId: String = "zip4j"
-    /** @versionCheck https://repo.maven.apache.org/maven2/net/lingala/zip4j/zip4j/ */
-    def version: String = "2.11.6"
-  end zip4j
-
-  object tukaani:
-    object xz extends Module:
-      def groupId: String = "org.tukaani"
-      def artifactId: String = "xz"
-      /** @versionCheck https://repo.maven.apache.org/maven2/org/tukaani/xz/ */
-      def version: String = "1.12"
-    end xz
-  end tukaani
 
   object yomahub extends GroupID:
     def groupId: String = "com.yomahub"
