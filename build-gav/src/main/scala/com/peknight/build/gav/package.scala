@@ -820,19 +820,19 @@ package object gav:
     end xz
   end tukaani
 
-  object bouncyCastle extends GroupID with Version:
+  object bouncyCastle extends GroupID:
     def groupId: String = "org.bouncycastle"
-    /** @versionCheck https://repo.maven.apache.org/maven2/org/bouncycastle/bcprov-jdk18on/ */
-    def version: String = "1.85.2"
     object provider extends Module:
       def groupId: String = bouncyCastle.groupId
       def artifactId: String = "bcprov-jdk18on"
-      def version: String = bouncyCastle.version
+      /** @versionCheck https://repo.maven.apache.org/maven2/org/bouncycastle/bcprov-jdk18on/ */
+      def version: String = "1.85.2"
     end provider
     object pkix extends Module:
       def groupId: String = bouncyCastle.groupId
       def artifactId: String = "bcpkix-jdk18on"
-      def version: String = bouncyCastle.version
+      /** @versionCheck https://repo.maven.apache.org/maven2/org/bouncycastle/bcpkix-jdk18on/ */
+      def version: String = "1.85"
     end pkix
   end bouncyCastle
 
