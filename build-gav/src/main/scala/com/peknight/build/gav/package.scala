@@ -504,7 +504,7 @@ package object gav:
     def groupId: String = "org.scala-sbt"
     def artifactId: String = "sbt"
     /** @versionCheck https://repo.maven.apache.org/maven2/org/scala-sbt/sbt/ */
-    def version: String = "2.0.5"
+    def version: String = "2.0.6"
   end sbtScala
 
   object sbtGithub extends GroupID:
@@ -823,7 +823,7 @@ package object gav:
   object bouncyCastle extends GroupID with Version:
     def groupId: String = "org.bouncycastle"
     /** @versionCheck https://repo.maven.apache.org/maven2/org/bouncycastle/bcprov-jdk18on/ */
-    def version: String = "1.85"
+    def version: String = "1.85.2"
     object provider extends Module:
       def groupId: String = bouncyCastle.groupId
       def artifactId: String = "bcprov-jdk18on"
@@ -931,7 +931,7 @@ package object gav:
       def groupId: String = yomahub.groupId
       def artifactId: String = "liteflow-core"
       /** @versionCheck https://repo.maven.apache.org/maven2/com/yomahub/liteflow-core/ */
-      def version: String = "2.16.1"
+      def version: String = "2.16.1.1"
     end liteflow
   end yomahub
 end gav
