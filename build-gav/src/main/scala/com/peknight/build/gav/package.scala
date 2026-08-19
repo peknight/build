@@ -888,7 +888,7 @@ package object gav:
       def groupId: String = "com.google.guava"
       def artifactId: String = "guava"
       /** @versionCheck https://repo.maven.apache.org/maven2/com/google/guava/guava/ filter=-jre$ */
-      def version: String = "33.6.0-jre"
+      def version: String = "33.7.1-jre"
     end guava
   end google
 
