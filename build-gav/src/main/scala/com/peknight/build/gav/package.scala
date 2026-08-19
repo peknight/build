@@ -840,7 +840,7 @@ package object gav:
     def groupId: String = "ch.qos.logback"
     def artifactId: String = "logback-core"
     /** @versionCheck https://repo.maven.apache.org/maven2/ch/qos/logback/logback-core/ */
-    def version: String = "1.6.2"
+    def version: String = "1.6.3"
     object classic extends Module:
       def groupId: String = logback.groupId
       def artifactId: String = "logback-classic"
@@ -921,7 +921,7 @@ package object gav:
       def groupId: String = alibaba.groupId
       def artifactId: String = "qlexpress4"
       /** @versionCheck https://repo.maven.apache.org/maven2/com/alibaba/qlexpress4/ */
-      def version: String = "4.1.2"
+      def version: String = "4.1.3"
     end qlExpress4
   end alibaba
 
@@ -931,7 +931,7 @@ package object gav:
       def groupId: String = yomahub.groupId
       def artifactId: String = "liteflow-core"
       /** @versionCheck https://repo.maven.apache.org/maven2/com/yomahub/liteflow-core/ */
-      def version: String = "2.16.1.1"
+      def version: String = "2.16.1.3"
     end liteflow
   end yomahub
 end gav
